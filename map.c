@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:36:25 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/09 19:51:52 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/09 20:54:46 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ bool	get_map(t_map *map, char **av)
 			free(line);
 			line = get_next_line(m_fd);
 		}
-
 	}
 	return (true);
 }
