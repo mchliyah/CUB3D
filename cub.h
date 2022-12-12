@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:27:59 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/09 20:58:49 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/12 12:09:16 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,34 @@ typedef struct s_map
 
 }	t_map;
 
-typedef struct s_cub
+typedef struct	s_ax
 {
-	
 	double	x;
 	double	y;
-	double	dx;
-	double	dx;
+}				t_ax;
+
+typedef struct	s_image
+{
+	void	*img;
+	void	*ptr;
+	int		bpp;
+	int		size_line;
+	int		endian;
+}				t_image;
+
+typedef	struct	s_window
+{
+	void		*ptr;
+	void		*win;
+	t_image		screen;
+	t_ax		size;
+	t_ax		midl;
+}	t_window;
+
+typedef struct s_cub
+{
+	t_window	window;
+	t_map		map;
 }t_cub;
 
 //map handling
