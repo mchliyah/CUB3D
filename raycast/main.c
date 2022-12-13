@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:27:39 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/13 17:15:05 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/13 17:49:15 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,11 @@ int	main(int ac, char **av)
 	// if (!init(cub))
 	// 	exit_error("init error");
 	cub.window.mlx = mlx_init();
-	cub.window.win = mlx_new_window(cub.window.mlx, X, Y, "FDF");
+	cub.window.win = mlx_new_window(cub.window.mlx, X, Y, "cub3D");
 	cub.window.img = mlx_new_image(cub.window.mlx, X, Y);
 	cub.window.img_adrs = mlx_get_data_addr(cub.window.img, &cub.window.bpp, &cub.window.len, &cub.window.endian);
 	mlx_put_image_to_window(cub.window.mlx, cub.window.win, cub.window.img, 0, 0);
+	
 	mlx_hook(cub.window.win, 2, 0, key_press, &cub);
 	mlx_hook(cub.window.win, 17, 0, t_close, &cub);
 	mlx_loop(cub.window.mlx);
