@@ -6,13 +6,13 @@
 #    By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 20:42:29 by mchliyah          #+#    #+#              #
-#    Updated: 2022/12/12 21:40:56 by mchliyah         ###   ########.fr        #
+#    Updated: 2022/12/14 19:53:14 by mchliyah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3
 CC = gcc
-FLAGS =  -Wall -Werror -Wextra -c
+FLAGS =  -Wall -Werror -Wextra -c 
 
 RM = rm -f
 
@@ -41,7 +41,7 @@ C_RES = \033[0m
 all : $(NAME)
 
 $(NAME) :  $(OBJECTS)
-	@$(CC) $(OBJECTS) -lmlx -framework OpenGL -framework AppKit -o $(NAME) #-fsanitize=address
+	@$(CC) $(OBJECTS) -lmlx -framework OpenGL -framework AppKit -o $(NAME) -fsanitize=address -g
 	@echo "$(C_GREEN)[CUB3D MANDATORY CREATED!]$(C_RES)"
 
 clean : 
