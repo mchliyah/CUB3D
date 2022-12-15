@@ -6,52 +6,32 @@
 #    By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 20:42:29 by mchliyah          #+#    #+#              #
-#    Updated: 2022/12/14 22:38:40 by hsaidi           ###   ########.fr        #
+#    Updated: 2022/12/15 11:35:52 by hsaidi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cub3
-CC = gcc
-FLAGS =  -Wall -Werror -Wextra -c
+NAME = cub
 
-RM = rm -f
+SRCS = main.c\
 
-FILES = main.c\
-		get_next_line.c\
-		get_next_line_utils.c \
-		
+GNL = ../get_next_line/get_next_line.c ../get_next_line/get_next_line_utils.c
 
-OBJECTS = $(FILES:.c=.o)
+FLAGS2 = -lmlx -framework OpenGL -framework AppKit
+FLAGS = -Wall -Wextra -Werror 
+OBJS = $(SRCS:.c=.o)
 
-%.o: %.c
-	@$(CC) $(FLAGS) -c $^ -o $@
+all: $(NAME)
 
-# LIBFT = ./libft
-# ARLIB = $(LIBFT)/libft.a
-# ALLIBFT = make -C $(LIBFT)
-# CLEANLIBFT = make clean -C $(LIBFT)
-# FCLEANLIBFT = rm -f $(ARLIB)
-# RELIBFT = make re -C $(LIBFT)
+$(NAME): ${OBJS}
+	gcc $(FLAGS) ${OBJS} $(GNL) ${FLAGS2} -o $(NAME)
 
-C_RED = \033[1;31m
-C_GREEN = \033[1;32m
-C_L_BLUE = \033[1;34m
-C_RES = \033[0m
 
-.PHONY : all clean fclean rebonus
+clean:
+	rm -f $(OBJS)
 
-all : $(NAME)
+fclean: clean
+	rm -f $(NAME)
 
-$(NAME) :  $(OBJECTS)
-	@$(CC) $(OBJECTS) -lmlx -framework OpenGL -framework AppKit -o $(NAME) #-fsanitize=address
-	@echo "$(C_GREEN)[CUB3D MANDATORY CREATED!]$(C_RES)"
+re: fclean all
 
-clean : 
-	@$(RM) $(OBJECTS)
-	@echo "$(C_RED)[CUB3D OBJECTS DELETED!]$(C_RES)"
-
-fclean : clean
-	@$(RM) $(NAME)
-	@echo "$(C_RED)[CUB3D && EXECUTABLES DELETED!]$(C_RES)"
-
-re : fclean all
+.PHONY: all clean fclean re
