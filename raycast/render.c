@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 23:21:26 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/15 00:44:34 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/15 22:38:38 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,24 @@ void render_Square(t_cub *cub, t_ax pos, unsigned int color)
 
 void	render_player(t_cub *cub)
 {
-	int i = 0;
-	int j = 0;
-	while (i < 5)
-	{
+	double i;
+	double j;
+
+	j = cub->player.y - 2;
+	
+	if (j < 0)
 		j = 0;
-		while (j < ft_strlen1(map[i]))
+	while (j < cub->player.y + 2)
+	{
+		i = cub->player.x - 2;
+		if (i < 0)
+			i = 0;
+		while (i < cub->player.x + 2)
 		{
-			if (map[i][j] == cub->player.symbol)
-				my_mlx_pixel_put(&cub->window, cub->player.x, cub->player.y, blue);
-			j++;
+			my_mlx_pixel_put(&cub->window, i, j, blue);
+			i++;
 		}
-		i++;
+		j++;
 	}
 }
 
@@ -79,7 +85,6 @@ void render(t_cub *cub)
 	
 	pos.x = 0;
 	pos.y = 0;
-    get_player_pos(cub);
 	while (pos.y < 5)
 	{
 		pos.x = 0;

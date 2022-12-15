@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:27:59 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/15 00:56:56 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/15 22:18:47 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 
 # define TILESIZE 64
 
-# define X 10 * TILESIZE
-# define Y 5 * TILESIZE
+# define X 1000
+# define Y 1000
 
 #define wall '1'
 #define empty '0'
@@ -33,6 +33,29 @@
 #define green 0x0000FF00
 #define red 0x00FF0000
 #define blue 0x000000FF
+
+# define LEFT 123
+# define RIGHT 124
+# define DOWN 125
+# define UP 126
+
+# define ESC 53
+# define SPACE 49
+
+# define A_KEY 0
+# define D_KEY 2
+# define S_KEY 1
+# define W_KEY 13
+
+enum {
+	ON_KEYDOWN = 2,
+	ON_KEYUP = 3,
+	ON_MOUSEDOWN = 4,
+	ON_MOUSEUP = 5,
+	ON_MOUSEMOVE = 6,
+	ON_EXPOSE = 12,
+	ON_DESTROY = 17
+};
 
 static char map[5][10] = {{'1','1','1','1','1'}
 				 		,{'1','0','0','0','0','1'}
@@ -62,10 +85,11 @@ typedef struct s_player
 	char 	symbol;
 	double	x; //start position
 	double	y;
-	double	dirX;//diriction initial 
-	double	dirY;
-	double	planeX; //2d raycaster version camera plane 
-	double	planeY;
+	double	dir_turn;//diriction initial 
+	double	dir_walk;
+	double	angle; //2d raycaster version camera plane 
+	double	speed_mv;
+	double	speed_rt;
 }	t_player;
 
 typedef	struct	s_window
@@ -95,5 +119,6 @@ int		key_press(int key, t_cub *cub);
 int		t_close(t_cub *cub);
 void	render(t_cub *cub);
 int		ft_strlen1(char *str);
+void	get_player_pos(t_cub *cub);
 
 #endif
