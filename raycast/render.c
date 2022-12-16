@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 23:21:26 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/15 22:38:38 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/16 21:52:17 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,38 @@ void render_Square(t_cub *cub, t_ax pos, unsigned int color)
 	}
 }
 
+void	render_ray(t_cub *cub)
+{
+	int xstart;
+	int ystart;
+	int xend;
+	int yend;
+
+	xstart = cub->player.x;
+	ystart = cub->player.y;
+	xend = cub->player.x + (cub->player.ray_len * cos(cub->player.rot_angle));
+	while (xstart <= xend)
+	{
+		yend = cub->player.y + (cub->player.ray_len * sin(cub->player.rot_angle));
+		while (ystart <= yend)
+		{
+			my_mlx_pixel_put(&cub->window, xstart, ystart, white);
+			ystart += 1;
+		}
+		xstart += 1;
+	}
+}
+
 void	render_player(t_cub *cub)
 {
 	double i;
 	double j;
 
 	j = cub->player.y - 2;
-	
-	if (j < 0)
-		j = 0;
+
 	while (j < cub->player.y + 2)
 	{
 		i = cub->player.x - 2;
-		if (i < 0)
-			i = 0;
 		while (i < cub->player.x + 2)
 		{
 			my_mlx_pixel_put(&cub->window, i, j, blue);
@@ -56,27 +74,7 @@ void	render_player(t_cub *cub)
 		}
 		j++;
 	}
-}
-
-void get_player_pos(t_cub *cub)
-{
-    int i = 0;
-    int j = 0;
-    while (i < 5)
-    {
-        j = 0;
-        while (j < ft_strlen1(map[i]))
-        {
-            if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'E' || map[i][j] == 'W')
-            {
-                cub->player.symbol = map[i][j];
-                cub->player.x = j * TILESIZE + (TILESIZE / 2);
-                cub->player.y = i * TILESIZE + (TILESIZE / 2);
-            }
-            j++;
-        }
-        i++;
-    }
+	render_ray(cub);
 }
 
 void render(t_cub *cub)

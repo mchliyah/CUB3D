@@ -6,45 +6,11 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:27:39 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/15 22:34:57 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/16 05:32:16 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include  "cub.h"
-
-int	buttons(int key, t_cub *cub)
-{
-	if (key == 53)
-	{
-		mlx_destroy_image(cub->window.mlx, cub->window.img);
-		mlx_destroy_window(cub->window.mlx, cub->window.win);
-		exit(0);
-	}
-	if (key == A_KEY)
-		cub->player.x -= 5;
-	if (key == D_KEY)
-		cub->player.x += 5;
-	if (key == W_KEY)
-		cub->player.y -= 5;
-	if (key == S_KEY)
-		cub->player.y += 5;
-	mlx_destroy_image(cub->window.mlx, cub->window.img);
-	cub->window.img = mlx_new_image(cub->window.mlx, X, Y);
-	cub->window.img_adrs = mlx_get_data_addr(cub->window.img, &cub->window.bits_per_pixel, &cub->window.line_length, &cub->window.endian);
-	render(cub);
-	mlx_put_image_to_window(cub->window.mlx, cub->window.win, cub->window.img, 0, 0);
-	return (0);
-}
-
-bool	init_player(t_cub *cub)
-{
-	cub->player.dir_turn = 0;
-	cub->player.dir_walk = 0;
-	cub->player.angle = M_PI_2;
-	cub->player.speed_mv = 3.0;
-	cub->player.speed_rt = 3.0 * (M_PI / 180);
-	return (true);
-}
 
 int	main(int ac, char **av)
 {
@@ -60,7 +26,6 @@ int	main(int ac, char **av)
 	cub.window.win = mlx_new_window(cub.window.mlx, X, Y, "cub3D");
 	cub.window.img = mlx_new_image(cub.window.mlx, X, Y);
 	cub.window.img_adrs = mlx_get_data_addr(cub.window.img, &cub.window.bits_per_pixel, &cub.window.line_length, &cub.window.endian);
-	get_player_pos(&cub);
 	render(&cub);
 	mlx_put_image_to_window(cub.window.mlx, cub.window.win, cub.window.img, 0, 0);
 	mlx_hook(cub.window.win, 2, 1L << 0, buttons, &cub);
