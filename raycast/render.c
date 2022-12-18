@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 23:21:26 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/15 00:44:34 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/18 00:10:35 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,51 +35,105 @@ void render_Square(t_cub *cub, t_ax pos, unsigned int color)
 	}
 }
 
-void	render_player(t_cub *cub)
+void	get_cordinates(t_cub *cub)
 {
-	int i = 0;
-	int j = 0;
-	while (i < 5)
-	{
-		j = 0;
-		while (j < ft_strlen1(map[i]))
-		{
-			if (map[i][j] == cub->player.symbol)
-				my_mlx_pixel_put(&cub->window, cub->player.x, cub->player.y, blue);
-			j++;
-		}
-		i++;
-	}
+	cub->ray.x_start = cub->player.x;
+	cub->ray.y_start = cub->player.y;
+	cub->ray.x_end = cub->player.x + (cub->player.ray_len * cos(cub->player.rot_angle));
+	cub->ray.y_end = cub->player.y + (cub->player.ray_len * sin(cub->player.rot_angle));
+
+    cub->ray.dx = abs(cub->ray.x_end - cub->ray.x_start);
+    cub->ray.dy = abs(cub->ray.y_end - cub->ray.y_start);
+	if (cub->ray.x_start < cub->ray.x_end)
+		cub->ray.sx = 1;
+	else
+		cub->ray.sx = -1;
+	if (cub->ray.y_start < cub->ray.y_end)
+		cub->ray.sy = 1;
+	else
+		cub->ray.sy = -1;
+	if (cub->ray.dx > cub->ray.dy)
+		cub->ray.err = cub->ray.dx / 2;
+	else
+		cub->ray.err = -cub->ray.dy / 2;
 }
 
-void get_player_pos(t_cub *cub)
+void render_ray(t_cub *cub)
 {
-    int i = 0;
-    int j = 0;
-    while (i < 5)
+	get_cordinates(cub);
+    while (1)
     {
-        j = 0;
-        while (j < ft_strlen1(map[i]))
+    	my_mlx_pixel_put(&cub->window, cub->ray.x_start, cub->ray.y_start, white);
+        if (cub->ray.x_start == cub->ray.x_end && cub->ray.y_start == cub->ray.y_end)
+            break;
+        cub->ray.e2 = cub->ray.err;
+        if (cub->ray.e2 > -cub->ray.dx)
         {
-            if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'E' || map[i][j] == 'W')
-            {
-                cub->player.symbol = map[i][j];
-                cub->player.x = j * TILESIZE + (TILESIZE / 2);
-                cub->player.y = i * TILESIZE + (TILESIZE / 2);
-            }
-            j++;
+            cub->ray.err -= cub->ray.dy;
+            cub->ray.x_start += cub->ray.sx;
         }
-        i++;
+        if (cub->ray.e2 < cub->ray.dy)
+        {
+            cub->ray.err += cub->ray.dx;
+            cub->ray.y_start += cub->ray.sy;
+        }
     }
 }
 
-void render(t_cub *cub)
+void	render_player(t_cub *cub)
+{
+	double i;
+	double j;
+
+	j = cub->player.y - 2;
+
+	while (j < cub->player.y + 2)
+	{
+		i = cub->player.x - 2;
+		while (i < cub->player.x + 2)
+		{
+			my_mlx_pixel_put(&cub->window, i, j, blue);
+			i++;
+		}
+		j++;
+	}
+	render_ray(cub);
+}
+
+void events(t_cub *cub)
+{
+	if(cub->player.move[0] == D_KEY)
+	{
+		cub->player.y += cub->player.speed_mov * sin(cub->player.rot_angle + M_PI_2);
+		cub->player.x += cub->player.speed_mov * cos(cub->player.rot_angle + M_PI_2);
+	}
+	else if(cub->player.move[0] == A_KEY)
+	{
+		cub->player.y += cub->player.speed_mov * sin(cub->player.rot_angle - M_PI_2);
+		cub->player.x += cub->player.speed_mov * cos(cub->player.rot_angle - M_PI_2);
+	}
+	if (cub->player.move[1] == W_KEY)
+	{
+		cub->player.y += cub->player.speed_mov * sin(cub->player.rot_angle);
+		cub->player.x += cub->player.speed_mov * cos(cub->player.rot_angle);
+	}
+	else if (cub->player.move[1] == S_KEY)
+	{
+		cub->player.y -= cub->player.speed_mov * sin(cub->player.rot_angle);
+		cub->player.x -= cub->player.speed_mov * cos(cub->player.rot_angle);
+	}
+	if (cub->player.move[2] == LEFT_KEY)
+		cub->player.rot_angle -= cub->player.speed_rot;
+	else if (cub->player.move[2] == RIGHT_KEY)
+		cub->player.rot_angle += cub->player.speed_rot;
+}
+
+int	render(t_cub *cub)
 {
 	t_ax pos;
 	
 	pos.x = 0;
 	pos.y = 0;
-    get_player_pos(cub);
 	while (pos.y < 5)
 	{
 		pos.x = 0;
@@ -94,4 +148,7 @@ void render(t_cub *cub)
 		pos.y++;
 	}
 	render_player(cub);
+	events(cub);
+	mlx_put_image_to_window(cub->window.mlx, cub->window.win, cub->window.img, 0, 0);
+	return (0);
 }

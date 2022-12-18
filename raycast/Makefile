@@ -6,7 +6,7 @@
 #    By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 20:42:29 by mchliyah          #+#    #+#              #
-#    Updated: 2022/12/14 23:23:33 by mchliyah         ###   ########.fr        #
+#    Updated: 2022/12/17 18:13:49 by mchliyah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,8 @@ FLAGS =  -Wall -Werror -Wextra -c
 RM = rm -f
 
 FILES = main.c\
+		init.c\
+		player.c\
 		utils.c\
 		keyhook.c\
 		render.c\
@@ -26,13 +28,6 @@ OBJECTS = $(FILES:.c=.o)
 
 %.o: %.c
 	@$(CC) $(FLAGS) -c $^ -o $@
-
-# LIBFT = ./libft
-# ARLIB = $(LIBFT)/libft.a
-# ALLIBFT = make -C $(LIBFT)
-# CLEANLIBFT = make clean -C $(LIBFT)
-# FCLEANLIBFT = rm -f $(ARLIB)
-# RELIBFT = make re -C $(LIBFT)
 
 C_RED = \033[1;31m
 C_GREEN = \033[1;32m
