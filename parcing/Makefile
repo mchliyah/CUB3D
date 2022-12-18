@@ -6,13 +6,16 @@
 #    By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 20:42:29 by mchliyah          #+#    #+#              #
-#    Updated: 2022/12/15 11:35:52 by hsaidi           ###   ########.fr        #
+#    Updated: 2022/12/18 11:31:20 by hsaidi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub
 
 SRCS = main.c\
+		file_handling.c\
+		map_utils.c\
+		reading_file.c\
 
 GNL = ../get_next_line/get_next_line.c ../get_next_line/get_next_line_utils.c
 

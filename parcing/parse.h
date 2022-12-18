@@ -6,7 +6,7 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 22:35:54 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/15 11:31:11 by hsaidi           ###   ########.fr       */
+/*   Updated: 2022/12/18 11:37:48 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
-# include <mlx.h>
-# include <math.h>
+// # include <mlx.h>
+// # include <math.h>
 # include "../get_next_line/get_next_line.h"
 
 typedef struct s_map
@@ -27,7 +27,13 @@ typedef struct s_map
 	int		map_height;
 	char	**parsing;
 	int		fd;
-}   t_map;
+}	t_map;
 
+int	ft_check_file(char **argv, char *filename);
+int space(char pos);
+int	ft_wrong_characters(char **str);
+void	ft_asssign_map(char **argv, t_map *map);
+void	ft_count_height(char **argv, t_map *map);
+void	ft_count_width(char **argv, t_map *map);
 
 #endif
