@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 23:21:26 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/17 00:20:01 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/18 00:10:35 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,42 +35,47 @@ void render_Square(t_cub *cub, t_ax pos, unsigned int color)
 	}
 }
 
-void draw_line(t_cub *cub)
+void	get_cordinates(t_cub *cub)
 {
-	int xstart;
-	int ystart;
-	int xend;
-	int yend;
+	cub->ray.x_start = cub->player.x;
+	cub->ray.y_start = cub->player.y;
+	cub->ray.x_end = cub->player.x + (cub->player.ray_len * cos(cub->player.rot_angle));
+	cub->ray.y_end = cub->player.y + (cub->player.ray_len * sin(cub->player.rot_angle));
 
-	xstart = cub->player.x;
-	ystart = cub->player.y;
-	xend = cub->player.x + (cub->player.ray_len * cos(cub->player.rot_angle));
-	yend = cub->player.y + (cub->player.ray_len * sin(cub->player.rot_angle));
+    cub->ray.dx = abs(cub->ray.x_end - cub->ray.x_start);
+    cub->ray.dy = abs(cub->ray.y_end - cub->ray.y_start);
+	if (cub->ray.x_start < cub->ray.x_end)
+		cub->ray.sx = 1;
+	else
+		cub->ray.sx = -1;
+	if (cub->ray.y_start < cub->ray.y_end)
+		cub->ray.sy = 1;
+	else
+		cub->ray.sy = -1;
+	if (cub->ray.dx > cub->ray.dy)
+		cub->ray.err = cub->ray.dx / 2;
+	else
+		cub->ray.err = -cub->ray.dy / 2;
+}
 
-
-    int dx, dy, sx, sy, err, e2;
-
-    dx = abs(xend - xstart);
-    dy = abs(yend - ystart);
-    sx = xstart < xend ? 1 : -1;
-    sy = ystart < yend ? 1 : -1;
-    err = (dx > dy ? dx : -dy) / 2;
-
+void render_ray(t_cub *cub)
+{
+	get_cordinates(cub);
     while (1)
     {
-        my_mlx_pixel_put(&cub->window, xstart, ystart, 0xFF0000);
-        if (xstart == xend && ystart == yend)
+    	my_mlx_pixel_put(&cub->window, cub->ray.x_start, cub->ray.y_start, white);
+        if (cub->ray.x_start == cub->ray.x_end && cub->ray.y_start == cub->ray.y_end)
             break;
-        e2 = err;
-        if (e2 > -dx)
+        cub->ray.e2 = cub->ray.err;
+        if (cub->ray.e2 > -cub->ray.dx)
         {
-            err -= dy;
-            xstart += sx;
+            cub->ray.err -= cub->ray.dy;
+            cub->ray.x_start += cub->ray.sx;
         }
-        if (e2 < dy)
+        if (cub->ray.e2 < cub->ray.dy)
         {
-            err += dx;
-            ystart += sy;
+            cub->ray.err += cub->ray.dx;
+            cub->ray.y_start += cub->ray.sy;
         }
     }
 }
@@ -92,11 +97,38 @@ void	render_player(t_cub *cub)
 		}
 		j++;
 	}
-	draw_line(cub);
-	// render_ray(cub);
+	render_ray(cub);
 }
 
-void render(t_cub *cub)
+void events(t_cub *cub)
+{
+	if(cub->player.move[0] == D_KEY)
+	{
+		cub->player.y += cub->player.speed_mov * sin(cub->player.rot_angle + M_PI_2);
+		cub->player.x += cub->player.speed_mov * cos(cub->player.rot_angle + M_PI_2);
+	}
+	else if(cub->player.move[0] == A_KEY)
+	{
+		cub->player.y += cub->player.speed_mov * sin(cub->player.rot_angle - M_PI_2);
+		cub->player.x += cub->player.speed_mov * cos(cub->player.rot_angle - M_PI_2);
+	}
+	if (cub->player.move[1] == W_KEY)
+	{
+		cub->player.y += cub->player.speed_mov * sin(cub->player.rot_angle);
+		cub->player.x += cub->player.speed_mov * cos(cub->player.rot_angle);
+	}
+	else if (cub->player.move[1] == S_KEY)
+	{
+		cub->player.y -= cub->player.speed_mov * sin(cub->player.rot_angle);
+		cub->player.x -= cub->player.speed_mov * cos(cub->player.rot_angle);
+	}
+	if (cub->player.move[2] == LEFT_KEY)
+		cub->player.rot_angle -= cub->player.speed_rot;
+	else if (cub->player.move[2] == RIGHT_KEY)
+		cub->player.rot_angle += cub->player.speed_rot;
+}
+
+int	render(t_cub *cub)
 {
 	t_ax pos;
 	
@@ -116,4 +148,7 @@ void render(t_cub *cub)
 		pos.y++;
 	}
 	render_player(cub);
+	events(cub);
+	mlx_put_image_to_window(cub->window.mlx, cub->window.win, cub->window.img, 0, 0);
+	return (0);
 }

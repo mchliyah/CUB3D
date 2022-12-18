@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 04:43:26 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/16 20:58:13 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/18 00:13:13 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,12 @@ bool	init_player(t_cub *cub)
 	get_player_pos(cub);
 	cub->player.dir_x = 0;
 	cub->player.dir_y = 0;
+    cub->player.move[0] = -1;
+    cub->player.move[1] = -1;
+    cub->player.move[2] = -1;
 	cub->player.angle = M_PI_2;
-	cub->player.speed_mov = 5.0;
-	cub->player.speed_rot = 5.0 * (M_PI / 180);
+	cub->player.speed_mov = 3.2;
+	cub->player.speed_rot = 3.2 * (M_PI / 180);
     cub->player.rot_angle = M_PI / 2;
     cub->player.ray_len = 30;
 

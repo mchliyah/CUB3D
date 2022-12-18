@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 23:20:14 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/16 20:58:26 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/17 22:42:57 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,40 +20,39 @@ int	t_close(t_cub *cub)
 	return (0);
 }
 
-void move(int key, t_cub *cub)
+void direction_move(int key, t_cub *cub)
 {
-	if (key == A_KEY)
-		cub->player.x -= cub->player.speed_mov;
-	if (key == D_KEY)
-		cub->player.x += cub->player.speed_mov;
-	if (key == W_KEY)
-		cub->player.y -= cub->player.speed_mov;
-	if (key == S_KEY)
-		cub->player.y += cub->player.speed_mov;
+	if (key == W_KEY || key == S_KEY)
+		cub->player.move[1] = key;
+	if(key == D_KEY || key == A_KEY)
+		cub->player.move[0] = key;
+	if (key == LEFT_KEY || key == RIGHT_KEY)
+		cub->player.move[2] = key;
 }
-
-void rotat(int key, t_cub *cub)
-{
-	if (key == LEFT_KEY)
-	{
-		cub->player.rot_angle -= 0.2;
-		cub->player.dir_x = cos(cub->player.rot_angle) * 5;
-		cub->player.dir_y = sin(cub->player.rot_angle) * 5;
-	}
-	if (key == RIGHT_KEY)
-		cub->player.rot_angle += cub->player.speed_rot;
-}
-
-int	buttons(int key, t_cub *cub)
+int	buttons_down(int key, t_cub *cub)
 {
 	if (key == 53)
 		t_close(cub);
-	move(key, cub);
-	rotat(key, cub);
-	mlx_destroy_image(cub->window.mlx, cub->window.img);
-	cub->window.img = mlx_new_image(cub->window.mlx, X, Y);
-	cub->window.img_adrs = mlx_get_data_addr(cub->window.img, &cub->window.bits_per_pixel, &cub->window.line_length, &cub->window.endian);
-	render(cub);
-	mlx_put_image_to_window(cub->window.mlx, cub->window.win, cub->window.img, 0, 0);
+	direction_move(key, cub);
 	return (0);
+}
+
+int	buttons_up(int key, t_cub *cub)
+{
+	if (key == A_KEY || key == D_KEY)
+		cub->player.move[0] = -1;
+	if (key == W_KEY || key == S_KEY)
+		cub->player.move[1] = -1;
+	if (key == LEFT_KEY || key == RIGHT_KEY)
+		cub->player.move[2] = -1;
+	return (0);
+}
+
+void keyhook_loop(t_cub *cub)
+{
+	mlx_hook(cub->window.win, ON_KEYDOWN, 1L << 0, buttons_down, cub);
+	mlx_hook(cub->window.win, ON_KEYUP, 1L << 1, buttons_up, cub);
+	mlx_hook(cub->window.win, ON_DESTROY, 1L << 17, t_close, cub);
+	mlx_loop_hook(cub->window.mlx, render, cub);
+	mlx_loop(cub->window.mlx);
 }

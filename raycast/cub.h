@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:27:59 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/16 20:54:47 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/17 22:29:41 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 #define red 0x00FF0000
 #define blue 0x000000FF
 #define white 0x00FFFFFF
+#define black 0x00000000
 
 //keycodes
 
@@ -82,6 +83,7 @@ typedef struct	s_ax
 typedef struct s_player
 {
 	char 	symbol;
+	int		move[3];
 	double	x; //start position
 	double	y;
 	double	dir_x;//diriction initial 
@@ -107,24 +109,49 @@ typedef	struct	s_window
 	t_ax	midl;
 }	t_window;
 
+typedef struct  s_ray
+{
+	int		x_start;
+	int		y_start;
+	int		x_end;
+	int		y_end;
+	int		dx;
+	int		dy;
+	int		sx;
+	int		sy;
+	int		err;
+	int		e2;
+	double	ray_angle;
+	double	wall_hit_x;
+	double	wall_hit_y;
+	double	distance;
+	bool	was_hit_vertical;
+	bool	is_ray_facing_right;
+	bool	is_ray_facing_left;
+}               t_ray;
+
+
 typedef struct s_cub
 {
 	t_window	window;
 	t_map		map;
 	t_player	player;
+	t_ray		ray;
 }t_cub;
 
 //init
 bool	init_player(t_cub *cub);
 void	get_player_pos(t_cub *cub);
+bool    init_mlx(t_cub *cub);
 
 //map handling
 bool	get_map(t_map *map, char **av);
 
 //render
-void	render(t_cub *cub);
+int		render(t_cub *cub);
 
 //events
+void	keyhook_loop(t_cub *cub);
 int		key_press(int key, t_cub *cub);
 int		t_close(t_cub *cub);
 int		buttons(int key, t_cub *cub);

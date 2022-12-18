@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/09 16:27:39 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/17 18:22:49 by mchliyah         ###   ########.fr       */
+/*   Created: 2022/12/17 18:08:39 by mchliyah          #+#    #+#             */
+/*   Updated: 2022/12/17 18:11:59 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  "cub.h"
+#include "cub.h"
 
-int	main(int ac, char **av)
+bool    init_mlx(t_cub *cub)
 {
-	t_cub	cub;
-
-	(void)ac;
-	(void)av;
-	if (!init_player(&cub) || !init_mlx(&cub)/* || !init_map(&cub) || !init_textures(&cub)*/)
-		exit(EXIT_FAILURE);
-	render(&cub);
-	keyhook_loop(&cub);
-	return (0);
+    cub->window.mlx = mlx_init();
+    cub->window.win = mlx_new_window(cub->window.mlx, X, Y, "cub3D");
+    cub->window.img = mlx_new_image(cub->window.mlx, X, Y);
+    cub->window.img_adrs = mlx_get_data_addr(cub->window.img,
+        &cub->window.bits_per_pixel, &cub->window.line_length,
+        &cub->window.endian);
+    return (true);
 }
