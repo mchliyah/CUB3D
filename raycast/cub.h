@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:27:59 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/17 22:29:41 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/19 01:25:50 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@
 static char map[5][10] = {{'1','1','1','1','1'}
 				 		,{'1','0','0','0','0','1'}
 				 		,{'1','S','1','0','0','1'}
-				 		,{'1','0','1','0','0','1'}
+				 		,{'1','0','0','1','0','1'}
 				 		,{'1','1','1','1','1'}
 };
 
@@ -155,6 +155,12 @@ void	keyhook_loop(t_cub *cub);
 int		key_press(int key, t_cub *cub);
 int		t_close(t_cub *cub);
 int		buttons(int key, t_cub *cub);
+void	A_key(t_cub *cub, double *x, double *y);
+void	S_key(t_cub *cub, double *x, double *y);
+void	D_key(t_cub *cub, double *x, double *y);
+void	W_key(t_cub *cub, double *x, double *y);
+void	LEFT_key(t_cub *cub);
+void	RIGHT_key(t_cub *cub);
 
 //utils
 int		ft_strlen1(char *str);

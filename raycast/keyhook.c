@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 23:20:14 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/17 22:42:57 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/19 00:57:47 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,3 +56,4 @@ void keyhook_loop(t_cub *cub)
 	mlx_loop_hook(cub->window.mlx, render, cub);
 	mlx_loop(cub->window.mlx);
 }
+
