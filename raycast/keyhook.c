@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 23:20:14 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/17 22:42:57 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/19 01:39:54 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,16 @@ int	t_close(t_cub *cub)
 	return (0);
 }
 
-void direction_move(int key, t_cub *cub)
+void	direction_move(int key, t_cub *cub)
 {
 	if (key == W_KEY || key == S_KEY)
 		cub->player.move[1] = key;
-	if(key == D_KEY || key == A_KEY)
+	if (key == D_KEY || key == A_KEY)
 		cub->player.move[0] = key;
 	if (key == LEFT_KEY || key == RIGHT_KEY)
 		cub->player.move[2] = key;
 }
+
 int	buttons_down(int key, t_cub *cub)
 {
 	if (key == 53)
@@ -48,7 +49,7 @@ int	buttons_up(int key, t_cub *cub)
 	return (0);
 }
 
-void keyhook_loop(t_cub *cub)
+void	keyhook_loop(t_cub *cub)
 {
 	mlx_hook(cub->window.win, ON_KEYDOWN, 1L << 0, buttons_down, cub);
 	mlx_hook(cub->window.win, ON_KEYUP, 1L << 1, buttons_up, cub);

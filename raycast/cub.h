@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:27:59 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/17 22:29:41 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/19 02:11:56 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,54 +27,53 @@
 # define X 1000
 # define Y 1000
 
-#define wall '1'
-#define empty '0'
+# define wall '1'
+# define empty '0'
 
-#define green 0x0000FF00
-#define red 0x00FF0000
-#define blue 0x000000FF
-#define white 0x00FFFFFF
-#define black 0x00000000
+# define green 0x0000FF00
+# define red 0x00FF0000
+# define blue 0x000000FF
+# define white 0x00FFFFFF
+# define black 0x00000000
 
 //keycodes
 
-# define 	ESC 53
-# define 	SPACE 49
-# define	ON_KEYDOWN 2
-# define	ON_KEYUP 3
-# define	ON_MOUSEDOWN 4
-# define	ON_MOUSEUP 5
-# define	ON_MOUSEMOVE 6
-# define	ON_EXPOSE 12
-# define	ON_DESTROY 17
-# define	LEFT_KEY 123
-# define	RIGHT_KEY 124
-# define	DOWN_KEY 125
-# define	UP_KEY  126
-# define	A_KEY  0
-# define	S_KEY  1
-# define	D_KEY  2
-# define	W_KEY  13
-
+# define ESC 53
+# define SPACE 49
+# define ON_KEYDOWN 2
+# define ON_KEYUP 3
+# define ON_MOUSEDOWN 4
+# define ON_MOUSEUP 5
+# define ON_MOUSEMOVE 6
+# define ON_EXPOSE 12
+# define ON_DESTROY 17 
+# define LEFT_KEY 123
+# define RIGHT_KEY 124
+# define DOWN_KEY 125
+# define UP_KEY 126
+# define A_KEY 0
+# define S_KEY 1
+# define D_KEY 2
+# define W_KEY 13
 
 static char map[5][10] = {{'1','1','1','1','1'}
 				 		,{'1','0','0','0','0','1'}
 				 		,{'1','S','1','0','0','1'}
-				 		,{'1','0','1','0','0','1'}
+				 		,{'1','0','0','1','0','1'}
 				 		,{'1','1','1','1','1'}
 };
 
 typedef struct s_map
 {
-	const int rows;
-	const int cols;
-	char	**textr;
-	char	**colrs;
-	char	**map;
+	const int	rows;
+	const int	cols;
+	char		**textr;
+	char		**colrs;
+	char		**map;
 
 }	t_map;
 
-typedef struct	s_ax
+typedef struct s_ax
 {
 	int	x;
 	int	y;
@@ -82,7 +81,7 @@ typedef struct	s_ax
 
 typedef struct s_player
 {
-	char 	symbol;
+	char	symbol;
 	int		move[3];
 	double	x; //start position
 	double	y;
@@ -95,7 +94,7 @@ typedef struct s_player
 	double	ray_len;
 }	t_player;
 
-typedef	struct	s_window
+typedef	struct s_window
 {
 	void	*mlx;
 	void	*win;
@@ -109,7 +108,7 @@ typedef	struct	s_window
 	t_ax	midl;
 }	t_window;
 
-typedef struct  s_ray
+typedef struct s_ray
 {
 	int		x_start;
 	int		y_start;
@@ -128,8 +127,7 @@ typedef struct  s_ray
 	bool	was_hit_vertical;
 	bool	is_ray_facing_right;
 	bool	is_ray_facing_left;
-}               t_ray;
-
+}	t_ray;
 
 typedef struct s_cub
 {
@@ -142,19 +140,21 @@ typedef struct s_cub
 //init
 bool	init_player(t_cub *cub);
 void	get_player_pos(t_cub *cub);
-bool    init_mlx(t_cub *cub);
+bool	init_mlx(t_cub *cub);
 
 //map handling
 bool	get_map(t_map *map, char **av);
 
-//render
+//render && mlx
 int		render(t_cub *cub);
-
+void	my_mlx_pixel_put(t_window *data, int x, int y, unsigned int color);
 //events
 void	keyhook_loop(t_cub *cub);
 int		key_press(int key, t_cub *cub);
 int		t_close(t_cub *cub);
 int		buttons(int key, t_cub *cub);
+void	events(t_cub *cub);
+bool	colision(t_cub *cub, int key);
 
 //utils
 int		ft_strlen1(char *str);
