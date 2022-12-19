@@ -6,7 +6,7 @@
 #    By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 20:42:29 by mchliyah          #+#    #+#              #
-#    Updated: 2022/12/17 18:13:49 by mchliyah         ###   ########.fr        #
+#    Updated: 2022/12/19 02:12:56 by mchliyah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,9 @@ FILES = main.c\
 		utils.c\
 		keyhook.c\
 		render.c\
+		colision.c\
+		events.c\
+		mlx.c\
 		
 
 OBJECTS = $(FILES:.c=.o)

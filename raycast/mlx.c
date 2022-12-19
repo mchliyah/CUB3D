@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   mlx.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/17 18:08:39 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/19 01:59:04 by mchliyah         ###   ########.fr       */
+/*   Created: 2022/12/19 01:58:41 by mchliyah          #+#    #+#             */
+/*   Updated: 2022/12/19 01:59:33 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-bool	init_mlx(t_cub *cub)
+void	my_mlx_pixel_put(t_window *data, int x, int y, unsigned int color)
 {
-	cub->window.mlx = mlx_init();
-	cub->window.win = mlx_new_window(cub->window.mlx, X, Y, "cub3D");
-	cub->window.img = mlx_new_image(cub->window.mlx, X, Y);
-	cub->window.img_adrs = mlx_get_data_addr(cub->window.img,
-			&cub->window.bits_per_pixel, &cub->window.line_length,
-			&cub->window.endian);
-	return (true);
+	char	*dst;
+
+	if (x >= 0 && x < X && y >= 0 && y < Y)
+	{
+		dst = data->img_adrs + (y * data->line_length + x
+				* (data->bits_per_pixel / 8));
+		*(unsigned int *)dst = color;
+	}
 }
