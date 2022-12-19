@@ -6,7 +6,7 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 10:36:13 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/18 11:34:41 by hsaidi           ###   ########.fr       */
+/*   Updated: 2022/12/19 00:49:24 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,3 +59,22 @@ void	ft_asssign_map(char **argv, t_map *map)
 	}
 	map->parsing[i] = 0;
 }
+	// if (!ft_wrong_characters(map.parsing))
+	// {
+	// 	printf("\n\n check your characters!\n");
+	// 	return (1);
+	// }
+	// if (ft_wall_check(&map) == 1)
+	// {
+	// 	printf("\n\n walls!\n");
+	// 	return (1);
+	// }	
+	//ft_map_size(&map);
+
+
+
+			// if (ft_wall_check(&map) == 1)
+		// {
+		// 	printf("\n\n walls!\n");
+		// 	return (1);
+		// }
