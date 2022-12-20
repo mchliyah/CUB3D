@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:27:59 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/19 21:43:43 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/20 18:03:59 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ typedef struct s_player
 	char	symbol;
 	int		move[3];
 	double	fov;
+	double	ray_len;
 	double	x; //start position
 	double	y;
 	double	dir_x;//diriction initial 
