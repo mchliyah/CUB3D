@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 04:43:26 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/19 01:42:47 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/19 21:48:22 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void	get_player_pos(t_cub *cub)
 
 	i = 0;
 	j = 0;
-	while (i < 5)
+	while (i < mapHeight)
 	{
 		j = 0;
-		while (j < ft_strlen1(map[i]))
+		while (j < mapWidth)
 		{
 			if (map[i][j] == 'N' || map[i][j] == 'S' ||
 				map[i][j] == 'E' || map[i][j] == 'W')
@@ -48,7 +48,6 @@ bool	init_player(t_cub *cub)
 	cub->player.angle = M_PI_2;
 	cub->player.speed_mov = 3.2;
 	cub->player.speed_rot = 3.2 * (M_PI / 180);
-	cub->player.rot_angle = M_PI / 2;
-	cub->player.ray_len = 30;
+	cub->player.rot_angle = M_PI / 2; // to check if it's correct
 	return (true);
 }

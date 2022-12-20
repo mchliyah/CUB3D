@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 23:21:26 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/19 01:59:24 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/20 02:17:33 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,44 @@ void	render_square(t_cub *cub, t_ax pos, unsigned int color)
 	}
 }
 
+void	calulat_dx_dy(t_cub *cub)
+{
+	cub->ray.dx = fabs(1 / cos(cub->player.fov));
+	cub->ray.dy = fabs(1 / sin(cub->player.fov));
+	cub->ray.sx = cos(cub->player.fov) < 0 ? -1 : 1;
+	cub->ray.sy = sin(cub->player.fov) < 0 ? -1 : 1;
+}
+
+double	dda(t_cub *cub)
+{
+	calulat_dx_dy(cub);
+	while (1)
+	{
+		if (cub->ray.dx < cub->ray.dy)
+		{
+			cub->ray.dx += cub->ray.dx;
+			cub->ray.x_start += cub->ray.sx;
+		}
+		else
+		{
+			cub->ray.dy += cub->ray.dy;
+			cub->ray.y_start += cub->ray.sy;
+		}
+		if (map[(int)cub->ray.y_start / TILESIZE][(int)cub->ray.x_start / TILESIZE] == wall)
+			break ;
+	}
+	return (cub->ray.len);
+}
+
 void	get_cordinates(t_cub *cub)
 {
 	cub->ray.x_start = cub->player.x;
 	cub->ray.y_start = cub->player.y;
+	dda(cub);
 	cub->ray.x_end = cub->player.x
-		+ (cub->player.ray_len * cos(cub->player.rot_angle));
+		+ (cub->ray.len * cos(cub->player.fov));
 	cub->ray.y_end = cub->player.y
-		+ (cub->player.ray_len * sin(cub->player.rot_angle));
+		+ (cub->ray.len * sin(cub->player.fov));
 	cub->ray.dx = abs(cub->ray.x_end - cub->ray.x_start);
 	cub->ray.dy = abs(cub->ray.y_end - cub->ray.y_start);
 	if (cub->ray.x_start < cub->ray.x_end)
@@ -59,7 +89,7 @@ void	render_ray(t_cub *cub)
 	while (1)
 	{
 		my_mlx_pixel_put(&cub->window, cub->ray.x_start,
-			cub->ray.y_start, white);
+			cub->ray.y_start, red);
 		if (cub->ray.x_start == cub->ray.x_end
 			&& cub->ray.y_start == cub->ray.y_end)
 			break ;
@@ -77,12 +107,22 @@ void	render_ray(t_cub *cub)
 	}
 }
 
+void	ray_casting(t_cub *cub)
+{
+	while (cub->player.fov < cub->player.rot_angle + M_PI / 6)
+	{
+		render_ray(cub);
+		cub->player.fov += M_PI / 180;
+	}
+}
+
 void	render_player(t_cub *cub)
 {
 	double	i;
 	double	j;
 
 	j = cub->player.y - 2;
+	cub->player.fov = cub->player.rot_angle - M_PI / 6;
 	while (j < cub->player.y + 2)
 	{
 		i = cub->player.x - 2;
@@ -93,7 +133,7 @@ void	render_player(t_cub *cub)
 		}
 		j++;
 	}
-	render_ray(cub);
+	ray_casting(cub);
 }
 
 int	render(t_cub *cub)
@@ -102,16 +142,16 @@ int	render(t_cub *cub)
 
 	pos.x = 0;
 	pos.y = 0;
-	while (pos.y < 5)
+	while (pos.y < mapHeight)
 	{
 		pos.x = 0;
-		while (pos.x < ft_strlen1(map[pos.y]))
+		while (pos.x < mapWidth)
 		{
 			if (map[pos.y][pos.x] == wall)
-				render_square(cub, pos, red);
+				render_square(cub, pos, gray);
 			else if (map[pos.y][pos.x] == empty
 				|| map[pos.y][pos.x] == cub->player.symbol)
-				render_square(cub, pos, green);
+				render_square(cub, pos, white);
 			pos.x++;
 		}
 		pos.y++;

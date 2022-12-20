@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 01:56:32 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/19 02:08:22 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/19 15:26:09 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,19 @@ t_ax	a_d_colision(t_cub *cub, int key)
 
 bool	colision(t_cub *cub, int key)
 {
+	t_ax	pos_start;
 	t_ax	pos;
 
+	pos_start.x = cub->player.x;
+	pos_start.y = cub->player.y;
 	if (key == S_KEY || key == W_KEY)
 		pos = s_w_colision(cub, key);
 	if (key == A_KEY || key == D_KEY)
 		pos = a_d_colision(cub, key);
 	if (map[pos.y / (TILESIZE)][pos.x / (TILESIZE)] == wall)
+		return (true);
+	if (map[pos_start.y / (TILESIZE)][pos.x / (TILESIZE)] == wall || map[pos.y
+			/ (TILESIZE)][pos_start.x / (TILESIZE)] == wall)
 		return (true);
 	return (false);
 }
