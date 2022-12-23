@@ -6,7 +6,7 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 22:16:02 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/18 15:24:05 by hsaidi           ###   ########.fr       */
+/*   Updated: 2022/12/23 08:43:03 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,48 @@
 
 int space(char pos)
 {
-    if(pos == 32)
-        return(0);
-    return(1);
+    if(pos == 32 || pos == '\t')
+        return(1);
+    return(0);
+}
+
+// char	*ft_strdup(const char *s1)
+// {
+// 	int		i;
+// 	char	*str;
+
+// 	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + 1));
+// 	if (!str)
+// 		return (NULL);
+// 	if (!s1)
+// 		return (NULL);
+// 	i = -1;
+// 	while (s1[++i])
+// 		str[i] = s1[i];
+// 	str[i] = '\0';
+// 	return (str);
+// }
+
+int player(char c)
+{
+	if (c == 'N' || c == 'E' || c == 'S' || c == 'W')
+			return (1);
+	return (0);
+}
+
+int	map_c(char c, int flag)
+{
+	if(flag == 1)
+	{
+		if (c == '1' || c == '0')
+			return (1);
+	}
+	if (flag == 2)
+	{
+		if (c == '1' || c == '0' || player(c))
+			return (1);
+	}
+	return (0);
 }
 
 int	ft_wrong_characters(char **str)
@@ -34,7 +73,7 @@ int	ft_wrong_characters(char **str)
 		{
 			if (str[i][j] == '0' || str[i][j] == '1' || str[i][j] == 'E'
 				|| str[i][j] == 'S' || str[i][j] == 'N' || str[i][j] == 'W'
-				|| str[i][j] == '\n')
+				|| str[i][j] == '\n' || str[i][j] == 32)
 				j++;
 			else
 				return (0);
@@ -43,37 +82,3 @@ int	ft_wrong_characters(char **str)
 	}
 	return (1);
 }
-
-// int	ft_count_line(t_map *game)
-// {
-// 	int		i;
-// 	char	**map;
-
-// 	i = 0;
-// 	map = game->parsing;
-// 	while (map[i])
-// 		i++;
-// 	return (i);
-// }
-
-// int	ft_wall_check(t_map *game)
-// {
-// 	int	count;
-// 	int	i;
-
-// 	i = 0;
-// 	printf("\nin wall check\n");
-// 	count = ft_count_line(game);
-// 	if (!ft_check_borders(game->parsing[0])
-// 		|| !ft_check_borders(game->parsing[game->map_height - 1]))
-// 		return (1);
-// 	while (i < count)
-// 	{
-// 		if (game->parsing[i][0] != '1'
-// 			|| game->parsing[i][ft_strlen(game->parsing[i])
-// 			+ - 2] != '1')
-// 			return (1);
-// 		i++;
-// 	}
-// 	return (0);
-// }
