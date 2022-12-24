@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 23:21:26 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/20 20:56:33 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/24 22:50:25 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,46 +29,12 @@ void	render_square(t_cub *cub, t_ax pos, unsigned int color)
 	}
 }
 
-bool	is_wall(t_cub *cub, double x, double y)
-{
-	int	x_start;
-	int	y_start;
-	int	x_end;
-	int	y_end;
-
-	x_start = (int)(x / TILESIZE);
-	y_start = (int)(y / TILESIZE);
-	x_end = (int)((x + cos(cub->player.fov) * 0.1) / TILESIZE);
-	y_end = (int)((y + sin(cub->player.fov) * 0.1) / TILESIZE);
-	if (map[y_start][x_start] == wall)
-		return (true);
-	if (map[y_start][x_end] == wall || map[y_end][x_start] == wall)
-		return (true);
-	return (false);
-}
-
-void	render_ray(t_cub *cub)
-{
-	double	x;
-	double	y;
-
-	x = cub->player.x;
-	y = cub->player.y;
-	while (!is_wall(cub, x, y))
-	{
-		x += cos(cub->player.fov) * 0.1;
-		y += sin(cub->player.fov) * 0.1;
-		my_mlx_pixel_put(&cub->window, x, y, red);
-	}
-}
-
 void	render_player(t_cub *cub)
 {
 	double	i;
 	double	j;
 
 	j = cub->player.y - 2;
-	cub->player.fov = cub->player.rot_angle - M_PI / 6;
 	while (j < cub->player.y + 2)
 	{
 		i = cub->player.x - 2;
@@ -79,14 +45,9 @@ void	render_player(t_cub *cub)
 		}
 		j++;
 	}
-	while (cub->player.fov < cub->player.rot_angle + M_PI / 6)
-	{
-		render_ray(cub);
-		cub->player.fov += M_PI / 200;
-	}
 }
 
-int	render(t_cub *cub)
+void	render_map(t_cub *cub)
 {
 	t_ax	pos;
 
@@ -106,7 +67,13 @@ int	render(t_cub *cub)
 		}
 		pos.y++;
 	}
+}
+
+int	render(t_cub *cub)
+{
+	render_map(cub);
 	render_player(cub);
+	cast_rays(cub);
 	events(cub);
 	mlx_put_image_to_window(cub->window.mlx,
 		cub->window.win, cub->window.img, 0, 0);
