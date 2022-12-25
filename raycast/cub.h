@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:27:59 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/24 22:57:27 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/25 18:40:44 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <mlx.h>
 # include <math.h>
 # include <stdbool.h>
-# include "../get_next_line/get_next_line.h"
 
 # define TILESIZE 32
 
@@ -130,18 +129,21 @@ typedef struct s_ray
 	int		y_end;
 	int		dx;
 	int		dy;
-	int		x_step;
-	int		y_step;
+	double	x_step;
+	double	y_step;
 	double	wall_hit_x;
 	double	wall_hit_y;
 	double	x_intercept;
 	double	y_intercept;
-	bool	was_hit_vertical;
-	bool	was_hit_horizontal;
-	bool	is_facing_right;
+	double	next_vert_x;
+	double	next_vert_y;
+	double	next_horz_x;
+	double	next_horz_y;
+	double	distance;
+	bool	hit_vert_wall;
+	bool	hit_horz_wall;
 	bool	is_facing_left;
 	bool	is_facing_up;
-	bool	is_facing_down;
 }	t_ray;
 
 typedef struct s_cub
@@ -175,4 +177,5 @@ bool	colision(t_cub *cub, int key);
 int		ft_strlen1(char *str);
 
 void	cast_rays(t_cub *cub);
+double	normalize_angle(double angle);
 #endif

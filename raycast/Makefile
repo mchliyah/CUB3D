@@ -6,7 +6,7 @@
 #    By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 20:42:29 by mchliyah          #+#    #+#              #
-#    Updated: 2022/12/24 18:41:53 by mchliyah         ###   ########.fr        #
+#    Updated: 2022/12/25 18:03:53 by mchliyah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ FILES = main.c\
 		colision.c\
 		events.c\
 		mlx.c\
+		raycast.c\
 		
 
 OBJECTS = $(FILES:.c=.o)
@@ -42,7 +43,7 @@ C_RES = \033[0m
 all : $(NAME)
 
 $(NAME) :  $(OBJECTS)
-	@$(CC) $(OBJECTS) -lmlx -framework OpenGL -framework AppKit -o $(NAME) #-fsanitize=address -g
+	@$(CC) $(OBJECTS) -lmlx -framework OpenGL -framework AppKit -o $(NAME) -fsanitize=address -g
 	@echo "$(C_GREEN)[CUB3D MANDATORY CREATED!]$(C_RES)"
 
 clean : 
