@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 01:55:47 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/25 20:35:49 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/26 00:53:57 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
 double	normalize_angle(double angle)
 {
+	angle = remainder(angle, (2 * M_PI));
 	if (angle < 0)
 		angle = (2 * M_PI) + angle;
-	if (angle > 2 * M_PI)
-		angle = angle - (2 * M_PI);
 	return (angle);
 }
 
@@ -73,12 +72,12 @@ void	events(t_cub *cub)
 		s_w_events(cub);
 	if (cub->player.move[2] == LEFT_KEY)
 	{
-		cub->player.rot_angle += cub->player.speed_rot;
+		cub->player.rot_angle -= cub->player.speed_rot;
 		cub->player.rot_angle = normalize_angle(cub->player.rot_angle);
 	}
 	else if (cub->player.move[2] == RIGHT_KEY)
 	{
-		cub->player.rot_angle -= cub->player.speed_rot;
+		cub->player.rot_angle += cub->player.speed_rot;
 		cub->player.rot_angle = normalize_angle(cub->player.rot_angle);
 	}
 }

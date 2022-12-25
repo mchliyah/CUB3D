@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 23:21:26 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/24 22:50:25 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/26 00:42:47 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ int	render(t_cub *cub)
 {
 	render_map(cub);
 	render_player(cub);
-	cast_rays(cub);
 	events(cub);
+	cast_rays(cub);
 	mlx_put_image_to_window(cub->window.mlx,
 		cub->window.win, cub->window.img, 0, 0);
 	return (0);

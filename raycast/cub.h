@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:27:59 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/25 18:40:44 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/26 00:47:13 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,12 +123,6 @@ typedef	struct s_window
 typedef struct s_ray
 {
 	double	angle;
-	int		x_start;
-	int		y_start;
-	int		x_end;
-	int		y_end;
-	int		dx;
-	int		dy;
 	double	x_step;
 	double	y_step;
 	double	wall_hit_x;
@@ -139,11 +133,13 @@ typedef struct s_ray
 	double	next_vert_y;
 	double	next_horz_x;
 	double	next_horz_y;
+	double	horz_wall_hit_x;
+	double	horz_wall_hit_y;
 	double	distance;
-	bool	hit_vert_wall;
-	bool	hit_horz_wall;
-	bool	is_facing_left;
 	bool	is_facing_up;
+	bool	is_facing_right;
+	bool	hit_vert;
+	bool	hit_horz;
 }	t_ray;
 
 typedef struct s_cub
@@ -151,7 +147,7 @@ typedef struct s_cub
 	t_window	window;
 	t_map		map;
 	t_player	player;
-	t_ray		ray[X];
+	t_ray		ray;
 }t_cub;
 
 //init
