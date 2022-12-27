@@ -6,11 +6,25 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 18:08:39 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/19 01:59:04 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/27 02:30:22 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+
+void	init_ray(t_ray *ray, t_player *player)
+{
+	ray->angle = player->rot_angle - M_PI / 6;
+	// ray->angle = normalize_angle(ray->angle);
+	if (ray->angle > 0 && ray->angle < M_PI)
+		ray->is_facing_up = false;
+	else
+		ray->is_facing_up = true;
+	if (ray->angle < 0.5 * M_PI || ray->angle > 1.5 * M_PI)
+		ray->is_facing_right = true;
+	else
+		ray->is_facing_right = false;
+}
 
 bool	init_mlx(t_cub *cub)
 {

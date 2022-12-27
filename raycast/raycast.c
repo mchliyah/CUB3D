@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 22:42:49 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/26 00:55:30 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/27 02:52:18 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,14 @@ void	draw_line(double x1, double y1, double x2, double y2, t_cub *cub)
 	}
 }
 
+double	distance(double x1, double y1, double x2, double y2)
+{
+	return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
+}
+
 void	horizontal_intersection(t_player *player, t_ray *ray)
 {
-	ray->y_intercept = floor(player->y / TILESIZE) * TILESIZE - 1;
+	ray->y_intercept = floor(player->y / TILESIZE) * TILESIZE;
 	if (!ray->is_facing_up)
 		ray->y_intercept += TILESIZE;
 	ray->x_intercept = player->x
@@ -79,8 +84,8 @@ void	horizontal_intersection(t_player *player, t_ray *ray)
 	{
 		if (has_wall_at(ray->next_horz_x, ray->next_horz_y))
 		{
-			ray->horz_wall_hit_x = ray->next_horz_x;
-			ray->horz_wall_hit_y = ray->next_horz_y;
+			ray->horz_hit_x = ray->next_horz_x;
+			ray->horz_hit_y = ray->next_horz_y;
 			ray->hit_horz = true;
 			break ;
 		}
@@ -92,28 +97,69 @@ void	horizontal_intersection(t_player *player, t_ray *ray)
 	}
 }
 
+void	vertical_intersection(t_player *player, t_ray *ray)
+{
+	ray->x_intercept = floor(player->x / TILESIZE) * TILESIZE;
+	if (ray->is_facing_right)
+		ray->x_intercept += TILESIZE;
+	ray->y_intercept = player->y
+		+ (ray->x_intercept - player->x) * tan(ray->angle);
+	ray->x_step = TILESIZE;
+	if (!ray->is_facing_right)
+		ray->x_step *= -1;
+	ray->y_step = TILESIZE * tan(ray->angle);
+	if ((ray->is_facing_up && ray->y_step > 0)
+		|| (!ray->is_facing_up && ray->y_step < 0))
+		ray->y_step *= -1;
+	ray->next_vert_x = ray->x_intercept;
+	ray->next_vert_y = ray->y_intercept;
+	if (!ray->is_facing_right)
+		ray->next_vert_x--;
+	else
+		ray->next_vert_x++;
+	while (ray->next_vert_x >= 0 && ray->next_vert_x <= mapWidth * TILESIZE	&& ray->next_vert_y >= 0 && ray->next_vert_y <= mapHeight * TILESIZE)
+	{
+		if (has_wall_at(ray->next_vert_x, ray->next_vert_y))
+		{
+			ray->vert_hit_x = ray->next_vert_x;
+			ray->vert_hit_y = ray->next_vert_y;
+			ray->hit_vert = true;
+			break ;
+		}
+		else
+		{
+			ray->next_vert_x += ray->x_step;
+			ray->next_vert_y += ray->y_step;
+		}
+	}
+}
+
 void	cast_rays(t_cub *cub)
 {
 	t_ray		ray;
 	t_player	player;
+	int			i;
+	double		h_distance;
+	double		v_distance;
 
 	player = cub->player;
 	ray = cub->ray;
-	ray.angle = player.rot_angle - player.fov / 2;
-	ray.angle = normalize_angle(ray.angle);
-	printf("ray.rot_angle = %f\n", ray.angle);
-	if (ray.angle >= 0 && ray.angle < M_PI)
-		ray.is_facing_up = false;
-	else
-		ray.is_facing_up = true;
-	if (ray.angle <= (M_PI / 2) || ray.angle > (3 * M_PI / 2))
-		ray.is_facing_right = true;
-	else
-		ray.is_facing_right = false;
-	ray.distance = 0;
-	horizontal_intersection(&player, &ray);
-	// printf("ray is facing up: %d\n", ray.is_facing_up);
-	// printf("raay is facing right: %d\n", ray.is_facing_right);
-	draw_line(player.x, player.y, ray.horz_wall_hit_x, ray.horz_wall_hit_y, cub);
-	// cast_ray(cub, i);
+	init_ray(&ray, &player);
+	i = 0;
+	while (i < 50)
+	{
+		ray.hit_horz = false;
+		ray.hit_vert = false;
+		horizontal_intersection(&player, &ray);
+		h_distance = distance(player.x, player.y, ray.horz_hit_x, ray.horz_hit_y);
+		vertical_intersection(&player, &ray);
+		v_distance = distance(player.x, player.y, ray.vert_hit_x, ray.vert_hit_y);
+		if (h_distance < v_distance)
+			draw_line(player.x, player.y, ray.horz_hit_x, ray.horz_hit_y, cub);
+		else
+			draw_line(player.x, player.y, ray.vert_hit_x, ray.vert_hit_y, cub);
+		ray.angle += player.fov / 50;
+		ray.angle = normalize_angle(ray.angle);
+		i++;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 04:43:26 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/25 20:22:49 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/26 22:07:10 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,6 @@ bool	init_player(t_cub *cub)
 	cub->player.fov = M_PI / 3;
 	cub->player.speed_mov = 3.2;
 	cub->player.speed_rot = 3.2 * (M_PI / 180);
-	cub->player.rot_angle = M_PI; // to check if it's correct
+	cub->player.rot_angle = M_PI_2; // to check if it's correct
 	return (true);
 }
