@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 01:55:47 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/27 02:26:00 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/27 19:33:56 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 double	normalize_angle(double angle)
 {
-	if (angle < 0)
-		angle += 2 * M_PI;
-	else if (angle > 2 * M_PI)
-		angle -= 2 * M_PI;
+ 	if (angle < 0)
+ 		angle += 2 * M_PI;
+ 	else if (angle > 2 * M_PI)
+ 		angle -= 2 * M_PI;
 	return (angle);
 }
 

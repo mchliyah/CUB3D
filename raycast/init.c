@@ -6,16 +6,14 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 18:08:39 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/27 02:30:22 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/27 20:08:06 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-void	init_ray(t_ray *ray, t_player *player)
+void	init_ray(t_ray *ray)
 {
-	ray->angle = player->rot_angle - M_PI / 6;
-	// ray->angle = normalize_angle(ray->angle);
 	if (ray->angle > 0 && ray->angle < M_PI)
 		ray->is_facing_up = false;
 	else

@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 22:42:49 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/27 02:52:18 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/28 01:06:03 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ void	draw_line(double x1, double y1, double x2, double y2, t_cub *cub)
 	delta_y /= step;
 	x = x1;
 	y = y1;
-	if (step > 1000)
-		step = 1000;
 	while (step > 0)
 	{
 		my_mlx_pixel_put(&cub->window, x, y, red);
@@ -62,6 +60,8 @@ double	distance(double x1, double y1, double x2, double y2)
 
 void	horizontal_intersection(t_player *player, t_ray *ray)
 {
+	int	i;
+
 	ray->y_intercept = floor(player->y / TILESIZE) * TILESIZE;
 	if (!ray->is_facing_up)
 		ray->y_intercept += TILESIZE;
@@ -71,18 +71,19 @@ void	horizontal_intersection(t_player *player, t_ray *ray)
 	if (ray->is_facing_up)
 		ray->y_step *= -1;
 	ray->x_step = TILESIZE / tan(ray->angle);
-	if ((ray->is_facing_right && ray->x_step < 0)
-		|| (!ray->is_facing_right && ray->x_step > 0))
+	if ((ray->is_facing_right && ray->x_step < 0))
+		ray->x_step *= -1;
+	if (!ray->is_facing_right && ray->x_step > 0)
 		ray->x_step *= -1;
 	ray->next_horz_x = ray->x_intercept;
 	ray->next_horz_y = ray->y_intercept;
-	if (ray->is_facing_up)
-		ray->next_horz_y--;
-	else
-		ray->next_horz_y++;
+
 	while (ray->next_horz_x >= 0 && ray->next_horz_x <= mapWidth * TILESIZE	&& ray->next_horz_y >= 0 && ray->next_horz_y <= mapHeight * TILESIZE)
 	{
-		if (has_wall_at(ray->next_horz_x, ray->next_horz_y))
+		i = 0;
+		if (ray->is_facing_up)
+			i = 1;
+		if (has_wall_at(ray->next_horz_x, ray->next_horz_y - i))
 		{
 			ray->horz_hit_x = ray->next_horz_x;
 			ray->horz_hit_y = ray->next_horz_y;
@@ -99,6 +100,7 @@ void	horizontal_intersection(t_player *player, t_ray *ray)
 
 void	vertical_intersection(t_player *player, t_ray *ray)
 {
+	int i;
 	ray->x_intercept = floor(player->x / TILESIZE) * TILESIZE;
 	if (ray->is_facing_right)
 		ray->x_intercept += TILESIZE;
@@ -108,18 +110,18 @@ void	vertical_intersection(t_player *player, t_ray *ray)
 	if (!ray->is_facing_right)
 		ray->x_step *= -1;
 	ray->y_step = TILESIZE * tan(ray->angle);
-	if ((ray->is_facing_up && ray->y_step > 0)
-		|| (!ray->is_facing_up && ray->y_step < 0))
+	if ((ray->is_facing_up && ray->y_step > 0))
+		ray->y_step *= -1;
+	if (!ray->is_facing_up && ray->y_step < 0)
 		ray->y_step *= -1;
 	ray->next_vert_x = ray->x_intercept;
 	ray->next_vert_y = ray->y_intercept;
-	if (!ray->is_facing_right)
-		ray->next_vert_x--;
-	else
-		ray->next_vert_x++;
 	while (ray->next_vert_x >= 0 && ray->next_vert_x <= mapWidth * TILESIZE	&& ray->next_vert_y >= 0 && ray->next_vert_y <= mapHeight * TILESIZE)
 	{
-		if (has_wall_at(ray->next_vert_x, ray->next_vert_y))
+		i = 0;
+	if (!ray->is_facing_right)
+		i = 1;
+		if (has_wall_at(ray->next_vert_x - i, ray->next_vert_y))
 		{
 			ray->vert_hit_x = ray->next_vert_x;
 			ray->vert_hit_y = ray->next_vert_y;
@@ -144,21 +146,27 @@ void	cast_rays(t_cub *cub)
 
 	player = cub->player;
 	ray = cub->ray;
-	init_ray(&ray, &player);
+	ray.angle = player.rot_angle - (player.fov / 2);
+	ray.angle = normalize_angle(ray.angle);
 	i = 0;
-	while (i < 50)
+	while (i < X)
 	{
 		ray.hit_horz = false;
 		ray.hit_vert = false;
+		init_ray(&ray);
 		horizontal_intersection(&player, &ray);
-		h_distance = distance(player.x, player.y, ray.horz_hit_x, ray.horz_hit_y);
 		vertical_intersection(&player, &ray);
-		v_distance = distance(player.x, player.y, ray.vert_hit_x, ray.vert_hit_y);
+			h_distance = distance(player.x, player.y, ray.horz_hit_x, ray.horz_hit_y);
+		if (!ray.hit_horz)
+			h_distance = INT_MAX;
+			v_distance = distance(player.x, player.y, ray.vert_hit_x, ray.vert_hit_y);
+		if (!ray.hit_vert)
+			v_distance = INT_MAX;
 		if (h_distance < v_distance)
 			draw_line(player.x, player.y, ray.horz_hit_x, ray.horz_hit_y, cub);
 		else
 			draw_line(player.x, player.y, ray.vert_hit_x, ray.vert_hit_y, cub);
-		ray.angle += player.fov / 50;
+		ray.angle += player.fov / X;
 		ray.angle = normalize_angle(ray.angle);
 		i++;
 	}
