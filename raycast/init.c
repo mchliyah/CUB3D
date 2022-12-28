@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 18:08:39 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/27 20:08:06 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/28 02:20:50 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void	init_ray(t_ray *ray)
 {
+	ray->hit_horz = false;
+	ray->hit_vert = false;
+	ray->angle = normalize_angle(ray->angle);
 	if (ray->angle > 0 && ray->angle < M_PI)
 		ray->is_facing_up = false;
 	else

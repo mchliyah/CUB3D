@@ -6,7 +6,7 @@
 #    By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 20:42:29 by mchliyah          #+#    #+#              #
-#    Updated: 2022/12/25 18:03:53 by mchliyah         ###   ########.fr        #
+#    Updated: 2022/12/28 02:29:59 by mchliyah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ FILES = main.c\
 		events.c\
 		mlx.c\
 		raycast.c\
+		get_intersect.c\
 		
 
 OBJECTS = $(FILES:.c=.o)
