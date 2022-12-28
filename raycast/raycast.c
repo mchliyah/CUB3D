@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 22:42:49 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/28 02:44:26 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/28 07:50:28 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	draw_line(double x1, double y1, double x2, double y2, t_cub *cub)
 	y = y1;
 	while (step > 0)
 	{
-		my_mlx_pixel_put(&cub->window, x, y, red);
+		my_mlx_pixel_put(&cub->window, x, y, orange);
 		x += delta_x;
 		y += delta_y;
 		step--;
@@ -95,8 +95,4 @@ void	cast_rays(t_cub *cub)
 	i = -1;
 	while (++i < X)
 		cast_ray(&player, ray, i);
-	i = -1;
-	while (++i < X)
-		draw_line(player.x, player.y, ray[i].wall_hit_x,
-			ray[i].wall_hit_y, cub);
 }

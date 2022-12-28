@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 02:26:40 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/28 02:33:33 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/28 07:50:47 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ bool	has_wall_at(double x, double y)
 	int	x1;
 	int	y1;
 
-	x1 = (int)(x / TILESIZE);
-	y1 = (int)(y / TILESIZE);
+	x1 = floor(x / TILESIZE);
+	y1 = floor(y / TILESIZE);
 	if (x1 < 0 || x1 >= mapWidth || y1 < 0 || y1 >= mapHeight)
 		return (true);
-	if (map[y1][x1] == wall)
+	if (map[y1][x1] == WALL)
 		return (true);
 	return (false);
 }
