@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 22:42:49 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/28 07:50:28 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/28 21:18:56 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	draw_line(double x1, double y1, double x2, double y2, t_cub *cub)
 	y = y1;
 	while (step > 0)
 	{
-		my_mlx_pixel_put(&cub->window, x, y, orange);
+		my_mlx_pixel_put(&cub->window, x, y, ORANGE);
 		x += delta_x;
 		y += delta_y;
 		step--;

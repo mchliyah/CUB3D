@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:27:59 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/28 08:13:59 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/28 22:22:52 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <fcntl.h>
 # include <mlx.h>
 # include <math.h>
-#include <limits.h>
+# include <limits.h>
 # include <stdbool.h>
 
 # define TILESIZE 64
@@ -29,19 +29,19 @@
 # define Y 800
 
 # define WALL '1'
-# define empty '0'
+# define EMPTY '0'
 
-# define green 0x0000FF00
-# define red 0x00FF0000
-# define blue 0x000000FF
-# define white 0x00FFFFFF
-# define black 0x00000000
-# define gray 0x00C0C0C0
-# define orange 0x00FFA500
-# define aqua 0x0000FFFF
-# define maroon 0x00800000
-
-
+# define GREEN 0x0000FF00
+# define RED 0x00FF0000
+# define BLUE 0x000000FF
+# define WHITE 0x00FFFFFF
+# define BLACK 0x00000000
+# define GRAY 0x00A9A9A9
+# define YELLOW 0x00FFFF00
+# define ORANGE 0x00FFA500
+# define PURPLE 0x00800080
+# define BROWN 0x00A52A2A
+# define AQUA 0x0000FFFF
 //keycodes
 
 # define ESC 53
@@ -127,9 +127,15 @@ typedef struct s_map
 
 typedef struct s_ax
 {
+	double	x;
+	double	y;
+}				t_ax;
+
+typedef struct s_int_ax
+{
 	int	x;
 	int	y;
-}				t_ax;
+}				t_int_ax;
 
 typedef struct s_player
 {
@@ -141,6 +147,8 @@ typedef struct s_player
 	double	speed_rot;
 	double	rot_angle;
 	int		move[3];
+	bool	facing_up;
+	bool	facing_right;
 }	t_player;
 
 typedef	struct s_window
@@ -185,7 +193,7 @@ typedef struct s_wall
 {
 	int		color;
 	double	distance;
-	double	correct_distance;
+	double	correct_dist;
 	double	height;
 	double	top;
 	double	bottom;
@@ -227,6 +235,7 @@ void	vertical_intersection(t_player *player, t_ray *ray);
 int		ft_strlen1(char *str);
 
 double	normalize_angle(double angle);
+void	player_update(t_cub *cub);
 
 void	draw_line(double x1, double y1, double x2, double y2, t_cub *cub);
 #endif

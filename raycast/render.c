@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 23:21:26 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/28 08:13:59 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/28 22:34:25 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,21 @@ void	render_square(t_cub *cub, t_ax pos, unsigned int color)
 	}
 }
 
+void	render_player(t_cub *cub)
+{
+	int	i;
+	int	j;
+
+	i = cub->player.y * SCL - 2;
+	while (i < cub->player.y * SCL + 2)
+	{
+		j = cub->player.x * SCL - 2;
+		while (++j < cub->player.x * SCL + 2)
+			my_mlx_pixel_put(&cub->window, j, i, RED);
+		i++;
+	}
+}
+
 void	render_mini_map(t_cub *cub)
 {
 	t_ax	pos;
@@ -41,15 +56,16 @@ void	render_mini_map(t_cub *cub)
 		pos.x = 0;
 		while (pos.x < mapWidth)
 		{
-			if (map[pos.y][pos.x] == WALL)
-				render_square(cub, pos, gray);
-			else if (map[pos.y][pos.x] == empty
-				|| map[pos.y][pos.x] == cub->player.symbol)
-				render_square(cub, pos, white);
+			if (map[(int)pos.y][(int)pos.x] == WALL)
+				render_square(cub, pos, GRAY);
+			else if (map[(int)pos.y][(int)pos.x] == EMPTY
+				|| map[(int)pos.y][(int)pos.x] == cub->player.symbol)
+				render_square(cub, pos, WHITE);
 			pos.x++;
 		}
 		pos.y++;
 	}
+	render_player(cub);
 	i = -1;
 	while (++i < X)
 		draw_line(cub->player.x * SCL, cub->player.y * SCL,
@@ -64,12 +80,16 @@ void	draw_wall(t_cub *cub, int i, double wall_height, int color)
 
 	j = -1;
 	while (++j < Y / 2 - (wall_height / 2))
-		my_mlx_pixel_put(&cub->window, i, j, aqua);
+		my_mlx_pixel_put(&cub->window, i, j, AQUA);
 	j = Y / 2 + (wall_height / 2) - 1;
 	while (++j < Y)
-		my_mlx_pixel_put(&cub->window, i, j, maroon);
+		my_mlx_pixel_put(&cub->window, i, j, BROWN);
 	wall_top_pixel = Y / 2 - (wall_height / 2);
+	if (wall_top_pixel < 0)
+		wall_top_pixel = 0;
 	wall_bottom_pixel = Y / 2 + (wall_height / 2);
+	if (wall_bottom_pixel > Y)
+		wall_bottom_pixel = Y;
 	j = wall_top_pixel;
 	while (j < wall_bottom_pixel)
 	{
@@ -77,46 +97,46 @@ void	draw_wall(t_cub *cub, int i, double wall_height, int color)
 		j++;
 	}
 }
-// {
-// 	double	x;
-// 	double	y;
-
-// 	x = i;
-// 	y = Y / 2 - (wall_strip_height / 2);
-// 	while (y < wall_strip_height)
-// 	{
-// 		my_mlx_pixel_put(&cub->window, x, y, green);
-// 		y++;
-// 	}
-// 	x++;
-// }
 
 void	thre_d_projection(t_cub *cub, t_wall *wall)
 {
 	t_ray	ray;
 	int		i;
 
-
 	i = -1;
 	while (++i < X)
 	{
 		ray = cub->ray[i];
 		wall->distance = (Y / 2) / tan(cub->player.fov / 2);
-		wall->correct_distance = ray.distance * cos(ray.angle - cub->player.rot_angle);
-		wall->height = ((TILESIZE / wall->correct_distance) * wall->distance) * 2;
-		wall->color = orange - 200 / wall->correct_distance;
+		if (wall->distance < 15)
+			wall->distance = 15;
+		wall->correct_dist = ray.distance
+			* cos(ray.angle - cub->player.rot_angle);
+		wall->height = ((TILESIZE / wall->correct_dist) * wall->distance) * 2;
+		wall->color = ORANGE - 200 / wall->correct_dist;
 		draw_wall(cub, i, wall->height, wall->color);
 	}
+}
+
+void	player_update(t_cub *cub)
+{
+	if (cub->player.rot_angle > 0 && cub->player.rot_angle < M_PI)
+		cub->player.facing_up = false;
+	else
+		cub->player.facing_up = true;
+	if (cub->player.rot_angle < 0.5 * M_PI || cub->player.rot_angle > 1.5 * M_PI)
+		cub->player.facing_right = true;
+	else
+		cub->player.facing_right = false;
+
 }
 
 int	render(t_cub *cub)
 {
 	t_wall	wall;
-	mlx_destroy_image(cub->window.mlx, cub->window.img);
-	cub->window.img = mlx_new_image(cub->window.mlx, X, Y);
-	cub->window.img_adrs = mlx_get_data_addr(cub->window.img,
-			&cub->window.bits_per_pixel, &cub->window.line_length,
-			&cub->window.endian);
+
+	
+	player_update(cub);
 	cast_rays(cub);
 	thre_d_projection(cub, &wall);
 	render_mini_map(cub);
@@ -125,3 +145,4 @@ int	render(t_cub *cub)
 		cub->window.win, cub->window.img, 0, 0);
 	return (0);
 }
+ 

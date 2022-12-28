@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 01:56:32 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/28 08:16:04 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/28 22:44:09 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,9 @@ t_ax	a_d_colision(t_cub *cub, int key)
 
 bool	colision(t_cub *cub, int key)
 {
-	t_ax	pos_start;
-	t_ax	pos;
+	t_ax		pos_start;
+	t_ax		pos;
+	t_int_ax	check;
 
 	pos_start.x = cub->player.x;
 	pos_start.y = cub->player.y;
@@ -65,10 +66,18 @@ bool	colision(t_cub *cub, int key)
 		pos = s_w_colision(cub, key);
 	if (key == A_KEY || key == D_KEY)
 		pos = a_d_colision(cub, key);
-	if (map[pos.y / (TILESIZE)][pos.x / (TILESIZE)] == WALL)
+	if (cub->player.rot_angle > 0 && cub->player.rot_angle < M_PI)
+		check.y = (pos.y + 6) / TILESIZE;
+	else
+		check.y = (pos.y - 6) / TILESIZE;
+	if (cub->player.rot_angle > M_PI_2 && cub->player.rot_angle < 3 * M_PI_2)
+		check.x = (pos.x - 6) / TILESIZE;
+	else
+		check.x = (pos.x + 6) / TILESIZE;
+	if (map[check.y][check.x] == WALL)
 		return (true);
-	if (map[pos_start.y / (TILESIZE)][pos.x / (TILESIZE)] == WALL || map[pos.y
-			/ (TILESIZE)][pos_start.x / (TILESIZE)] == WALL)
+	if (map[((int)(pos_start.y / TILESIZE))][(check.x)] == WALL
+		|| map[(check.y)][(int)(pos_start.x / TILESIZE)] == WALL)
 		return (true);
 	return (false);
 }
