@@ -6,7 +6,7 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 10:36:13 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/23 08:43:44 by hsaidi           ###   ########.fr       */
+/*   Updated: 2022/12/28 20:11:56 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,3 +60,10 @@ void	ft_asssign_map(char **argv, t_map *map)
 	map->parsing[i] = 0;
 }
 
+void get_data(char **av, t_map *map)
+{
+	ft_count_width(av, map);
+	ft_count_height(av, map);
+	ft_asssign_map(av, map);
+	return ;
+}
