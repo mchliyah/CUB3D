@@ -6,7 +6,7 @@
 #    By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 20:42:29 by mchliyah          #+#    #+#              #
-#    Updated: 2022/12/20 22:28:56 by hsaidi           ###   ########.fr        #
+#    Updated: 2022/12/29 06:03:30 by hsaidi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,11 +16,14 @@ SRCS = main.c\
 		file_handling.c\
 		map_utils.c\
 		reading_file.c\
+		top_file.c\
+		libft.c\
+		more_utils.c\
 
 GNL = ../get_next_line/get_next_line.c ../get_next_line/get_next_line_utils.c
 
 FLAGS2 = -lmlx -framework OpenGL -framework AppKit 
-FLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+FLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
