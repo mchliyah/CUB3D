@@ -6,7 +6,7 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 22:02:16 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/29 07:18:00 by hsaidi           ###   ########.fr       */
+/*   Updated: 2022/12/29 18:20:34 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	file_one(t_map *map, int flag)
 	{
 		if (flag == 1)
 		{
-			if (skip_alpha(map->parsing[i]) == 0 && (!map_c(*map->parsing[i] , 1)))
+			if (skip_alpha(map->parsing[i]) == 0 && (!map_c(*map->parsing[i + 1] , 1)))
 				size++;
 		}
 		i++;
@@ -174,9 +174,9 @@ int	main(int ac, char **av)
 	}
 	get_data(av, &map);
 	init_data(&map);
-	//reading(&map, map.parsing);
+	reading(&map, map.parsing);
 	 /*i comonted the top of file just to 
 	//make sure of something tomorow otherwase rah is working*/
-	if_map_valid(&map);
+	//if_map_valid(&map);
     return(0);
 }
