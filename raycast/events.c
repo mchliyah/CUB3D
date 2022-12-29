@@ -6,11 +6,20 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 01:55:47 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/19 17:24:42 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/27 19:33:56 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+
+double	normalize_angle(double angle)
+{
+ 	if (angle < 0)
+ 		angle += 2 * M_PI;
+ 	else if (angle > 2 * M_PI)
+ 		angle -= 2 * M_PI;
+	return (angle);
+}
 
 void	a_d_events(t_cub *cub)
 {
@@ -63,7 +72,13 @@ void	events(t_cub *cub)
 	if (cub->player.move[1] == S_KEY || cub->player.move[1] == W_KEY)
 		s_w_events(cub);
 	if (cub->player.move[2] == LEFT_KEY)
+	{
 		cub->player.rot_angle -= cub->player.speed_rot;
+		cub->player.rot_angle = normalize_angle(cub->player.rot_angle);
+	}
 	else if (cub->player.move[2] == RIGHT_KEY)
+	{
 		cub->player.rot_angle += cub->player.speed_rot;
+		cub->player.rot_angle = normalize_angle(cub->player.rot_angle);
+	}
 }
