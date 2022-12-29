@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 23:20:14 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/19 01:39:54 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/29 17:32:15 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	t_close(t_cub *cub)
 
 void	direction_move(int key, t_cub *cub)
 {
-	if (key == W_KEY || key == S_KEY)
+	if (key == W_KEY || key == S_KEY || key == UP_KEY || key == DOWN_KEY)
 		cub->player.move[1] = key;
 	if (key == D_KEY || key == A_KEY)
 		cub->player.move[0] = key;
@@ -42,7 +42,7 @@ int	buttons_up(int key, t_cub *cub)
 {
 	if (key == A_KEY || key == D_KEY)
 		cub->player.move[0] = -1;
-	if (key == W_KEY || key == S_KEY)
+	if (key == W_KEY || key == S_KEY || key == UP_KEY || key == DOWN_KEY)
 		cub->player.move[1] = -1;
 	if (key == LEFT_KEY || key == RIGHT_KEY)
 		cub->player.move[2] = -1;

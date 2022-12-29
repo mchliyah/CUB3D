@@ -6,48 +6,29 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 23:21:26 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/28 22:34:25 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/29 17:04:31 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-void	render_square(t_cub *cub, t_ax pos, unsigned int color)
+void	render_rays(t_cub *cub)
 {
+	t_ax	pos_end;
 	int	i;
-	int	j;
 
-	i = 0;
-	j = 0;
-	while (i < TILESIZE * SCL)
+	i = -1;
+	while (++i < X)
 	{
-		j = -1;
-		while (++j < TILESIZE * SCL)
-			my_mlx_pixel_put(&cub->window, pos.x * TILESIZE * SCL
-				+ j, pos.y * TILESIZE * SCL + i, color);
-		i++;
-	}
-}
-
-void	render_player(t_cub *cub)
-{
-	int	i;
-	int	j;
-
-	i = cub->player.y * SCL - 2;
-	while (i < cub->player.y * SCL + 2)
-	{
-		j = cub->player.x * SCL - 2;
-		while (++j < cub->player.x * SCL + 2)
-			my_mlx_pixel_put(&cub->window, j, i, RED);
-		i++;
+		pos_end.x = cub->ray[i].wall_hit_x * SCL;
+		pos_end.y = cub->ray[i].wall_hit_y * SCL;
+		draw_line(cub->player.x * SCL, cub->player.y * SCL, pos_end, cub);
 	}
 }
 
 void	render_mini_map(t_cub *cub)
 {
 	t_ax	pos;
-	int		i;
 
 	pos.x = 0;
 	pos.y = 0;
@@ -66,13 +47,10 @@ void	render_mini_map(t_cub *cub)
 		pos.y++;
 	}
 	render_player(cub);
-	i = -1;
-	while (++i < X)
-		draw_line(cub->player.x * SCL, cub->player.y * SCL,
-			cub->ray[i].wall_hit_x * SCL, cub->ray[i].wall_hit_y * SCL, cub);
+	render_rays(cub);
 }
 
-void	draw_wall(t_cub *cub, int i, double wall_height, int color)
+void	render_wall(t_cub *cub, int i, double wall_height, int color)
 {
 	int		j;
 	int		wall_top_pixel;
@@ -113,22 +91,16 @@ void	thre_d_projection(t_cub *cub, t_wall *wall)
 		wall->correct_dist = ray.distance
 			* cos(ray.angle - cub->player.rot_angle);
 		wall->height = ((TILESIZE / wall->correct_dist) * wall->distance) * 2;
-		wall->color = ORANGE - 200 / wall->correct_dist;
-		draw_wall(cub, i, wall->height, wall->color);
+		if (ray.hit_vert && ray.v_distance < ray.h_distance)
+			wall->color = ORANGE;
+		if (ray.hit_vert && ray.v_distance < ray.h_distance && ray.is_facing_right)
+			wall->color = BLUE;
+		if (ray.hit_horz && ray.h_distance < ray.v_distance)
+			wall->color = GREEN;
+		if (ray.hit_horz && ray.h_distance < ray.v_distance && ray.is_facing_up)
+			wall->color = RED;
+		render_wall(cub, i, wall->height, wall->color);
 	}
-}
-
-void	player_update(t_cub *cub)
-{
-	if (cub->player.rot_angle > 0 && cub->player.rot_angle < M_PI)
-		cub->player.facing_up = false;
-	else
-		cub->player.facing_up = true;
-	if (cub->player.rot_angle < 0.5 * M_PI || cub->player.rot_angle > 1.5 * M_PI)
-		cub->player.facing_right = true;
-	else
-		cub->player.facing_right = false;
-
 }
 
 int	render(t_cub *cub)

@@ -6,7 +6,7 @@
 #    By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 20:42:29 by mchliyah          #+#    #+#              #
-#    Updated: 2022/12/28 07:15:05 by mchliyah         ###   ########.fr        #
+#    Updated: 2022/12/29 16:59:59 by mchliyah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,6 @@ FLAGS =  -Wall -Werror -Wextra -c
 RM = rm -f
 
 FILES = main.c\
-		init.c\
 		player.c\
 		utils.c\
 		keyhook.c\

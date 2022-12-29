@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 04:43:26 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/28 22:23:14 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/29 17:05:34 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,30 @@ void	get_player_pos(t_cub *cub)
 	}
 }
 
-bool	init_player(t_cub *cub)
+void	render_player(t_cub *cub)
 {
-	get_player_pos(cub);
-	cub->player.move[0] = -1;
-	cub->player.move[1] = -1;
-	cub->player.move[2] = -1;
-	cub->player.fov = M_PI / 3;
-	cub->player.speed_mov = 3;
-	cub->player.speed_rot = 3 * (M_PI / 180);
-	cub->player.rot_angle = M_PI_2;
-	player_update(cub);
-	return (true);
+	int	i;
+	int	j;
+
+	i = cub->player.y * SCL - 2;
+	while (i < cub->player.y * SCL + 2)
+	{
+		j = cub->player.x * SCL - 2;
+		while (++j < cub->player.x * SCL + 2)
+			my_mlx_pixel_put(&cub->window, j, i, RED);
+		i++;
+	}
+}
+
+void	player_update(t_cub *cub)
+{
+	if (cub->player.rot_angle > 0 && cub->player.rot_angle < M_PI)
+		cub->player.facing_up = false;
+	else
+		cub->player.facing_up = true;
+	if (cub->player.rot_angle < 0.5 * M_PI
+		|| cub->player.rot_angle > 1.5 * M_PI)
+		cub->player.facing_right = true;
+	else
+		cub->player.facing_right = false;
 }
