@@ -6,7 +6,7 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 04:12:10 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/30 05:55:30 by hsaidi           ###   ########.fr       */
+/*   Updated: 2022/12/30 09:40:42 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int		check_top2(char *var, int j)
 {
-	printf("|->%s\n", var);
 	if (var[j] == 'N' && var[j + 1] == 'O' && space(var[j + 2]))
 		return(PATH_NO);
 	if (var[j] == 'S' && var[j + 1] == 'O' && space(var[j + 2]))
@@ -60,7 +59,7 @@ int is_color(char *colors, t_map *map)
 		{
 			if (!ft_isdigit(map->col[t][i]))
 			{
-				printf("dig|%c|\n", map->col[t][i]);
+				// printf("dig|%c|\n", map->col[t][i]);
 				printf("error\ninvalid color\n");
 				exit(1);
 			}
@@ -70,8 +69,20 @@ int is_color(char *colors, t_map *map)
 	}
 	return (t);	
 }
+void color_int(t_map *map, int col[3], int flag, int i)
+{
+	if (flag == PATH_F && map->floor == -1)
+			map->floor = (col[0] << 16) + ( col[1] << 8) + col[2];
+	if (flag == PATH_C && map->ceiling == -1)
+			map->ceiling = (col[0] << 16) + ( col[1] << 8) + col[2];
+	else
+	{
+		printf("color error\n");
+		exit(1);
+	}
+}
 
-void color_checking(t_map *map, char *color_l)
+void color_checking(t_map *map, char *color_l, int flag)
 {
 	int	col[3];
 	int lenght;
@@ -82,12 +93,18 @@ void color_checking(t_map *map, char *color_l)
 	while(i < lenght)
 	{
 		col[i] = atoi(map->col[i]);
-		if(col[i] < 0 || col[i] > 255)
+		if (col[i] < 0 || col[i] > 255)
 		{
 			printf("error\n color out of range\n");
 			exit(1);
 		}
-		printf("the nb is |%d|\n", col[i]);
+		else
+		{
+			if (flag == PATH_F && map->floor == -1)
+				map->floor = (col[0] << 16) + ( col[1] << 8) + col[2];
+			// printf("\n---%d---\n",map->floor );
+		}
+		// printf("the nb is |%d|\n", col[i]);
 		i++;
 	}
 }
@@ -118,19 +135,19 @@ int texters(t_map *map ,char *av, int i, int flag, int count)
 	{
 		count++;
 		map->no = av;
-		printf("adddv |%s|\n", av);
+		// printf("adddv |%s|\n", av);
 	}
 	else if (flag == PATH_SO && !map->so)
 	{
 		count++;
 		map->so = av;
-		printf("av |%s|\n", map->so);
+		// printf("av |%s|\n", map->so);
 	}
 	else if (flag == PATH_WE && !map->we)
 	{
 		count++;
 		map->we = av;
-		printf("av |%s|\n", map->we);
+		// printf("av |%s|\n", map->we);
 
 	}
 	else if (flag == PATH_EA && !map->ea)
@@ -147,46 +164,6 @@ int texters(t_map *map ,char *av, int i, int flag, int count)
 	return(count);
 }
 
-// need to check here fd open and use sub str
-// int check_all_characters(char *str, t_map *map, int flag)
-// {
-// 	printf("#iiiite %s\n", str);
-// 	if (flag == 1)
-// 	{
-// 		if(!ft_strcmp(str, "NO") || !ft_strcmp(str, "SO") || !ft_strcmp(str, "EA")
-// 				|| !ft_strcmp(str, "WE") || *str == 'F' || *str == 'C')
-// 			map->char_count++;
-// 	}
-// 	if(flag == 2)
-// 	{
-// 		if(*str == 'F' || *str == 'C')
-// 			map->char_count++;
-// 	}
-// 	else
-// 		return (-1);
-// 	return (0);
-// }
-// int hajar(char str)
-// {
-// 	if((str == 'N' && str + 1 == 'O')) 
-// 		return(0);
-// 	if ((str == 'S' && str + 1 == 'O'))
-// 		return(0);
-// 	 if ((str == 'W' && str + 1 == 'E'))
-// 		return(0);
-// 	if ((str == 'E' && str + 1 == 'A'))
-// 		return(0);
-// 	 if (str == 'F')
-// 		return(0);
-// 	 if (str == 'C')
-// 		return(0);
-// 	 if (str == '\n')
-// 		return(0);
-// 	else
-// 		return(-1);
-
-// }
-
 int reading(t_map *map, char **av)
 {
 	int		i;
@@ -198,7 +175,7 @@ int reading(t_map *map, char **av)
 	int		index_info;
 
 	i = 0;
-	index_info = file_one(map, 1) - 1;
+	index_info = file_one(map, 1);
 	while ((av[i] && i < index_info))
 	{
 		printf("index info : %d\n", index_info);
@@ -219,7 +196,7 @@ int reading(t_map *map, char **av)
 
 			av[i][ft_strlen(av[i])- 1] = 0;
 			colors = ft_substr(av[i], j + 1, ft_strlen(av[i]));
-			color_checking(map, colors);
+			color_checking(map, colors, flag);
 		}
 		if(flag == PATH_NO || flag == PATH_EA 
 			|| flag == PATH_SO || flag == PATH_WE)

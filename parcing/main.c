@@ -6,7 +6,7 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 22:02:16 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/30 06:00:25 by hsaidi           ###   ########.fr       */
+/*   Updated: 2022/12/30 09:39:44 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,21 +46,30 @@ int skip_alpha(char *str)
 	}
 	return(0);
 }
-
+int is_not_texter(char *str, int i)
+{
+	if ((str[i] == 'N' && str[i + 1] == 'O') 
+		|| (str[i] == 'S' && str[i + 1] == 'O') 
+		|| (str[i] == 'E' && str[i + 1] == 'A') 
+		|| (str[i] == 'W' && str[i + 1] == 'E'))
+			return (0);
+	return(1);
+}
 int is_param_first(char *str)
 {
 	int i;
 
-	
 	i = 0;
 	while((str[i] == ' ' || str[i] == '\t') && str[i])
 		i++;
 	while(str[i])
 	{
-		if ((str[i] == 'N' && str[i + 1] == 'O') 
-				|| (str[i] == 'S' && str[i + 1] == 'O'))
-			return (0);
-		if (str[i] == '1' || str[i] == '0' || player(str[i]))
+
+		if (!is_not_texter(str, i))
+			return(0);
+		while (space(str[i]))
+			i++;
+		if ((str[i] == '1' || str[i] == '0' || player(str[i])))
 			return (1);
 		else
 			return (0);
@@ -79,14 +88,14 @@ int	file_one(t_map *map, int flag)
 	(void)flag;
 	while(map->parsing[i])
 	{
-			if (!is_param_first(map->parsing[i]))
-			{
-				size++;
-				printf("wahya hamid : %s\n", map->parsing[i]);
-			}
+		if (!is_param_first(map->parsing[i]))
+		{
+			size++;
+			// printf("wahya hamid : *%s*\n", map->parsing[i]);
+		}
 		i++;
 	}
-	printf("SIZE : %d\n",size);
+	// printf("SIZE : %d\n",size);
 	return(size - 1);
 }
 
@@ -172,8 +181,7 @@ void if_map_valid(t_map *map)
 
 	valid_i = 0;
 	valid_i = check_is_map(map,map->parsing);
-	// if(reading(map, map->parsing))
-	// {
+
 		if(reading(map, map->parsing) || first_wall(map) || ft_check_borders(map) || last_wall(map))
 		{
 			printf("wrong map!\n");
@@ -183,11 +191,11 @@ void if_map_valid(t_map *map)
 	else
 	{
 		// here u can get the index of valid map(valid_i)
-		while(map->parsing[valid_i])  
-		{
-			printf("parce:%s\n",map->parsing[valid_i]);
-			valid_i++;
-		}
+		// while(map->parsing[valid_i])  
+		// {
+		// 	// printf("parce:%s\n",map->parsing[valid_i]);
+		// 	valid_i++;
+		// }
 		printf("*NICE*\n");
 	}
 }
