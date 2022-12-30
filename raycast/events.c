@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 01:55:47 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/27 19:33:56 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/29 17:29:24 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 double	normalize_angle(double angle)
 {
- 	if (angle < 0)
- 		angle += 2 * M_PI;
- 	else if (angle > 2 * M_PI)
- 		angle -= 2 * M_PI;
+	if (angle < 0)
+		angle += 2 * M_PI;
+	else if (angle > 2 * M_PI)
+		angle -= 2 * M_PI;
 	return (angle);
 }
 
@@ -47,7 +47,7 @@ void	a_d_events(t_cub *cub)
 
 void	s_w_events(t_cub *cub)
 {
-	if (cub->player.move[1] == S_KEY)
+	if (cub->player.move[1] == S_KEY || cub->player.move[1] == DOWN_KEY)
 	{
 		if (!colision(cub, S_KEY))
 		{
@@ -55,7 +55,8 @@ void	s_w_events(t_cub *cub)
 			cub->player.x -= cub->player.speed_mov * cos(cub->player.rot_angle);
 		}
 	}
-	else if (cub->player.move[1] == W_KEY)
+	else if (cub->player.move[1] == W_KEY || cub->player.move[1] == UP_KEY)
+
 	{
 		if (!colision(cub, W_KEY))
 		{
@@ -69,7 +70,8 @@ void	events(t_cub *cub)
 {
 	if (cub->player.move[0] == D_KEY || cub->player.move[0] == A_KEY)
 		a_d_events(cub);
-	if (cub->player.move[1] == S_KEY || cub->player.move[1] == W_KEY)
+	if (cub->player.move[1] == S_KEY || cub->player.move[1] == W_KEY
+		|| cub->player.move[1] == UP_KEY || cub->player.move[1] == DOWN_KEY)
 		s_w_events(cub);
 	if (cub->player.move[2] == LEFT_KEY)
 	{

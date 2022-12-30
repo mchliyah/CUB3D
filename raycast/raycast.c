@@ -6,13 +6,13 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 22:42:49 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/28 21:18:56 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/29 16:36:33 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-void	draw_line(double x1, double y1, double x2, double y2, t_cub *cub)
+void	draw_line(double x1, double y1, t_ax pos_end, t_cub *cub)
 {
 	double	delta_x;
 	double	delta_y;
@@ -20,8 +20,8 @@ void	draw_line(double x1, double y1, double x2, double y2, t_cub *cub)
 	double	x;
 	double	y;
 
-	delta_x = x2 - x1;
-	delta_y = y2 - y1;
+	delta_x = pos_end.x - x1;
+	delta_y = pos_end.y - y1;
 	if (fabs(delta_x) > fabs(delta_y))
 		step = fabs(delta_x);
 	else
@@ -46,27 +46,24 @@ double	distance(double x1, double y1, double x2, double y2)
 
 void	set_ray_distance(t_player *player, t_ray *ray)
 {
-	double		h_distance;
-	double		v_distance;
-
-	h_distance = distance(player->x, player->y,
+	ray->h_distance = distance(player->x, player->y,
 			ray->horz_hit_x, ray->horz_hit_y);
 	if (!ray->hit_horz)
-		h_distance = INT_MAX;
-	v_distance = distance(player->x, player->y,
+		ray->h_distance = INT_MAX;
+	ray->v_distance = distance(player->x, player->y,
 			ray->vert_hit_x, ray->vert_hit_y);
 	if (!ray->hit_vert)
-		v_distance = INT_MAX;
-	if (h_distance < v_distance)
+		ray->v_distance = INT_MAX;
+	if (ray->h_distance < ray->v_distance)
 	{
-		ray->distance = h_distance;
+		ray->distance = ray->h_distance;
 		ray->wall_hit_x = ray->horz_hit_x;
 		ray->wall_hit_y = ray->horz_hit_y;
 		ray->hit_horz = true;
 	}
 	else
 	{
-		ray->distance = v_distance;
+		ray->distance = ray->v_distance;
 		ray->wall_hit_x = ray->vert_hit_x;
 		ray->wall_hit_y = ray->vert_hit_y;
 		ray->hit_vert = true;
