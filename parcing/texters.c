@@ -6,7 +6,7 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 10:00:52 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/30 10:39:17 by hsaidi           ###   ########.fr       */
+/*   Updated: 2022/12/30 10:52:10 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,12 @@ void texters(t_map *map ,char *av, int i, int flag)
 {
 	while(space(*av))
 		av++;
+    if(ft_strchr(av, 32) || ft_strchr(av, '\t'))
+	{
+		printf("error\n %s\n", av);
+		exit(0);
+	}
+    printf("av *%s*\n",av);
 	if (flag == PATH_NO && !map->no)
 		map->no = av;
 	else if (flag == PATH_SO && !map->so)

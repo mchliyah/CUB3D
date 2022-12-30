@@ -6,7 +6,7 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 04:12:10 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/30 10:38:26 by hsaidi           ###   ########.fr       */
+/*   Updated: 2022/12/30 10:48:35 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,15 +155,14 @@ int reading(t_map *map, char **av)
 			map->char_count++;
 			av[i][ft_strlen(av[i])- 1] = 0;
 			var = ft_substr(av[i], j + 2, ft_strlen(av[i]));
-			// check_xpm(av, var);
-			texters(map, var, j, flag, count);
+			texters(map, var, j, flag);
 		}
 		i++;
 	}
 	if (map->char_count != 6)
 	{
 		printf("erorr\n");
-		exit(1);
+		exit(1);  
 	}
 	return(0);
 }
