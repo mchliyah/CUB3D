@@ -6,25 +6,11 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 23:21:26 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/30 15:16:38 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/30 16:07:39 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include  "../includes/cub.h"
-
-void	render_rays(t_cub *cub)
-{
-	t_ax	pos_end;
-	int		i;
-
-	i = -1;
-	while (++i < X)
-	{
-		pos_end.x = cub->ray[i].wall_hit_x * SCL;
-		pos_end.y = cub->ray[i].wall_hit_y * SCL;
-		draw_line(cub->player.x * SCL, cub->player.y * SCL, pos_end, cub);
-	}
-}
 
 void	render_mini_map(t_cub *cub)
 {
@@ -40,14 +26,14 @@ void	render_mini_map(t_cub *cub)
 			if (cub->map.parsing[(int)pos.y][(int)pos.x] == WALL)
 				render_square(cub, pos, GRAY);
 			else if (cub->map.parsing[(int)pos.y][(int)pos.x] == EMPTY
-				|| cub->map.parsing[(int)pos.y][(int)pos.x] == cub->player.symbol)
+				|| cub->map.parsing[(int)pos.y][(int)pos.x]
+				== cub->player.symbol)
 				render_square(cub, pos, WHITE);
 			pos.x++;
 		}
 		pos.y++;
 	}
 	render_player(cub);
-	render_rays(cub);
 }
 
 void	render_wall(t_cub *cub, int i, double wall_height, int color)
@@ -58,10 +44,10 @@ void	render_wall(t_cub *cub, int i, double wall_height, int color)
 
 	j = -1;
 	while (++j < Y / 2 - (wall_height / 2))
-		my_mlx_pixel_put(&cub->window, i, j, AQUA);
+		my_mlx_pixel_put(&cub->window, i, j, cub->map.ceiling);
 	j = Y / 2 + (wall_height / 2) - 1;
 	while (++j < Y)
-		my_mlx_pixel_put(&cub->window, i, j, BROWN);
+		my_mlx_pixel_put(&cub->window, i, j, cub->map.floor);
 	wall_top_pixel = Y / 2 - (wall_height / 2);
 	if (wall_top_pixel < 0)
 		wall_top_pixel = 0;
@@ -102,7 +88,6 @@ void	thre_d_projection(t_cub *cub, t_wall *wall)
 			wall->color = RED;
 		render_wall(cub, i, wall->height, wall->color);
 	}
-	printf("here\n");
 }
 
 int	render(t_cub *cub)

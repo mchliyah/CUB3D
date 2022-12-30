@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 22:02:16 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/30 14:49:51 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/30 15:58:30 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,8 +132,6 @@ int	ft_check_borders(t_map *map)
 			if (player(map->parsing[i][p]))
 			{
 				map->player_count += 1;
-				// printf("player count : %d\n", map->player_count);
-				printf("i : %d\n, p : %d\n", i, p);
 				if (map->player_count != 1 || ((map_c(map->parsing[i][p + 1], 1)!= 1) || (map_c(map->parsing[i][p - 1], 1) != 1)
 					|| (map_c(map->parsing[i + 1][p], 1)!= 1) || (map_c(map->parsing[i - 1][p], 1)!= 1)))
 				{

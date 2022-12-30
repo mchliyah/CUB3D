@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:27:59 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/30 14:29:00 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/30 16:09:02 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,16 +123,6 @@ typedef struct s_ray
 	bool	hit_horz;
 }	t_ray;
 
-// typedef struct s_textur
-// {
-// 	int		f_color;
-// 	int		c_color;
-// 	void	*no;
-// 	void	*so;
-// 	void	*we;
-// 	void	*ea;
-// }	t_textur;
-
 typedef struct s_wall
 {
 	int		color;
@@ -149,7 +139,6 @@ typedef struct s_cub
 	t_map		map;
 	t_player	player;
 	t_ray		ray[X];
-	// t_textur	textur;
 }t_cub;
 
 //init
@@ -182,7 +171,7 @@ int		ft_strlen1(char *str);
 double	normalize_angle(double angle);
 void	player_update(t_cub *cub);
 
-void	draw_line(double x1, double y1, t_ax pos_end, t_cub *cub);
+// void	draw_line(double x1, double y1, t_ax pos_end, t_cub *cub);
 void	render_square(t_cub *cub, t_ax pos, unsigned int color);
 void	render_player(t_cub *cub);
 #endif

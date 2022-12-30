@@ -6,38 +6,38 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 22:42:49 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/30 15:02:12 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/30 16:07:49 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include  "../includes/cub.h"
 
-void	draw_line(double x1, double y1, t_ax pos_end, t_cub *cub)
-{
-	double	delta_x;
-	double	delta_y;
-	double	step;
-	double	x;
-	double	y;
+// void	draw_line(double x1, double y1, t_ax pos_end, t_cub *cub)
+// {
+// 	double	delta_x;
+// 	double	delta_y;
+// 	double	step;
+// 	double	x;
+// 	double	y;
 
-	delta_x = pos_end.x - x1;
-	delta_y = pos_end.y - y1;
-	if (fabs(delta_x) > fabs(delta_y))
-		step = fabs(delta_x);
-	else
-		step = fabs(delta_y);
-	delta_x /= step;
-	delta_y /= step;
-	x = x1;
-	y = y1;
-	while (step > 0)
-	{
-		my_mlx_pixel_put(&cub->window, x, y, ORANGE);
-		x += delta_x;
-		y += delta_y;
-		step--;
-	}
-}
+// 	delta_x = pos_end.x - x1;
+// 	delta_y = pos_end.y - y1;
+// 	if (fabs(delta_x) > fabs(delta_y))
+// 		step = fabs(delta_x);
+// 	else
+// 		step = fabs(delta_y);
+// 	delta_x /= step;
+// 	delta_y /= step;
+// 	x = x1;
+// 	y = y1;
+// 	while (step > 0)
+// 	{
+// 		my_mlx_pixel_put(&cub->window, x, y, ORANGE);
+// 		x += delta_x;
+// 		y += delta_y;
+// 		step--;
+// 	}
+// }
 
 double	distance(double x1, double y1, double x2, double y2)
 {

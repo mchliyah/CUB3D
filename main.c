@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:27:39 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/30 15:04:07 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/30 15:23:35 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	main(int ac, char **av)
 {
 	t_cub	cub;
-	// t_map	map;
 
 	if (ac != 2 || !ft_check_file(av, av[1]))
 	{	

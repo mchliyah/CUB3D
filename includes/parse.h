@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 22:35:54 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/30 13:12:12 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/30 16:09:16 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,5 @@ int		ft_isdigit(int k);
 int		ft_strcmp(char *s1, char *s2);
 
 //add by mchliyah
-void if_map_valid(t_map *map);
+void	if_map_valid(t_map *map);
 #endif
