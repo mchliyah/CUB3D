@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 04:43:26 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/30 13:54:39 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/30 15:14:31 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,15 @@ void	get_player_pos(t_cub *cub)
 	int	i;
 	int	j;
 
-	i = cub->map.valid_i;
+	i = 8;
 	j = 0;
+	printf("i = %d\n", i);
+	printf("plauer pos.x = %f\n", cub->player.x);
+	printf("plauer pos.y = %f\n", cub->player.y);
 	while (i < cub->map.map_height)
 	{
 		j = 0;
-		while (j < cub->map.map_width)
+		while (j < ft_strlen1(cub->map.parsing[i]))
 		{
 			if (cub->map.parsing[i][j] == 'N' || cub->map.parsing[i][j] == 'S' ||
 				cub->map.parsing[i][j] == 'E' || cub->map.parsing[i][j] == 'W')
@@ -35,6 +38,8 @@ void	get_player_pos(t_cub *cub)
 		}
 		i++;
 	}
+	printf("plauer pos.x = %f\n", cub->player.x);
+	printf("plauer pos.y = %f\n", cub->player.y);
 }
 
 void	render_player(t_cub *cub)

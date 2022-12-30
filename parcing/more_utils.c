@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 00:43:08 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/30 13:53:52 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/30 14:49:19 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ void init_data(t_map *map)
     map->player_y = -1;
 }
 
-int player(char c)
+int	player(char c)
 {
 	if (c == 'N' || c == 'E' || c == 'S' || c == 'W')
-			return (1);
+		return (1);
 	return (0);
 }
 

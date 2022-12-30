@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 22:02:16 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/30 13:53:35 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/30 14:49:51 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int	ft_check_borders(t_map *map)
 	int	i;
 	int	p;
 
-	i = 0;
+	i = map->valid_i;
 	if (!map->parsing[i])
 		return (1);
 	while (map->parsing[i])
@@ -125,19 +125,21 @@ int	ft_check_borders(t_map *map)
 				if ((map_c(map->parsing[i][p + 1], 2)!= 1) || (map_c(map->parsing[i][p - 1], 2) !=1)
 					|| (map_c(map->parsing[i + 1][p], 2)!= 1) || (map_c(map->parsing[i - 1][p], 2)!= 1))
 				{
-					printf("error\nMap invalid!\n");
+					printf("error\nMap invalid!1\n");
 					exit(1);
 				}
 			}
 			if (player(map->parsing[i][p]))
 			{
 				map->player_count += 1;
-				if (map->player_count != 1 || ((map_c(map->parsing[i][p + 1], 1)!= 1) || (map_c(map->parsing[i][p - 1], 1) !=1)
+				// printf("player count : %d\n", map->player_count);
+				printf("i : %d\n, p : %d\n", i, p);
+				if (map->player_count != 1 || ((map_c(map->parsing[i][p + 1], 1)!= 1) || (map_c(map->parsing[i][p - 1], 1) != 1)
 					|| (map_c(map->parsing[i + 1][p], 1)!= 1) || (map_c(map->parsing[i - 1][p], 1)!= 1)))
 				{
-					printf("error\nMap invalid!\n");
+					printf("error\nMap invalid!2\n");
 					exit(1);
-				}  
+				}
 			}
 			p++;
 		}

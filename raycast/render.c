@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 23:21:26 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/30 13:54:33 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/30 15:16:38 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ void	render_mini_map(t_cub *cub)
 	t_ax	pos;
 
 	pos.x = 0;
-	pos.y = cub->map.valid_i;
+	pos.y = 8;
 	while (pos.y < cub->map.map_height)
 	{
 		pos.x = 0;
-		while (pos.x < cub->map.map_height)
+		while (pos.x < ft_strlen1(cub->map.parsing[(int)pos.y]))
 		{
 			if (cub->map.parsing[(int)pos.y][(int)pos.x] == WALL)
 				render_square(cub, pos, GRAY);
@@ -102,6 +102,7 @@ void	thre_d_projection(t_cub *cub, t_wall *wall)
 			wall->color = RED;
 		render_wall(cub, i, wall->height, wall->color);
 	}
+	printf("here\n");
 }
 
 int	render(t_cub *cub)
