@@ -6,7 +6,7 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 04:12:10 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/30 10:05:46 by hsaidi           ###   ########.fr       */
+/*   Updated: 2022/12/30 10:38:26 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,6 @@ int reading(t_map *map, char **av)
 		j = 0;
 		while(space(av[i][j]))
 		 	j++;
-		//printf("	dd |%s|\n", av[i]);
 		flag = check_top2(av[i], j);
 		if(flag == -1 && av[i][j] != '\n' )
 		{
@@ -145,7 +144,7 @@ int reading(t_map *map, char **av)
 		}
 		if(flag == PATH_F || flag == PATH_C)
 		{
-
+			map->char_count++;
 			av[i][ft_strlen(av[i])- 1] = 0;
 			colors = ft_substr(av[i], j + 1, ft_strlen(av[i]));
 			color_checking(map, colors, flag);
@@ -153,12 +152,18 @@ int reading(t_map *map, char **av)
 		if(flag == PATH_NO || flag == PATH_EA 
 			|| flag == PATH_SO || flag == PATH_WE)
 		{
+			map->char_count++;
 			av[i][ft_strlen(av[i])- 1] = 0;
 			var = ft_substr(av[i], j + 2, ft_strlen(av[i]));
-			//check_xpm(av, var);
+			// check_xpm(av, var);
 			texters(map, var, j, flag, count);
 		}
 		i++;
+	}
+	if (map->char_count != 6)
+	{
+		printf("erorr\n");
+		exit(1);
 	}
 	return(0);
 }

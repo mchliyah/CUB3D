@@ -6,7 +6,7 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 10:00:52 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/30 10:07:03 by hsaidi           ###   ########.fr       */
+/*   Updated: 2022/12/30 10:39:17 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,35 +40,21 @@ int		check_top2(char *var, int j)
 		return (-1);
 }
 
-int texters(t_map *map ,char *av, int i, int flag, int count)
+void texters(t_map *map ,char *av, int i, int flag)
 {
 	while(space(*av))
 		av++;
 	if (flag == PATH_NO && !map->no)
-	{
-		count++;
 		map->no = av;
-
-	}
 	else if (flag == PATH_SO && !map->so)
-	{
-		count++;
 		map->so = av;
-	}
 	else if (flag == PATH_WE && !map->we)
-	{
-		count++;
 		map->we = av;
-	}
 	else if (flag == PATH_EA && !map->ea)
-	{
-		count++;
 		map->ea = av;
-	}
 	else
-	{
+	{   
 		printf("error\n Duplication\n");
 		exit(1);
 	}
-	return(count);
 }
