@@ -6,7 +6,7 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 04:12:10 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/29 20:40:42 by hsaidi           ###   ########.fr       */
+/*   Updated: 2022/12/30 02:19:38 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		check_top2(char *var, int j)
 {
-	//printf("|->%s\n", var);
+	printf("|->%s\n", var);
 	if (var[j] == 'N' && var[j + 1] == 'O' && space(var[j + 2]))
 		return(PATH_NO);
 	if (var[j] == 'S' && var[j + 1] == 'O' && space(var[j + 2]))
@@ -70,6 +70,7 @@ int is_color(char *colors, t_map *map)
 	}
 	return (t);	
 }
+
 void color_checking(t_map *map, char *color_l)
 {
 	int	col[3];
@@ -81,15 +82,36 @@ void color_checking(t_map *map, char *color_l)
 	while(i < lenght)
 	{
 		col[i] = atoi(map->col[i]);
+		if(col[i] < 0 || col[i] > 255)
+		{
+			printf("error\n color out of range\n");
+			exit(1);
+		}
 		printf("the nb is |%d|\n", col[i]);
 		i++;
 	}
 }
 
+
+// void check_texter(char *av)
+// {
+// 	int fd;
+
+// 	if (av == NULL)
+// 	{
+// 		printf("error\nempty file\n");
+// 		exit(0);
+// 	}
+// 	fd = open(av, 0644);
+// 	if(fd < 0)
+// 	{
+// 		printf("error\n file invalid\n");
+// 		exit(0);
+// 	}
+// }
+
 int texters(t_map *map ,char *av, int i, int flag, int count)
 {
-	int fd;
-
 	while(space(*av))
 		av++;
 	if (flag == PATH_NO && !map->no)
@@ -125,25 +147,17 @@ int texters(t_map *map ,char *av, int i, int flag, int count)
 	return(count);
 }
 
-// int check_texter(t_map *map)
-// {
-
-// 	if (av == NULL)
-// 	{
-// 		printf("error\nempty file\n");
-// 		exit(0);
-// 	}
-	// fd = open(av, 0644);
-	// if(fd < 0)
-	// {
-	// 	printf("error\n file invalid\n");
-	// 	//exit(0);
-	// }
-	// else 
-	// 	printf("nice nice\n");
-
-// }
 // need to check here fd open and use sub str
+int check_all_characters(char *str, t_map *map)
+{
+	printf("#iiiite %s\n", str);
+	if(!ft_strcmp(str, "NO") && !ft_strcmp(str, "SO") && !ft_strcmp(str, "EA")
+			 && !ft_strcmp(str, "WE") && *str == 'F' && *str == 'C')
+		map->char_count++;
+	else
+		return (-1);
+	return (0);
+}
 
 int reading(t_map *map, char **av)
 {
@@ -159,13 +173,19 @@ int reading(t_map *map, char **av)
 	index_info = file_one(map, 1);
 	while (av[i] && i < index_info)
 	{
+		// if(check_all_characters(av[i], map) == - 1)
+		// {
+		// 	printf("error\n");
+		// 	exit(0);
+		// }
 		// check the count here
 		count = 0;
 		j = 0;
 		while(space(av[i][j]))
 		 	j++;
 		flag = check_top2(av[i], j);
-		if(flag == -1 && av[i][j] != '\n')
+		
+		if(flag == -1 && av[i][j] != '\n' )
 		{
 			printf("error\n");
 			exit(0);
@@ -174,16 +194,15 @@ int reading(t_map *map, char **av)
 		{
 			av[i][ft_strlen(av[i])- 1] = 0;
 			colors = ft_substr(av[i], j + 1, ft_strlen(av[i]));
-			//printf("here |%c|\n", av[i][ft_strlen(av[i])- 1]);
 			color_checking(map, colors);
 		}
 		if(flag == PATH_NO || flag == PATH_EA 
 			|| flag == PATH_SO || flag == PATH_WE)
 		{
+			av[i][ft_strlen(av[i])- 1] = 0;
 			var = ft_substr(av[i], j + 2, ft_strlen(av[i]));
-			//printf("else|%s|\n", var);
-			texters(map, var, j, flag, count);
 			check_xpm(av, var);
+			texters(map, var, j, flag, count);
 		}
 		i++;
 	}

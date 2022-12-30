@@ -6,7 +6,7 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 22:16:02 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/29 07:19:30 by hsaidi           ###   ########.fr       */
+/*   Updated: 2022/12/30 02:14:51 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	first_wall(t_map *map)
 
 	i = 0;
 	h = check_is_map(map,map->parsing);
+	if (!h || !map->parsing[h])
+		return (1);
 	while(h && map->parsing[h][i])
 	{
 		if (map->parsing[h][i] != '1' && !space(map->parsing[h][i])
@@ -46,6 +48,8 @@ int last_wall(t_map *map)
 	int p;
 
 	i = check_is_map(map,map->parsing);
+	if (!i || !map->parsing[i])
+		return (1);
 	while(map->parsing[i])
 		i++;
 	p = 0;
@@ -66,6 +70,7 @@ int player(char c)
 {
 	if (c == 'N' || c == 'E' || c == 'S' || c == 'W')
 			return (1);
+	
 	return (0);
 }
 

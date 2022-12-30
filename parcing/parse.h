@@ -6,7 +6,7 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 22:35:54 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/29 06:35:51 by hsaidi           ###   ########.fr       */
+/*   Updated: 2022/12/30 01:21:15 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,12 @@ typedef struct s_map
 	char	**col;
 	int		player_count;
 	int		player_x;
+	int		char_count;
 	int		more_maps;
 	int		player_y;
 	char	**parsing;
+	int		floor;
+	int		ceiling;
 	char	*no;
 	char	*so;
 	char	*we;

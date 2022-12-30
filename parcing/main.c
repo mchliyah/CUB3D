@@ -6,7 +6,7 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 22:02:16 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/29 18:20:34 by hsaidi           ###   ########.fr       */
+/*   Updated: 2022/12/30 02:18:48 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	file_one(t_map *map, int flag)
 	{
 		if (flag == 1)
 		{
-			if (skip_alpha(map->parsing[i]) == 0 && (!map_c(*map->parsing[i + 1] , 1)))
+			if (skip_alpha(map->parsing[i]) == 0 && (!map_c(*map->parsing[i] , 2)))
 				size++;
 		}
 		i++;
@@ -101,6 +101,8 @@ int	ft_check_borders(t_map *map)
 	int	i;
 	int	p;
 
+	if (!map->parsing[i])
+		return (1);
 	while (map->parsing[i])
 	{
 		p = 0;
@@ -146,11 +148,14 @@ void if_map_valid(t_map *map)
 
 	valid_i = 0;
 	valid_i = check_is_map(map,map->parsing);
-	if((first_wall(map) || ft_check_borders(map) || last_wall(map)))
-	{
-		printf("wrong map!\n");
-		exit(0);
-	}
+	// if(reading(map, map->parsing))
+	// {
+		if(reading(map, map->parsing) ||first_wall(map) || ft_check_borders(map) || last_wall(map))
+		{
+			printf("wrong map!\n");
+			exit(0);
+		}
+	// }
 	else
 	{
 		// here u can get the index of valid map(valid_i)
@@ -174,9 +179,6 @@ int	main(int ac, char **av)
 	}
 	get_data(av, &map);
 	init_data(&map);
-	reading(&map, map.parsing);
-	 /*i comonted the top of file just to 
-	//make sure of something tomorow otherwase rah is working*/
-	//if_map_valid(&map);
+	if_map_valid(&map);
     return(0);
 }
