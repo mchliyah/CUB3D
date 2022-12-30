@@ -6,7 +6,7 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 22:35:54 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/30 01:21:15 by hsaidi           ###   ########.fr       */
+/*   Updated: 2022/12/30 04:20:17 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int		map_c(char c, int flag);
 int		first_wall(t_map *map);
 int		last_wall(t_map *map);
 int		skip_space(char *sp, int i);
+int		hajar(char str);
 int		ft_strcmp(char *s1, char *s2);
 int		file_one(t_map *map, int flag);
 char	*ft_strdup(const char *s1);

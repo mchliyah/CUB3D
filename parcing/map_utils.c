@@ -6,7 +6,7 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 22:16:02 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/30 02:14:51 by hsaidi           ###   ########.fr       */
+/*   Updated: 2022/12/30 05:57:59 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int last_wall(t_map *map)
 	while(map->parsing[i])
 		i++;
 	p = 0;
+	
 	while(map->parsing[i - 1][p])
 	{
 		if (map->parsing[i - 1][p] != '1' && !space(map->parsing[i - 1][p])
@@ -70,7 +71,6 @@ int player(char c)
 {
 	if (c == 'N' || c == 'E' || c == 'S' || c == 'W')
 			return (1);
-	
 	return (0);
 }
 

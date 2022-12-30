@@ -6,7 +6,7 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 22:02:16 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/30 02:18:48 by hsaidi           ###   ########.fr       */
+/*   Updated: 2022/12/30 06:00:25 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,28 @@ int skip_alpha(char *str)
 	return(0);
 }
 
+int is_param_first(char *str)
+{
+	int i;
+
+	
+	i = 0;
+	while((str[i] == ' ' || str[i] == '\t') && str[i])
+		i++;
+	while(str[i])
+	{
+		if ((str[i] == 'N' && str[i + 1] == 'O') 
+				|| (str[i] == 'S' && str[i + 1] == 'O'))
+			return (0);
+		if (str[i] == '1' || str[i] == '0' || player(str[i]))
+			return (1);
+		else
+			return (0);
+		i++;
+	}
+	return (0);
+}
+
 int	file_one(t_map *map, int flag)
 {
 	int	i;
@@ -54,16 +76,18 @@ int	file_one(t_map *map, int flag)
 
 	i = 0;
 	size = 0;
+	(void)flag;
 	while(map->parsing[i])
 	{
-		if (flag == 1)
-		{
-			if (skip_alpha(map->parsing[i]) == 0 && (!map_c(*map->parsing[i] , 2)))
+			if (!is_param_first(map->parsing[i]))
+			{
 				size++;
-		}
+				printf("wahya hamid : %s\n", map->parsing[i]);
+			}
 		i++;
 	}
-	return(size);
+	printf("SIZE : %d\n",size);
+	return(size - 1);
 }
 
 int	check_is_map(t_map *map, char **av)
@@ -150,7 +174,7 @@ void if_map_valid(t_map *map)
 	valid_i = check_is_map(map,map->parsing);
 	// if(reading(map, map->parsing))
 	// {
-		if(reading(map, map->parsing) ||first_wall(map) || ft_check_borders(map) || last_wall(map))
+		if(reading(map, map->parsing) || first_wall(map) || ft_check_borders(map) || last_wall(map))
 		{
 			printf("wrong map!\n");
 			exit(0);

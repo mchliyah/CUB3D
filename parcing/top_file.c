@@ -6,7 +6,7 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 04:12:10 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/30 02:19:38 by hsaidi           ###   ########.fr       */
+/*   Updated: 2022/12/30 05:55:30 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,9 +116,9 @@ int texters(t_map *map ,char *av, int i, int flag, int count)
 		av++;
 	if (flag == PATH_NO && !map->no)
 	{
-		printf("av |%s|\n", av);
 		count++;
 		map->no = av;
+		printf("adddv |%s|\n", av);
 	}
 	else if (flag == PATH_SO && !map->so)
 	{
@@ -148,16 +148,44 @@ int texters(t_map *map ,char *av, int i, int flag, int count)
 }
 
 // need to check here fd open and use sub str
-int check_all_characters(char *str, t_map *map)
-{
-	printf("#iiiite %s\n", str);
-	if(!ft_strcmp(str, "NO") && !ft_strcmp(str, "SO") && !ft_strcmp(str, "EA")
-			 && !ft_strcmp(str, "WE") && *str == 'F' && *str == 'C')
-		map->char_count++;
-	else
-		return (-1);
-	return (0);
-}
+// int check_all_characters(char *str, t_map *map, int flag)
+// {
+// 	printf("#iiiite %s\n", str);
+// 	if (flag == 1)
+// 	{
+// 		if(!ft_strcmp(str, "NO") || !ft_strcmp(str, "SO") || !ft_strcmp(str, "EA")
+// 				|| !ft_strcmp(str, "WE") || *str == 'F' || *str == 'C')
+// 			map->char_count++;
+// 	}
+// 	if(flag == 2)
+// 	{
+// 		if(*str == 'F' || *str == 'C')
+// 			map->char_count++;
+// 	}
+// 	else
+// 		return (-1);
+// 	return (0);
+// }
+// int hajar(char str)
+// {
+// 	if((str == 'N' && str + 1 == 'O')) 
+// 		return(0);
+// 	if ((str == 'S' && str + 1 == 'O'))
+// 		return(0);
+// 	 if ((str == 'W' && str + 1 == 'E'))
+// 		return(0);
+// 	if ((str == 'E' && str + 1 == 'A'))
+// 		return(0);
+// 	 if (str == 'F')
+// 		return(0);
+// 	 if (str == 'C')
+// 		return(0);
+// 	 if (str == '\n')
+// 		return(0);
+// 	else
+// 		return(-1);
+
+// }
 
 int reading(t_map *map, char **av)
 {
@@ -170,21 +198,17 @@ int reading(t_map *map, char **av)
 	int		index_info;
 
 	i = 0;
-	index_info = file_one(map, 1);
-	while (av[i] && i < index_info)
+	index_info = file_one(map, 1) - 1;
+	while ((av[i] && i < index_info))
 	{
-		// if(check_all_characters(av[i], map) == - 1)
-		// {
-		// 	printf("error\n");
-		// 	exit(0);
-		// }
+		printf("index info : %d\n", index_info);
 		// check the count here
 		count = 0;
 		j = 0;
 		while(space(av[i][j]))
 		 	j++;
+		//printf("	dd |%s|\n", av[i]);
 		flag = check_top2(av[i], j);
-		
 		if(flag == -1 && av[i][j] != '\n' )
 		{
 			printf("error\n");
@@ -192,6 +216,7 @@ int reading(t_map *map, char **av)
 		}
 		if(flag == PATH_F || flag == PATH_C)
 		{
+
 			av[i][ft_strlen(av[i])- 1] = 0;
 			colors = ft_substr(av[i], j + 1, ft_strlen(av[i]));
 			color_checking(map, colors);
@@ -201,7 +226,7 @@ int reading(t_map *map, char **av)
 		{
 			av[i][ft_strlen(av[i])- 1] = 0;
 			var = ft_substr(av[i], j + 2, ft_strlen(av[i]));
-			check_xpm(av, var);
+			//check_xpm(av, var);
 			texters(map, var, j, flag, count);
 		}
 		i++;
