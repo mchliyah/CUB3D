@@ -6,7 +6,7 @@
 #    By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 20:42:29 by mchliyah          #+#    #+#              #
-#    Updated: 2022/12/29 06:03:30 by hsaidi           ###   ########.fr        #
+#    Updated: 2022/12/30 10:04:47 by hsaidi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRCS = main.c\
 		top_file.c\
 		libft.c\
 		more_utils.c\
+		texters.c\
 
 GNL = ../get_next_line/get_next_line.c ../get_next_line/get_next_line_utils.c
 

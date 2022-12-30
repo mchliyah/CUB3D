@@ -6,18 +6,11 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 22:16:02 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/30 05:57:59 by hsaidi           ###   ########.fr       */
+/*   Updated: 2022/12/30 10:08:35 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
-
-int space(char pos)
-{
-    if(pos == 32 || pos == '\t')
-        return(1);
-    return(0);
-}
 
 int	first_wall(t_map *map)
 {
@@ -63,28 +56,6 @@ int last_wall(t_map *map)
 			exit(0);
 		}
 		p++;
-	}
-	return (0);
-}
-
-int player(char c)
-{
-	if (c == 'N' || c == 'E' || c == 'S' || c == 'W')
-			return (1);
-	return (0);
-}
-
-int	map_c(char c, int flag)
-{
-	if(flag == 1)
-	{
-		if (c == '1' || c == '0')
-			return (1);
-	}
-	if (flag == 2)
-	{
-		if (c == '1' || c == '0' || player(c))
-			return (1);
 	}
 	return (0);
 }

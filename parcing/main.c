@@ -6,27 +6,11 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 22:02:16 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/30 09:39:44 by hsaidi           ###   ########.fr       */
+/*   Updated: 2022/12/30 10:06:47 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
-
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
-{
-	size_t	i;
-
-	i = 0;
-	if ((!s1 || !s2) && !n)
-		return (0);
-	while ((s1[i] || s2[i]) && i < n)
-	{
-		if (s1[i] != s2[i])
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-		i++;
-	}
-	return (0);
-}
 
 int	ft_isdigit(int k)
 {
@@ -46,15 +30,7 @@ int skip_alpha(char *str)
 	}
 	return(0);
 }
-int is_not_texter(char *str, int i)
-{
-	if ((str[i] == 'N' && str[i + 1] == 'O') 
-		|| (str[i] == 'S' && str[i + 1] == 'O') 
-		|| (str[i] == 'E' && str[i + 1] == 'A') 
-		|| (str[i] == 'W' && str[i + 1] == 'E'))
-			return (0);
-	return(1);
-}
+
 int is_param_first(char *str)
 {
 	int i;
@@ -181,13 +157,11 @@ void if_map_valid(t_map *map)
 
 	valid_i = 0;
 	valid_i = check_is_map(map,map->parsing);
-
-		if(reading(map, map->parsing) || first_wall(map) || ft_check_borders(map) || last_wall(map))
-		{
-			printf("wrong map!\n");
-			exit(0);
-		}
-	// }
+	if(reading(map, map->parsing) || first_wall(map) || ft_check_borders(map) || last_wall(map))
+	{
+		printf("wrong map!\n");
+		exit(0);
+	}
 	else
 	{
 		// here u can get the index of valid map(valid_i)
