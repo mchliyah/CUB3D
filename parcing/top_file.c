@@ -6,7 +6,7 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 04:12:10 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/30 10:48:35 by hsaidi           ###   ########.fr       */
+/*   Updated: 2022/12/30 11:06:04 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int is_color(char *colors, t_map *map)
 // 	}
 // 	if (flag == PATH_C && map->ceiling == -1)
 // 	{
-// 			map->ceiling = (col[0]) + ( col[1] ) + col[2];
+// 			map->ceiling = (col[0] << 16) + (col[1] << 8) + col[2];
 
 // 	}
 // 	else
@@ -71,7 +71,10 @@ int is_color(char *colors, t_map *map)
 // 		exit(1);
 // 	}
 // }
-
+int	create_trgb(int t, int r, int g, int b)
+{
+	return (t << 24 | r << 16 | g << 8 | b);
+}
 void color_checking(t_map *map, char *color_l, int flag)
 {
 	int	col[3];
@@ -83,19 +86,29 @@ void color_checking(t_map *map, char *color_l, int flag)
 	while(i < lenght)
 	{
 		col[i] = atoi(map->col[i]);
-		
 		if (col[i] < 0 || col[i] > 255)
 		{
 			printf("error\n color out of range\n");
 			exit(1);
 		}
-		else
-		{
-			printf("\n--%d---\n",col[i]);
-			//color_int(map, col[i], flag);
-		}
 		i++;
 	}
+	printf("\n-1--%d-%d-%d-\n",col[0],col[1],col[2]);
+	if (flag == PATH_F && map->floor == -1)
+	{
+		map->floor = create_trgb(0, col[0], col[1], col[2]);
+		printf("\n1---%d---\n",map->floor);
+	}
+	else if (flag == PATH_C && map->ceiling == -1)
+	{
+		map->ceiling =  create_trgb(0, col[0], col[1], col[2]);
+		printf("\n2---%d---\n",map->ceiling);
+	}
+	else
+	{
+		printf("color error\n");
+		exit(1);
+	}		
 }
 
 
