@@ -6,11 +6,11 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 22:42:49 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/29 16:36:33 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/30 13:54:36 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include  "../includes/cub.h"
 
 void	draw_line(double x1, double y1, t_ax pos_end, t_cub *cub)
 {
@@ -70,11 +70,11 @@ void	set_ray_distance(t_player *player, t_ray *ray)
 	}
 }
 
-void	cast_ray(t_player *player, t_ray *ray, int i)
+void	cast_ray(t_cub *cub, t_player *player, t_ray *ray, int i)
 {
 	init_ray(&ray[i]);
-	horizontal_intersection(player, &ray[i]);
-	vertical_intersection(player, &ray[i]);
+	horizontal_intersection(cub, player, &ray[i]);
+	vertical_intersection(cub, player, &ray[i]);
 	set_ray_distance(player, &ray[i]);
 	if (i + 1 < X)
 		ray[i + 1].angle = ray[i].angle + player->fov / X;
@@ -91,5 +91,5 @@ void	cast_rays(t_cub *cub)
 	ray[0].angle = player.rot_angle - (player.fov / 2);
 	i = -1;
 	while (++i < X)
-		cast_ray(&player, ray, i);
+		cast_ray(cub, &player, ray, i);
 }

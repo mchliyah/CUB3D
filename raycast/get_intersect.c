@@ -6,22 +6,22 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 02:26:40 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/28 07:50:47 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/30 13:54:52 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include  "../includes/cub.h"
 
-bool	has_wall_at(double x, double y)
+bool	has_wall_at(t_cub *cub, double x, double y)
 {
 	int	x1;
 	int	y1;
 
 	x1 = floor(x / TILESIZE);
 	y1 = floor(y / TILESIZE);
-	if (x1 < 0 || x1 >= mapWidth || y1 < 0 || y1 >= mapHeight)
+	if (x1 < 0 || x1 >= cub->map.map_width || y1 < 0 || y1 >= cub->map.map_height)
 		return (true);
-	if (map[y1][x1] == WALL)
+	if (cub->map.parsing[y1][x1] == WALL)
 		return (true);
 	return (false);
 }
@@ -45,18 +45,18 @@ void	get_first_horz_intersection(t_player *player, t_ray *ray)
 	ray->next_horz_y = ray->y_intercept;
 }
 
-void	horizontal_intersection(t_player *player, t_ray *ray)
+void	horizontal_intersection(t_cub *cub, t_player *player, t_ray *ray)
 {
 	int	i;
 
 	get_first_horz_intersection(player, ray);
-	while (ray->next_horz_x >= 0 && ray->next_horz_x <= mapWidth * TILESIZE
-		&& ray->next_horz_y >= 0 && ray->next_horz_y <= mapHeight * TILESIZE)
+	while (ray->next_horz_x >= 0 && ray->next_horz_x <= cub->map.map_width * TILESIZE
+		&& ray->next_horz_y >= 0 && ray->next_horz_y <= cub->map.map_height * TILESIZE)
 	{
 		i = 0;
 		if (ray->is_facing_up)
 			i = 1;
-		if (has_wall_at(ray->next_horz_x, ray->next_horz_y - i))
+		if (has_wall_at(cub, ray->next_horz_x, ray->next_horz_y - i))
 		{
 			ray->horz_hit_x = ray->next_horz_x;
 			ray->horz_hit_y = ray->next_horz_y;
@@ -90,18 +90,18 @@ void	get_first_vert_intersect(t_player *player, t_ray *ray)
 	ray->next_vert_y = ray->y_intercept;
 }
 
-void	vertical_intersection(t_player *player, t_ray *ray)
+void	vertical_intersection(t_cub *cub, t_player *player, t_ray *ray)
 {
 	int	i;
 
 	get_first_vert_intersect(player, ray);
-	while (ray->next_vert_x >= 0 && ray->next_vert_x <= mapWidth * TILESIZE
-		&& ray->next_vert_y >= 0 && ray->next_vert_y <= mapHeight * TILESIZE)
+	while (ray->next_vert_x >= 0 && ray->next_vert_x <= cub->map.map_width * TILESIZE
+		&& ray->next_vert_y >= 0 && ray->next_vert_y <= cub->map.map_height * TILESIZE)
 	{
 		i = 0;
 		if (!ray->is_facing_right)
 		i = 1;
-		if (has_wall_at(ray->next_vert_x - i, ray->next_vert_y))
+		if (has_wall_at(cub, ray->next_vert_x - i, ray->next_vert_y))
 		{
 			ray->vert_hit_x = ray->next_vert_x;
 			ray->vert_hit_y = ray->next_vert_y;

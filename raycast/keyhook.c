@@ -6,11 +6,11 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 23:20:14 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/29 17:32:15 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/30 13:54:46 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include  "../includes/cub.h"
 
 int	t_close(t_cub *cub)
 {

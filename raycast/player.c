@@ -6,28 +6,28 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 04:43:26 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/29 17:05:34 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/30 13:54:39 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include  "../includes/cub.h"
 
 void	get_player_pos(t_cub *cub)
 {
 	int	i;
 	int	j;
 
-	i = 0;
+	i = cub->map.valid_i;
 	j = 0;
-	while (i < mapHeight)
+	while (i < cub->map.map_height)
 	{
 		j = 0;
-		while (j < mapWidth)
+		while (j < cub->map.map_width)
 		{
-			if (map[i][j] == 'N' || map[i][j] == 'S' ||
-				map[i][j] == 'E' || map[i][j] == 'W')
+			if (cub->map.parsing[i][j] == 'N' || cub->map.parsing[i][j] == 'S' ||
+				cub->map.parsing[i][j] == 'E' || cub->map.parsing[i][j] == 'W')
 			{
-				cub->player.symbol = map[i][j];
+				cub->player.symbol = cub->map.parsing[i][j];
 				cub->player.x = j * TILESIZE + (TILESIZE / 2);
 				cub->player.y = i * TILESIZE + (TILESIZE / 2);
 			}

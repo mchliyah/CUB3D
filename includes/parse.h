@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 22:35:54 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/30 10:39:35 by hsaidi           ###   ########.fr       */
+/*   Updated: 2022/12/30 13:12:12 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+# ifndef PARSE_H
+# define PARSE_H
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -19,7 +19,7 @@
 # include <fcntl.h>
 // # include <mlx.h>
 // # include <math.h>
-# include "../get_next_line/get_next_line.h"
+# include "get_next_line.h"
 
 enum e_path
 {
@@ -33,6 +33,7 @@ enum e_path
 
 typedef struct s_map
 {
+	int		valid_i;
 	int		map_width;
 	int		map_height;
 	char	**col;
@@ -66,7 +67,7 @@ int		skip_alpha(char *str);
 int		map_c(char c, int flag);
 int		is_not_texter(char *str, int i);
 int		first_wall(t_map *map);
-void		texters(t_map *map ,char *av, int i, int flag);
+void	texters(t_map *map ,char *av, int i, int flag);
 int		last_wall(t_map *map);
 int		skip_space(char *sp, int i);
 int		check_top2(char *var, int j);
@@ -81,4 +82,7 @@ char	**ft_split(char const *s, char c);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		ft_isdigit(int k);
 int		ft_strcmp(char *s1, char *s2);
+
+//add by mchliyah
+void if_map_valid(t_map *map);
 #endif

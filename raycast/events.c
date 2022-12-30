@@ -6,11 +6,11 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 01:55:47 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/29 17:29:24 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/30 13:54:55 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include  "../includes/cub.h"
 
 double	normalize_angle(double angle)
 {

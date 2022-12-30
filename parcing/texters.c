@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   texters.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 10:00:52 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/30 10:52:10 by hsaidi           ###   ########.fr       */
+/*   Updated: 2022/12/30 13:53:43 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "../includes/parse.h"
 
 int is_not_texter(char *str, int i)
 {
@@ -42,6 +42,7 @@ int		check_top2(char *var, int j)
 
 void texters(t_map *map ,char *av, int i, int flag)
 {
+	(void)i;
 	while(space(*av))
 		av++;
     if(ft_strchr(av, 32) || ft_strchr(av, '\t'))

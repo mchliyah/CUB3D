@@ -6,7 +6,7 @@
 #    By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 20:42:29 by mchliyah          #+#    #+#              #
-#    Updated: 2022/12/29 16:59:59 by mchliyah         ###   ########.fr        #
+#    Updated: 2022/12/30 13:52:46 by mchliyah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,15 +17,26 @@ FLAGS =  -Wall -Werror -Wextra -c
 RM = rm -f
 
 FILES = main.c\
-		player.c\
-		utils.c\
-		keyhook.c\
-		render.c\
-		colision.c\
-		events.c\
-		mlx.c\
-		raycast.c\
-		get_intersect.c\
+ 		parcing/parce.c\
+		parcing/file_handling.c\
+		parcing/map_utils.c\
+		parcing/reading_file.c\
+		parcing/top_file.c\
+		parcing/libft.c\
+		parcing/more_utils.c\
+		parcing/texters.c\
+		get_next_line/get_next_line.c\
+		get_next_line/get_next_line_utils.c\
+		raycast/init.c\
+		raycast/player.c\
+		raycast/utils.c\
+		raycast/keyhook.c\
+		raycast/render.c\
+		raycast/colision.c\
+		raycast/events.c\
+		raycast/mlx.c\
+		raycast/raycast.c\
+		raycast/get_intersect.c\
 		
 
 OBJECTS = $(FILES:.c=.o)

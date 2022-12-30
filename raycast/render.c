@@ -6,16 +6,16 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 23:21:26 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/29 17:04:31 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/30 13:54:33 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include  "../includes/cub.h"
 
 void	render_rays(t_cub *cub)
 {
 	t_ax	pos_end;
-	int	i;
+	int		i;
 
 	i = -1;
 	while (++i < X)
@@ -31,16 +31,16 @@ void	render_mini_map(t_cub *cub)
 	t_ax	pos;
 
 	pos.x = 0;
-	pos.y = 0;
-	while (pos.y < mapHeight)
+	pos.y = cub->map.valid_i;
+	while (pos.y < cub->map.map_height)
 	{
 		pos.x = 0;
-		while (pos.x < mapWidth)
+		while (pos.x < cub->map.map_height)
 		{
-			if (map[(int)pos.y][(int)pos.x] == WALL)
+			if (cub->map.parsing[(int)pos.y][(int)pos.x] == WALL)
 				render_square(cub, pos, GRAY);
-			else if (map[(int)pos.y][(int)pos.x] == EMPTY
-				|| map[(int)pos.y][(int)pos.x] == cub->player.symbol)
+			else if (cub->map.parsing[(int)pos.y][(int)pos.x] == EMPTY
+				|| cub->map.parsing[(int)pos.y][(int)pos.x] == cub->player.symbol)
 				render_square(cub, pos, WHITE);
 			pos.x++;
 		}
@@ -93,7 +93,8 @@ void	thre_d_projection(t_cub *cub, t_wall *wall)
 		wall->height = ((TILESIZE / wall->correct_dist) * wall->distance) * 2;
 		if (ray.hit_vert && ray.v_distance < ray.h_distance)
 			wall->color = ORANGE;
-		if (ray.hit_vert && ray.v_distance < ray.h_distance && ray.is_facing_right)
+		if (ray.hit_vert && ray.v_distance < ray.h_distance
+			&& ray.is_facing_right)
 			wall->color = BLUE;
 		if (ray.hit_horz && ray.h_distance < ray.v_distance)
 			wall->color = GREEN;
@@ -107,7 +108,6 @@ int	render(t_cub *cub)
 {
 	t_wall	wall;
 
-	
 	player_update(cub);
 	cast_rays(cub);
 	thre_d_projection(cub, &wall);
@@ -117,4 +117,3 @@ int	render(t_cub *cub)
 		cub->window.win, cub->window.img, 0, 0);
 	return (0);
 }
- 

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parce.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 22:02:16 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/30 10:06:47 by hsaidi           ###   ########.fr       */
+/*   Updated: 2022/12/30 13:53:35 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "../includes/parse.h"
 
 int	ft_isdigit(int k)
 {
@@ -83,6 +83,7 @@ int	check_is_map(t_map *map, char **av)
 
 	invalid = 0; 
 	i = 0;
+	(void)map;
 	while(av[i])
 	{
 		p = 0;
@@ -110,6 +111,7 @@ int	ft_check_borders(t_map *map)
 	int	i;
 	int	p;
 
+	i = 0;
 	if (!map->parsing[i])
 		return (1);
 	while (map->parsing[i])
@@ -153,38 +155,18 @@ int skip_space(char *sp, int i)
 
 void if_map_valid(t_map *map)
 {
-	int	valid_i;
 
-	valid_i = 0;
-	valid_i = check_is_map(map,map->parsing);
+	map->valid_i = 0;
+	map->valid_i = check_is_map(map, map->parsing);
 	if(reading(map, map->parsing) || first_wall(map) || ft_check_borders(map) || last_wall(map))
 	{
 		printf("wrong map!\n");
 		exit(0);
 	}
-	else
-	{
-		// here u can get the index of valid map(valid_i)
-		// while(map->parsing[valid_i])  
-		// {
-		// 	// printf("parce:%s\n",map->parsing[valid_i]);
-		// 	valid_i++;
-		// }
-		printf("*NICE*\n");
-	}
 }
 
-int	main(int ac, char **av)
-{
-	t_map	map;
-
-	if (ac != 2 || !ft_check_file(av,av[1]))
-	{	
-		printf("wrong arg!");
-		exit(0);
-	}
-	get_data(av, &map);
-	init_data(&map);
-	if_map_valid(&map);
-    return(0);
-}
+// int	main(int ac, char **av)
+// {
+	
+//     return(0);
+// }

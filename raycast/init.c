@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/09 16:27:39 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/29 17:07:18 by mchliyah         ###   ########.fr       */
+/*   Created: 2022/12/30 13:11:10 by mchliyah          #+#    #+#             */
+/*   Updated: 2022/12/30 13:54:49 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  "cub.h"
+#include  "../includes/cub.h"
 
 void	init_ray(t_ray *ray)
 {
@@ -50,17 +50,4 @@ bool	init_player(t_cub *cub)
 	cub->player.rot_angle = M_PI_2;
 	player_update(cub);
 	return (true);
-}
-
-int	main(int ac, char **av)
-{
-	t_cub	cub;
-
-	(void)ac;
-	(void)av;
-	if (!init_player(&cub) || !init_mlx(&cub) /* || !init_map(&cub) || !init_textures(&cub)*/)
-		exit(EXIT_FAILURE);
-	render(&cub);
-	keyhook_loop(&cub);
-	return (0);
 }
