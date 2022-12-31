@@ -6,7 +6,7 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 22:35:54 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/31 20:33:03 by hsaidi           ###   ########.fr       */
+/*   Updated: 2022/12/31 21:49:09 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int		skip_alpha(char *str);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		reading(t_map *map, char **av);
 char	*ft_strdup(const char *s1);
-int		check_is_map(t_map *map, char **av);
+int		check_is_map(char **av);
 char	**ft_split(char const *s, char c);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		ft_isdigit(int k);

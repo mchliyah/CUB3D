@@ -6,7 +6,7 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 22:02:16 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/31 20:23:53 by hsaidi           ###   ########.fr       */
+/*   Updated: 2022/12/31 21:53:02 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,9 @@ int	ft_check_borders(t_map *map)
 	return (0);
 }
 
-void if_map_valid(t_map *map)
+void	if_map_valid(t_map *map)
 {
-	map->valid_i = check_is_map(map, map->parsing);
+	map->valid_i = check_is_map(map->parsing);
 	if (reading(map, map->parsing)
 		|| (first_wall(map) || ft_check_borders(map) || last_wall(map))
 		|| map->player_count != 1 || map->char_count != 6)

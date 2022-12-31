@@ -6,7 +6,7 @@
 #    By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 20:42:29 by mchliyah          #+#    #+#              #
-#    Updated: 2022/12/31 20:20:39 by hsaidi           ###   ########.fr        #
+#    Updated: 2022/12/31 21:48:34 by hsaidi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ FILES = main.c\
 		parcing/map_utils2.c\
 		parcing/reading_file.c\
 		parcing/top_file.c\
+		parcing/libft_2.c\
 		parcing/libft.c\
 		parcing/more_utils.c\
 		parcing/texters_path.c\
