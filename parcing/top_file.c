@@ -6,7 +6,7 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 04:12:10 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/31 11:19:43 by hsaidi           ###   ########.fr       */
+/*   Updated: 2022/12/31 17:01:51 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,10 @@ void color_checking(t_map *map, char *color_l, int flag)
 {
 	int	col[3];
 	int lenght;
+	int	count;
 	int	i;
 
+	count = 0;
 	i = 0;
 	lenght =  is_color(color_l, map);
 	while(i < lenght)
@@ -94,7 +96,13 @@ void color_checking(t_map *map, char *color_l, int flag)
 			printf("error\n color out of range\n");
 			exit(1);
 		}
+		count++;
 		i++;
+	}
+	if (count != 3)
+	{
+		printf("error\n colors more or less than 3\n");
+		exit(1);
 	}
 	if (flag == PATH_F && map->floor == -1)
 		map->floor = create_trgb(0, col[0], col[1], col[2]);
@@ -144,15 +152,10 @@ int reading(t_map *map, char **av)
 		while(space(av[i][j]))
 		 	j++;
 		flag = check_top2(av[i], j);
-		if(flag == -1 && av[i][j] != '\n' )
-		{
-			printf("error\n");
-			exit(0);
-		}
 		if(flag == PATH_F || flag == PATH_C)
 		{
 			map->char_count++;
-			av[i][ft_strlen(av[i])- 1] = 0;
+			av[i][ft_strlen(av[i]) - 1] = 0;
 			colors = ft_substr(av[i], j + 1, ft_strlen(av[i]));
 			color_checking(map, colors, flag);
 		}
@@ -160,16 +163,17 @@ int reading(t_map *map, char **av)
 			|| flag == PATH_SO || flag == PATH_WE)
 		{
 			map->char_count++;
-			av[i][ft_strlen(av[i])- 1] = 0;
+			av[i][ft_strlen(av[i]) - 1] = 0;
 			var = ft_substr(av[i], j + 2, ft_strlen(av[i]));
 			texters(map, var, j, flag);
 		}
 		i++;
 	}
-	if (map->char_count != 6)
+	if (flag == -1 && av[i][j] != '\n')
 	{
-		printf("erorr\n");
+		printf(" %d erorr %d %d\n", i, map->char_count, flag);
 		exit(1);  
 	}
+	printf("THE FLAG %d\n", flag);
 	return(0);
 }
