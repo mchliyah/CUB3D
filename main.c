@@ -6,7 +6,7 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:27:39 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/31 12:37:21 by hsaidi           ###   ########.fr       */
+/*   Updated: 2022/12/31 13:58:24 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 int	main(int ac, char **av)
 {
 	t_cub	cub;
-
+	//test
+	
 	if (ac != 2 || !ft_check_file(av, av[1]))
 	{	
 		printf("wrong arg!");
