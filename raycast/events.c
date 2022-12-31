@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 01:55:47 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/30 13:54:55 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/31 19:56:46 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	s_w_events(t_cub *cub)
 		}
 	}
 	else if (cub->player.move[1] == W_KEY || cub->player.move[1] == UP_KEY)
-
 	{
 		if (!colision(cub, W_KEY))
 		{
@@ -83,4 +82,23 @@ void	events(t_cub *cub)
 		cub->player.rot_angle += cub->player.speed_rot;
 		cub->player.rot_angle = normalize_angle(cub->player.rot_angle);
 	}
+}
+
+int	mouse_event(int x, int y, t_cub *cub)
+{
+	if (x != cub->player.mouse_x && y != cub->player.mouse_y)
+	{
+		cub->player.mouse_x = x;
+		cub->player.mouse_y = y;
+		if (y > 0 && y < Y && x > 0 && x < X)
+		{
+			if (x > X / 2)
+				cub->player.move[2] = RIGHT_KEY;
+			else if (x < X / 2)
+				cub->player.move[2] = LEFT_KEY;
+		}
+	}
+	else
+	cub->player.move[2] = -1;
+	return (0);
 }

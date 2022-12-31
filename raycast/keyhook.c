@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 23:20:14 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/30 13:54:46 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/31 19:56:40 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	keyhook_loop(t_cub *cub)
 	mlx_hook(cub->window.win, ON_KEYDOWN, 1L << 0, buttons_down, cub);
 	mlx_hook(cub->window.win, ON_KEYUP, 1L << 1, buttons_up, cub);
 	mlx_hook(cub->window.win, ON_DESTROY, 1L << 17, t_close, cub);
+	mlx_hook(cub->window.win, ON_MOUSEMOVE, 1L << 6, mouse_event, cub);
 	mlx_loop_hook(cub->window.mlx, render, cub);
 	mlx_loop(cub->window.mlx);
 }
