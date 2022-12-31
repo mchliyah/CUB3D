@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   texters.c                                          :+:      :+:    :+:   */
+/*   texters_path.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 10:00:52 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/30 13:53:43 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/31 11:27:21 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void texters(t_map *map ,char *av, int i, int flag)
 		printf("error\n %s\n", av);
 		exit(0);
 	}
-    printf("av *%s*\n",av);
 	if (flag == PATH_NO && !map->no)
 		map->no = av;
 	else if (flag == PATH_SO && !map->so)

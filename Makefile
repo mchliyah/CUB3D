@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+         #
+#    By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 20:42:29 by mchliyah          #+#    #+#              #
-#    Updated: 2022/12/30 13:52:46 by mchliyah         ###   ########.fr        #
+#    Updated: 2022/12/31 11:27:31 by hsaidi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ FILES = main.c\
 		parcing/top_file.c\
 		parcing/libft.c\
 		parcing/more_utils.c\
-		parcing/texters.c\
+		parcing/texters_path.c\
 		get_next_line/get_next_line.c\
 		get_next_line/get_next_line_utils.c\
 		raycast/init.c\

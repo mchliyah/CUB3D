@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 23:21:26 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/30 16:07:39 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/31 12:36:07 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	render_mini_map(t_cub *cub)
 	t_ax	pos;
 
 	pos.x = 0;
-	pos.y = 8;
+	pos.y = cub->map.valid_i;
+	printf("valid i == %d\n", cub->map.valid_i);
 	while (pos.y < cub->map.map_height)
 	{
 		pos.x = 0;

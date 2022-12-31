@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reading_file.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 10:36:13 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/30 13:53:46 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/31 10:58:22 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	ft_asssign_map(char **argv, t_map *map)
 	map->parsing[i] = 0;
 }
 
-void get_data(char **av, t_map *map)
+void	get_data(char **av, t_map *map)
 {
 	ft_count_width(av, map);
 	ft_count_height(av, map);

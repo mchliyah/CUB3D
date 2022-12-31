@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:27:39 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/30 15:23:35 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/31 12:37:21 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int ac, char **av)
 	if_map_valid(&cub.map);
 	if (!init_player(&cub) || !init_mlx(&cub))
 		exit(EXIT_FAILURE);
-	cub.map.valid_i = 8;
+	// cub.map.valid_i = 8;
 	render(&cub);
 	keyhook_loop(&cub);
 	return (0);

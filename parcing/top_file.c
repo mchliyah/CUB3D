@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   top_file.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 04:12:10 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/30 13:53:39 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/31 11:19:43 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int is_color(char *colors, t_map *map)
 			i++;
 		u++;
 	}
-	// printf("test <%s>\n",colors);
 	if (i != 2)
 	{
 		printf("error\n check your ,");
@@ -73,10 +72,12 @@ int is_color(char *colors, t_map *map)
 // 		exit(1);
 // 	}
 // }
+
 int	create_trgb(int t, int r, int g, int b)
 {
 	return (t << 24 | r << 16 | g << 8 | b);
 }
+
 void color_checking(t_map *map, char *color_l, int flag)
 {
 	int	col[3];
@@ -95,24 +96,16 @@ void color_checking(t_map *map, char *color_l, int flag)
 		}
 		i++;
 	}
-	printf("\n-1--%d-%d-%d-\n",col[0],col[1],col[2]);
 	if (flag == PATH_F && map->floor == -1)
-	{
 		map->floor = create_trgb(0, col[0], col[1], col[2]);
-		printf("\n1---%d---\n",map->floor);
-	}
 	else if (flag == PATH_C && map->ceiling == -1)
-	{
 		map->ceiling =  create_trgb(0, col[0], col[1], col[2]);
-		printf("\n2---%d---\n",map->ceiling);
-	}
 	else
 	{
 		printf("color error\n");
 		exit(1);
 	}		
 }
-
 
 // void check_texter(char *av)
 // {
@@ -146,7 +139,6 @@ int reading(t_map *map, char **av)
 	index_info = file_one(map, 1);
 	while ((av[i] && i < index_info))
 	{
-		// printf("index info : %d\n", index_info);
 		count = 0;
 		j = 0;
 		while(space(av[i][j]))
