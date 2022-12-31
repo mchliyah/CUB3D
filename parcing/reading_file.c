@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reading_file.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 10:36:13 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/31 10:58:22 by hsaidi           ###   ########.fr       */
+/*   Updated: 2022/12/31 17:31:19 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,21 @@ void	ft_count_width(char **argv, t_map *map)
 		printf("you need a map");
 		exit (0);
 	}
-	map->map_width = ft_strlen(str) - 1;
+	map->width = ft_strlen(str) - 1;
 	free (str);
 }
 
-void	ft_count_height(char **argv, t_map *map)
+void	ft_count_hheight(char **argv, t_map *map)
 {
 	char	*str;
 	int		fd;
 
 	fd = open(argv[1], O_RDONLY);
 	str = get_next_line(fd);
-	map->map_height = 0;
+	map->height = 0;
 	while (str)
 	{
-		map->map_height += 1;
+		map->height += 1;
 		free (str);
 		str = get_next_line(fd);
 	}
@@ -51,8 +51,8 @@ void	ft_asssign_map(char **argv, t_map *map)
 
 	fd = open(argv[1], O_RDONLY);
 	i = 0;
-	map->parsing = malloc(sizeof(char *) * map->map_height + 1);
-	while (i <= map->map_height)
+	map->parsing = malloc(sizeof(char *) * map->height + 1);
+	while (i <= map->height)
 	{
 		map->parsing[i] = get_next_line(fd);
 		i++;
@@ -63,7 +63,7 @@ void	ft_asssign_map(char **argv, t_map *map)
 void	get_data(char **av, t_map *map)
 {
 	ft_count_width(av, map);
-	ft_count_height(av, map);
+	ft_count_hheight(av, map);
 	ft_asssign_map(av, map);
 	return ;
 }

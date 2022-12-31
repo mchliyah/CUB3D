@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 22:35:54 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/30 16:09:16 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/31 17:31:19 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ enum e_path
 typedef struct s_map
 {
 	int		valid_i;
-	int		map_width;
-	int		map_height;
+	int		width;
+	int		height;
 	char	**col;
 	int		player_count;
 	int		player_x;
@@ -59,7 +59,7 @@ int		ft_check_file(char **argv, char *filename);
 int		space(char pos);
 int		ft_wrong_characters(char *str, int i);
 void	ft_asssign_map(char **argv, t_map *map);
-void	ft_count_height(char **argv, t_map *map);
+void	ft_count_hheight(char **argv, t_map *map);
 void	ft_count_width(char **argv, t_map *map);
 int		player(char c);
 void	init_data(t_map *map);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 22:16:02 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/31 12:52:27 by hsaidi           ###   ########.fr       */
+/*   Updated: 2022/12/31 17:13:36 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,13 @@ int	first_wall(t_map *map)
 int	last_wall(t_map *map)
 {
 	int	p;
-	int i;
+	int	i;
 
 	if (!map->valid_i || !map->parsing[map->valid_i])
 		return (1);
 	i = map->valid_i;
-	printf("heree --%d--\n", map->valid_i);
 	while (map->parsing[i])
 		i++;
-	printf("valid i --%d--\n", map->valid_i);
-	printf("i =  --%d--\n", i);
 	p = 0;
 	while (map->parsing[i - 1][p])
 	{

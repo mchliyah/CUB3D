@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 04:43:26 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/30 15:30:24 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/31 17:31:19 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	get_player_pos(t_cub *cub)
 
 	i = 8;
 	j = 0;
-	while (i < cub->map.map_height)
+	while (i < cub->map.height)
 	{
 		j = 0;
 		while (j < ft_strlen1(cub->map.parsing[i]))

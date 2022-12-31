@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 13:11:10 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/31 12:47:07 by hsaidi           ###   ########.fr       */
+/*   Updated: 2022/12/31 17:31:57 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,34 @@ bool	init_mlx(t_cub *cub)
 	return (true);
 }
 
+void	set_map_width(t_cub *cub)
+{
+	int	i;
+	int	j;
+
+	i = cub->map.valid_i;
+	cub->map.width = 0;
+	while (i < cub->map.height)
+	{
+		j = 0;
+		while (cub->map.parsing[i][j])
+			j++;
+		if (j > cub->map.width)
+			cub->map.width = j;
+		i++;
+	}
+}
+
 bool	init_player(t_cub *cub)
 {
+	set_map_width(cub);
 	get_player_pos(cub);
 	cub->player.move[0] = -1;
 	cub->player.move[1] = -1;
 	cub->player.move[2] = -1;
 	cub->player.fov = M_PI / 3;
-	cub->player.speed_mov = 3;
-	cub->player.speed_rot = 3 * (M_PI / 180);
+	cub->player.speed_mov = 1.2;
+	cub->player.speed_rot = 1.2 * (M_PI / 180);
 	cub->player.rot_angle = M_PI_2;
 	player_update(cub);
 	return (true);

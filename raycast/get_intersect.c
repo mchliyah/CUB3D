@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 02:26:40 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/30 13:54:52 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/31 17:31:19 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ bool	has_wall_at(t_cub *cub, double x, double y)
 
 	x1 = floor(x / TILESIZE);
 	y1 = floor(y / TILESIZE);
-	if (x1 < 0 || x1 >= cub->map.map_width || y1 < 0 || y1 >= cub->map.map_height)
+	if (x1 < 0 || x1 >= cub->map.width || y1 < 0 || y1 >= cub->map.height)
 		return (true);
 	if (cub->map.parsing[y1][x1] == WALL)
 		return (true);
@@ -50,8 +50,8 @@ void	horizontal_intersection(t_cub *cub, t_player *player, t_ray *ray)
 	int	i;
 
 	get_first_horz_intersection(player, ray);
-	while (ray->next_horz_x >= 0 && ray->next_horz_x <= cub->map.map_width * TILESIZE
-		&& ray->next_horz_y >= 0 && ray->next_horz_y <= cub->map.map_height * TILESIZE)
+	while (ray->next_horz_x >= 0 && ray->next_horz_x <= cub->map.width * TILESIZE
+		&& ray->next_horz_y >= 0 && ray->next_horz_y <= cub->map.height * TILESIZE)
 	{
 		i = 0;
 		if (ray->is_facing_up)
@@ -95,8 +95,8 @@ void	vertical_intersection(t_cub *cub, t_player *player, t_ray *ray)
 	int	i;
 
 	get_first_vert_intersect(player, ray);
-	while (ray->next_vert_x >= 0 && ray->next_vert_x <= cub->map.map_width * TILESIZE
-		&& ray->next_vert_y >= 0 && ray->next_vert_y <= cub->map.map_height * TILESIZE)
+	while (ray->next_vert_x >= 0 && ray->next_vert_x <= cub->map.width * TILESIZE
+		&& ray->next_vert_y >= 0 && ray->next_vert_y <= cub->map.height * TILESIZE)
 	{
 		i = 0;
 		if (!ray->is_facing_right)

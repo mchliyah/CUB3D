@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:27:59 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/30 16:09:02 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/31 17:30:39 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@
 # include <stdbool.h>
 # include "parse.h"
 
-# define TILESIZE 64
+# define TILESIZE 32
 # define SCL 0.1
 
-# define X 1600
-# define Y 800
+# define X 1400
+# define Y 720
 
 # define WALL '1'
 # define EMPTY '0'
@@ -128,7 +128,7 @@ typedef struct s_wall
 	int		color;
 	double	distance;
 	double	correct_dist;
-	double	height;
+	double	hheight;
 	double	top;
 	double	bottom;
 }	t_wall;

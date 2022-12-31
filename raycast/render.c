@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 23:21:26 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/31 12:36:07 by hsaidi           ###   ########.fr       */
+/*   Updated: 2022/12/31 17:31:19 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ void	render_mini_map(t_cub *cub)
 
 	pos.x = 0;
 	pos.y = cub->map.valid_i;
-	printf("valid i == %d\n", cub->map.valid_i);
-	while (pos.y < cub->map.map_height)
+	while (pos.y < cub->map.height)
 	{
 		pos.x = 0;
 		while (pos.x < ft_strlen1(cub->map.parsing[(int)pos.y]))
@@ -37,22 +36,22 @@ void	render_mini_map(t_cub *cub)
 	render_player(cub);
 }
 
-void	render_wall(t_cub *cub, int i, double wall_height, int color)
+void	render_wall(t_cub *cub, int i, double wall_hheight, int color)
 {
 	int		j;
 	int		wall_top_pixel;
 	int		wall_bottom_pixel;
 
 	j = -1;
-	while (++j < Y / 2 - (wall_height / 2))
+	while (++j < Y / 2 - (wall_hheight / 2))
 		my_mlx_pixel_put(&cub->window, i, j, cub->map.ceiling);
-	j = Y / 2 + (wall_height / 2) - 1;
+	j = Y / 2 + (wall_hheight / 2) - 1;
 	while (++j < Y)
 		my_mlx_pixel_put(&cub->window, i, j, cub->map.floor);
-	wall_top_pixel = Y / 2 - (wall_height / 2);
+	wall_top_pixel = Y / 2 - (wall_hheight / 2);
 	if (wall_top_pixel < 0)
 		wall_top_pixel = 0;
-	wall_bottom_pixel = Y / 2 + (wall_height / 2);
+	wall_bottom_pixel = Y / 2 + (wall_hheight / 2);
 	if (wall_bottom_pixel > Y)
 		wall_bottom_pixel = Y;
 	j = wall_top_pixel;
@@ -77,7 +76,7 @@ void	thre_d_projection(t_cub *cub, t_wall *wall)
 			wall->distance = 15;
 		wall->correct_dist = ray.distance
 			* cos(ray.angle - cub->player.rot_angle);
-		wall->height = ((TILESIZE / wall->correct_dist) * wall->distance) * 2;
+		wall->hheight = ((TILESIZE / wall->correct_dist) * wall->distance);
 		if (ray.hit_vert && ray.v_distance < ray.h_distance)
 			wall->color = ORANGE;
 		if (ray.hit_vert && ray.v_distance < ray.h_distance
@@ -87,7 +86,7 @@ void	thre_d_projection(t_cub *cub, t_wall *wall)
 			wall->color = GREEN;
 		if (ray.hit_horz && ray.h_distance < ray.v_distance && ray.is_facing_up)
 			wall->color = RED;
-		render_wall(cub, i, wall->height, wall->color);
+		render_wall(cub, i, wall->hheight, wall->color);
 	}
 }
 
@@ -95,6 +94,11 @@ int	render(t_cub *cub)
 {
 	t_wall	wall;
 
+	mlx_destroy_image(cub->window.mlx, cub->window.img);
+	cub->window.img = mlx_new_image(cub->window.mlx, X, Y);
+	cub->window.img_adrs = mlx_get_data_addr(cub->window.img,
+			&cub->window.bits_per_pixel, &cub->window.line_length,
+			&cub->window.endian);
 	player_update(cub);
 	cast_rays(cub);
 	thre_d_projection(cub, &wall);
