@@ -6,7 +6,7 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 22:16:02 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/31 17:59:00 by hsaidi           ###   ########.fr       */
+/*   Updated: 2022/12/31 18:17:29 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	first_wall(t_map *map)
 int	last_wall(t_map *map)
 {
 	int	p;
-	int i;
+	int	i;
 
 	if (!map->valid_i || !map->parsing[map->valid_i])
 		return (1);

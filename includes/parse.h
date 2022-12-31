@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 22:35:54 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/30 16:09:16 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/12/31 20:33:03 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,11 @@ int		last_wall(t_map *map);
 int		skip_space(char *sp, int i);
 int		check_top2(char *var, int j);
 int		file_one(t_map *map, int flag);
+int		check_is_map(char **av);
+int		file_one(t_map *map, int flag);
+int		is_param_first(char *str);
+int		player_protection(t_map *map, int i, int p);
+int		skip_alpha(char *str);
 
 				//libft//
 int		ft_strncmp(const char *s1, const char *s2, size_t n);

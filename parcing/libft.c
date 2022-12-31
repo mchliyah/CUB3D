@@ -6,11 +6,19 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 16:40:37 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/31 12:06:02 by hsaidi           ###   ########.fr       */
+/*   Updated: 2022/12/31 20:17:15 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/parse.h"
+
+
+int	ft_isdigit(int k)
+{
+	if (k >= '0' && k <= '9')
+		return (1);
+	return (0);
+}
 
 int	ft_strcmp(char *s1, char *s2)
 {
