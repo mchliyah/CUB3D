@@ -6,7 +6,7 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 10:00:52 by hsaidi            #+#    #+#             */
-/*   Updated: 2023/01/01 18:08:55 by hsaidi           ###   ########.fr       */
+/*   Updated: 2023/01/01 19:03:57 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,21 @@ int	check_top2(char *var, int j)
 		return (-1);
 }
 
+void check_texter(char *av)
+{
+	int fd;
+	if (av == NULL)
+	{
+		printf("error\nempty file\n");
+		exit(0);
+	}
+	fd = open(av, 0644);
+	if(fd < 0)
+	{
+		printf("error\n file invalid %s\n", av);
+		exit(0);
+	}
+}
 void	texters(t_map *map, char *av, int i, int flag)
 {
 	(void)i;
@@ -51,16 +66,29 @@ void	texters(t_map *map, char *av, int i, int flag)
 		exit(0);
 	}
 	if (flag == PATH_NO && !map->no)
+	{
+		check_texter(av);
 		map->no = av;
+	}
 	else if (flag == PATH_SO && !map->so)
+	{
+		check_texter(av);
 		map->so = av;
+	}
 	else if (flag == PATH_WE && !map->we)
+	{
+		check_texter(av);
 		map->we = av;
+	}
 	else if (flag == PATH_EA && !map->ea)
+	{
+		check_texter(av);
 		map->ea = av;
+	}
 	else
 	{
 		printf("error\n Duplication\n");
 		exit(1);
 	}
 }
+
