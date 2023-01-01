@@ -6,36 +6,54 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 23:21:26 by mchliyah          #+#    #+#             */
-/*   Updated: 2023/01/01 17:15:03 by mchliyah         ###   ########.fr       */
+/*   Updated: 2023/01/01 17:07:58 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include  "../includes/cub.h"
 
-int	get_color(char *textur)
+void	render_mini_map(t_cub *cub)
 {
+	t_ax	pos;
 
+	pos.x = 0;
+	pos.y = cub->map.valid_i;
+	while (pos.y < cub->map.height)
+	{
+		pos.x = 0;
+		while (pos.x < ft_strlen1(cub->map.parsing[(int)pos.y]))
+		{
+			if (cub->map.parsing[(int)pos.y][(int)pos.x] == WALL)
+				render_square(cub, pos, GRAY);
+			else if (cub->map.parsing[(int)pos.y][(int)pos.x] == EMPTY
+				|| cub->map.parsing[(int)pos.y][(int)pos.x]
+				== cub->player.symbol)
+				render_square(cub, pos, WHITE);
+			pos.x++;
+		}
+		pos.y++;
+	}
+	render_player(cub);
 }
 
-void	render_wall(t_cub *cub, int i, double wall_hheight, char *textur)
+void	render_wall(t_cub *cub, int i, double wall_hheight, int textur)
 {
-	int		color;
 	int		j;
 	int		wall_top_pixel;
 	int		wall_bottom_pixel;
 
-	wall_top_pixel = Y / 2 - (wall_hheight / 2);
-	wall_bottom_pixel = Y / 2 + (wall_hheight / 2);
-	if (wall_top_pixel < 0)
-		wall_top_pixel = 0;
-	if (wall_bottom_pixel > Y)
-		wall_bottom_pixel = Y;
 	j = -1;
-	while (++j < wall_top_pixel)
+	while (++j < Y / 2 - (wall_hheight / 2))
 		my_mlx_pixel_put(&cub->window, i, j, cub->map.ceiling);
-	j = wall_bottom_pixel - 1;
+	j = Y / 2 + (wall_hheight / 2) - 1;
 	while (++j < Y)
 		my_mlx_pixel_put(&cub->window, i, j, cub->map.floor);
+	wall_top_pixel = Y / 2 - (wall_hheight / 2);
+	if (wall_top_pixel < 0)
+		wall_top_pixel = 0;
+	wall_bottom_pixel = Y / 2 + (wall_hheight / 2);
+	if (wall_bottom_pixel > Y)
+		wall_bottom_pixel = Y;
 	j = wall_top_pixel;
 	while (j < wall_bottom_pixel)
 	{
@@ -54,19 +72,20 @@ void	thre_d_projection(t_cub *cub, t_wall *wall)
 	{
 		ray = cub->ray[i];
 		wall->distance = (Y / 2) / tan(cub->player.fov / 2);
-		// if (wall->distance < 15)
-		// 	wall->distance = 15;
+		if (wall->distance < 15)
+			wall->distance = 15;
 		wall->correct_dist = ray.distance
 			* cos(ray.angle - cub->player.rot_angle);
 		wall->hheight = ((TILESIZE / wall->correct_dist) * wall->distance);
-		if (ray.hit_vert && !ray.is_facing_right)
-			wall->textur = cub->map.no;
-		else if (ray.hit_vert && ray.is_facing_right)
-			wall->textur = cub->map.so;
-		else if (ray.hit_horz && !ray.is_facing_up)
-			wall->textur = cub->map.we;
-		else if (ray.hit_horz && ray.is_facing_up)
-			wall->textur = cub->map.ea;
+		if (ray.hit_vert && ray.v_distance < ray.h_distance)
+			wall->textur = ORANGE;
+		if (ray.hit_vert && ray.v_distance < ray.h_distance
+			&& ray.is_facing_right)
+			wall->textur = BLUE;
+		if (ray.hit_horz && ray.h_distance < ray.v_distance)
+			wall->textur = GREEN;
+		if (ray.hit_horz && ray.h_distance < ray.v_distance && ray.is_facing_up)
+			wall->textur = RED;
 		render_wall(cub, i, wall->hheight, wall->textur);
 	}
 }
@@ -83,6 +102,7 @@ int	render(t_cub *cub)
 	player_update(cub);
 	cast_rays(cub);
 	thre_d_projection(cub, &wall);
+	render_mini_map(cub);
 	events(cub);
 	mlx_put_image_to_window(cub->window.mlx,
 		cub->window.win, cub->window.img, 0, 0);
