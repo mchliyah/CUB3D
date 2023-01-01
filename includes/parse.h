@@ -6,7 +6,7 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 22:35:54 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/31 21:49:09 by hsaidi           ###   ########.fr       */
+/*   Updated: 2023/01/01 14:31:37 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,10 @@ int		skip_space(char *sp, int i);
 int		check_top2(char *var, int j);
 int		file_one(t_map *map, int flag);
 int		check_is_map(char **av);
+void	color_checking(t_map *map, char *color_l, int flag);
 int		file_one(t_map *map, int flag);
+int		create_trgb(int t, int r, int g, int b);
+int		is_color(char *colors, t_map *map);
 int		is_param_first(char *str);
 int		player_protection(t_map *map, int i, int p);
 int		skip_alpha(char *str);

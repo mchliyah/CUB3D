@@ -6,7 +6,7 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 22:16:02 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/31 18:17:29 by hsaidi           ###   ########.fr       */
+/*   Updated: 2023/01/01 14:38:57 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,8 @@ int	last_wall(t_map *map)
 	if (!map->valid_i || !map->parsing[map->valid_i])
 		return (1);
 	i = map->valid_i;
-	printf("heree --%d--\n", map->valid_i);
 	while (map->parsing[i])
 		i++;
-	printf("valid i --%d--\n", map->valid_i);
-	printf("i =  --%d--\n", i);
 	p = 0;
 	while (map->parsing[i - 1][p])
 	{
