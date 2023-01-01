@@ -6,11 +6,11 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 22:35:54 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/31 17:31:19 by mchliyah         ###   ########.fr       */
+/*   Updated: 2023/01/01 18:48:47 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef PARSE_H
+#ifndef PARSE_H
 # define PARSE_H
 
 # include <stdio.h>
@@ -72,12 +72,20 @@ int		last_wall(t_map *map);
 int		skip_space(char *sp, int i);
 int		check_top2(char *var, int j);
 int		file_one(t_map *map, int flag);
+int		check_is_map(char **av);
+void	color_checking(t_map *map, char *color_l, int flag);
+int		file_one(t_map *map, int flag);
+int		create_trgb(int t, int r, int g, int b);
+int		is_color(char *colors, t_map *map);
+int		is_param_first(char *str);
+int		player_protection(t_map *map, int i, int p);
+int		skip_alpha(char *str);
 
 				//libft//
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		reading(t_map *map, char **av);
 char	*ft_strdup(const char *s1);
-int		check_is_map(t_map *map, char **av);
+int		check_is_map(char **av);
 char	**ft_split(char const *s, char c);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		ft_isdigit(int k);

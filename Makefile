@@ -6,7 +6,7 @@
 #    By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 20:42:29 by mchliyah          #+#    #+#              #
-#    Updated: 2023/01/01 14:52:52 by mchliyah         ###   ########.fr        #
+#    Updated: 2023/01/01 18:57:56 by mchliyah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,11 +22,14 @@ FILES = main.c\
  		parcing/parce.c\
 		parcing/file_handling.c\
 		parcing/map_utils.c\
+		parcing/map_utils2.c\
 		parcing/reading_file.c\
+		parcing/colors.c\
 		parcing/top_file.c\
+		parcing/libft_2.c\
 		parcing/libft.c\
 		parcing/more_utils.c\
-		parcing/texters_path.c\
+		parcing/textures_path.c\
 		get_next_line/get_next_line.c\
 		get_next_line/get_next_line_utils.c\
 		raycast/init.c\
@@ -41,26 +44,29 @@ FILES = main.c\
 		raycast/get_intersect.c\
 		
 FILES_bonus = main.c\
-			bonus/parcing/parce.c\
-			bonus/parcing/file_handling.c\
-			bonus/parcing/map_utils.c\
-			bonus/parcing/reading_file.c\
-			bonus/parcing/top_file.c\
-			bonus/parcing/libft.c\
-			bonus/parcing/more_utils.c\
-			bonus/parcing/texters_path.c\
-			bonus/get_next_line/get_next_line.c\
-			bonus/get_next_line/get_next_line_utils.c\
-			bonus/raycast/init.c\
-			bonus/raycast/player.c\
-			bonus/raycast/utils.c\
-			bonus/raycast/keyhook.c\
-			bonus/raycast/render.c\
-			bonus/raycast/colision.c\
-			bonus/raycast/events.c\
-			bonus/raycast/mlx.c\
-			bonus/raycast/raycast.c\
-			bonus/raycast/get_intersect.c\
+			get_next_line/get_next_line.c\
+			get_next_line/get_next_line_utils.c\
+			parcing_bonus/parce.c\
+			parcing_bonus/file_handling.c\
+			parcing_bonus/map_utils.c\
+			parcing_bonus/map_utils2.c\
+			parcing_bonus/reading_file.c\
+			parcing_bonus/colors.c\
+			parcing_bonus/top_file.c\
+			parcing_bonus/libft_2.c\
+			parcing_bonus/libft.c\
+			parcing_bonus/more_utils.c\
+			parcing_bonus/textures_path.c\
+			raycast_bonus/init.c\
+			raycast_bonus/player.c\
+			raycast_bonus/utils.c\
+			raycast_bonus/keyhook.c\
+			raycast_bonus/render.c\
+			raycast_bonus/colision.c\
+			raycast_bonus/events.c\
+			raycast_bonus/mlx.c\
+			raycast_bonus/raycast.c\
+			raycast_bonus/get_intersect.c\
 
 OBJECTS = $(FILES:.c=.o)
 OBJECTS_bonus = $(FILES_bonus:.c=.o)

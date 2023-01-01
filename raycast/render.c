@@ -6,20 +6,19 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 23:21:26 by mchliyah          #+#    #+#             */
-/*   Updated: 2023/01/01 17:15:03 by mchliyah         ###   ########.fr       */
+/*   Updated: 2023/01/01 18:38:17 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include  "../includes/cub.h"
 
-int	get_color(char *textur)
-{
+// int	get_color(char *textur)
+// {
 
-}
+// }
 
-void	render_wall(t_cub *cub, int i, double wall_hheight, char *textur)
+void	render_wall(t_cub *cub, int i, double wall_hheight, int color)
 {
-	int		color;
 	int		j;
 	int		wall_top_pixel;
 	int		wall_bottom_pixel;
@@ -48,6 +47,7 @@ void	thre_d_projection(t_cub *cub, t_wall *wall)
 {
 	t_ray	ray;
 	int		i;
+	int     color;
 
 	i = -1;
 	while (++i < X)
@@ -60,14 +60,14 @@ void	thre_d_projection(t_cub *cub, t_wall *wall)
 			* cos(ray.angle - cub->player.rot_angle);
 		wall->hheight = ((TILESIZE / wall->correct_dist) * wall->distance);
 		if (ray.hit_vert && !ray.is_facing_right)
-			wall->textur = cub->map.no;
+			color = ORANGE;
 		else if (ray.hit_vert && ray.is_facing_right)
-			wall->textur = cub->map.so;
+			color = BLUE;
 		else if (ray.hit_horz && !ray.is_facing_up)
-			wall->textur = cub->map.we;
+			color = BLACK;
 		else if (ray.hit_horz && ray.is_facing_up)
-			wall->textur = cub->map.ea;
-		render_wall(cub, i, wall->hheight, wall->textur);
+			color = GREEN;
+		render_wall(cub, i, wall->hheight, color);
 	}
 }
 

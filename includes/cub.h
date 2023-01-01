@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:27:59 by mchliyah          #+#    #+#             */
-/*   Updated: 2023/01/01 17:05:43 by mchliyah         ###   ########.fr       */
+/*   Updated: 2023/01/01 18:53:19 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,4 +176,5 @@ void	player_update(t_cub *cub);
 // void	draw_line(double x1, double y1, t_ax pos_end, t_cub *cub);
 void	render_square(t_cub *cub, t_ax pos, unsigned int color);
 void	render_player(t_cub *cub);
+int     mouse_event(int x, int y, t_cub *cub);
 #endif

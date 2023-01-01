@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 10:36:13 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/31 17:31:19 by mchliyah         ###   ########.fr       */
+/*   Updated: 2023/01/01 18:35:12 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_asssign_map(char **argv, t_map *map)
 
 	fd = open(argv[1], O_RDONLY);
 	i = 0;
-	map->parsing = malloc(sizeof(char *) * map->height + 1);
+	map->parsing = malloc(sizeof(char *) * (map->height + 1));
 	while (i <= map->height)
 	{
 		map->parsing[i] = get_next_line(fd);
