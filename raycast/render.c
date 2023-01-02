@@ -6,7 +6,7 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 23:21:26 by mchliyah          #+#    #+#             */
-/*   Updated: 2023/01/02 23:18:00 by hsaidi           ###   ########.fr       */
+/*   Updated: 2023/01/02 23:52:55 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,14 @@ void	render_wall(t_cub *cub, t_ray *ray, int i, double wall_hheight, t_textur *t
 	int		color;
 	int		wall_top_pixel;
 	int		wall_bottom_pixel;
+	int     h;
+	int 	s;
 
 	(void)ray;
 	wall_top_pixel = Y / 2 - (wall_hheight / 2);
 	wall_bottom_pixel = Y / 2 + (wall_hheight / 2);
+	h = wall_bottom_pixel - wall_top_pixel;
+	s = wall_top_pixel;
 	if (wall_top_pixel < 0)
 		wall_top_pixel = 0;
 	if (wall_bottom_pixel > Y)
@@ -36,16 +40,17 @@ void	render_wall(t_cub *cub, t_ray *ray, int i, double wall_hheight, t_textur *t
 	while (++j < Y)
 		my_mlx_pixel_put(&cub->window, i, j, cub->map.floor);
 	j = wall_top_pixel;
-	// if (ray->hit_horz)
-		x = i % TILESIZE; 
-	// else
-	// 	x = j % TILESIZE;
+	if (ray->hit_horz)
+		x = (int)ray->horz_hit_x % TILESIZE; 
+	else
+		x = (int)ray->vert_hit_y % TILESIZE;
 	while (j < wall_bottom_pixel)
 	{
 		// printf("line length is %d\n", textur->line_length);
-		y = (j - wall_top_pixel) * ((TILESIZE) / wall_hheight);
+		y = ((j - s) / (wall_hheight)) * TILESIZE;
+		//y = ((j - wall_top_pixel) / (wall_hheight)) * TILESIZE;
 		// y = j % (int)wall_hheight;
-		color = get_pixel_color(textur, x, y % textur->line_length);
+		color = get_pixel_color(textur, x, y);
 		my_mlx_pixel_put(&cub->window, i, j, color);
 		j++;
 	}
