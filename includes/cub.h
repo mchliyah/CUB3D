@@ -6,7 +6,7 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:27:59 by mchliyah          #+#    #+#             */
-/*   Updated: 2023/01/02 18:41:02 by hsaidi           ###   ########.fr       */
+/*   Updated: 2023/01/02 22:34:11 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdbool.h>
 # include "parse.h"
 
-# define TILESIZE 32
+# define TILESIZE 64
 # define SCL 0.1
 
 # define X 1400
@@ -152,10 +152,10 @@ typedef struct s_cub
 	t_map		map;
 	t_player	player;
 	t_ray		ray[X];
-	t_textur	no;
-	t_textur	ea;
-	t_textur	we;
-	t_textur	so;
+	t_textur	*no;
+	t_textur	*ea;
+	t_textur	*we;
+	t_textur	*so;
 
 }t_cub;
 

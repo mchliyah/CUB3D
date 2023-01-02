@@ -6,20 +6,14 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 23:21:26 by mchliyah          #+#    #+#             */
-/*   Updated: 2023/01/02 18:57:42 by hsaidi           ###   ########.fr       */
+/*   Updated: 2023/01/02 23:18:00 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include  "../includes/cub.h"
 
-// int	get_color(char *textur)
-// {
-// 	int	i;
-	 
-	
-// }
 
-void	render_wall(t_cub *cub, int i, double wall_hheight, t_textur *textur)
+void	render_wall(t_cub *cub, t_ray *ray, int i, double wall_hheight, t_textur *textur)
 {
 	int		j;
 	int		x;
@@ -28,6 +22,7 @@ void	render_wall(t_cub *cub, int i, double wall_hheight, t_textur *textur)
 	int		wall_top_pixel;
 	int		wall_bottom_pixel;
 
+	(void)ray;
 	wall_top_pixel = Y / 2 - (wall_hheight / 2);
 	wall_bottom_pixel = Y / 2 + (wall_hheight / 2);
 	if (wall_top_pixel < 0)
@@ -41,15 +36,16 @@ void	render_wall(t_cub *cub, int i, double wall_hheight, t_textur *textur)
 	while (++j < Y)
 		my_mlx_pixel_put(&cub->window, i, j, cub->map.floor);
 	j = wall_top_pixel;
-	if (cub->ray[i].hit_horz)
+	// if (ray->hit_horz)
 		x = i % TILESIZE; 
-	else
-		x = j % TILESIZE;
+	// else
+	// 	x = j % TILESIZE;
 	while (j < wall_bottom_pixel)
 	{
-		y = (j - wall_top_pixel) * ((float)textur->line_length / wall_hheight);
+		// printf("line length is %d\n", textur->line_length);
+		y = (j - wall_top_pixel) * ((TILESIZE) / wall_hheight);
 		// y = j % (int)wall_hheight;
-		color = get_pixel_color(textur, x, y);
+		color = get_pixel_color(textur, x, y % textur->line_length);
 		my_mlx_pixel_put(&cub->window, i, j, color);
 		j++;
 	}
@@ -58,11 +54,11 @@ void	render_wall(t_cub *cub, int i, double wall_hheight, t_textur *textur)
 void	thre_d_projection(t_cub *cub, t_wall *wall)
 {
 	t_ray	ray;
-	t_textur	textur;
+	t_textur	*textur;
 	int		i;
 
-	i = -1;
-	while (++i < X)
+	i = 0;
+	while (i < X)
 	{
 		ray = cub->ray[i];
 		wall->distance = (Y / 2) / tan(cub->player.fov / 2);
@@ -79,7 +75,8 @@ void	thre_d_projection(t_cub *cub, t_wall *wall)
 			textur = cub->ea;
 		else if (ray.hit_horz && ray.is_facing_up)
 			textur = cub->we;
-		render_wall(cub, i, wall->hheight, &textur);
+		render_wall(cub, &ray, i, wall->hheight, textur);
+		i++;
 	}
 }
 
