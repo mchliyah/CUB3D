@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 01:55:47 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/31 19:56:46 by mchliyah         ###   ########.fr       */
+/*   Updated: 2023/01/02 19:28:22 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,19 +86,20 @@ void	events(t_cub *cub)
 
 int	mouse_event(int x, int y, t_cub *cub)
 {
-	if (x != cub->player.mouse_x && y != cub->player.mouse_y)
+	(void)y;
+
+	if (x > cub->player.mouse_x)
 	{
-		cub->player.mouse_x = x;
-		cub->player.mouse_y = y;
-		if (y > 0 && y < Y && x > 0 && x < X)
-		{
-			if (x > X / 2)
-				cub->player.move[2] = RIGHT_KEY;
-			else if (x < X / 2)
-				cub->player.move[2] = LEFT_KEY;
-		}
+		cub->player.move[2] = RIGHT_KEY;
+		cub->player.turn_key = false;
 	}
-	else
-	cub->player.move[2] = -1;
+	else if (x < cub->player.mouse_x)
+	{
+		cub->player.move[2] = LEFT_KEY;
+		cub->player.turn_key = false;
+	}
+	cub->player.mouse_x = x;
+	if (x < 0 || x > X || y < 0 || y > Y)
+		mlx_mouse_move(cub->window.win, X / 2, Y / 2);
 	return (0);
 }

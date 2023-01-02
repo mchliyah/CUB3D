@@ -6,14 +6,14 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:27:59 by mchliyah          #+#    #+#             */
-/*   Updated: 2023/01/01 18:53:19 by mchliyah         ###   ########.fr       */
+/*   Updated: 2023/01/02 19:27:19 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB_H
 # define CUB_H
 
-# include <mlx.h>
+# include "../minilibx/mlx.h"
 # include <math.h>
 # include <limits.h>
 # include <stdbool.h>
@@ -74,6 +74,7 @@ typedef struct s_int_ax
 typedef struct s_player
 {
 	char	symbol;
+	bool	turn_key;
 	double	x;
 	double	y;
 	double	fov;
@@ -81,8 +82,8 @@ typedef struct s_player
 	double	speed_rot;
 	double	rot_angle;
 	int		move[3];
-	int 	mouse_x;
-	int 	mouse_y;
+	int		mouse_x;
+	int		mouse_y;
 	bool	facing_up;
 	bool	facing_right;
 }	t_player;

@@ -6,9 +6,11 @@
 #    By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 20:42:29 by mchliyah          #+#    #+#              #
-#    Updated: 2023/01/01 18:57:56 by mchliyah         ###   ########.fr        #
+#    Updated: 2023/01/02 15:01:34 by mchliyah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+minilib = minilibx/libmlx.a
 
 NAME = cub3
 NAME_bonus = cub3_bonus
@@ -83,23 +85,27 @@ C_RES = \033[0m
 
 all : $(NAME)
 
-$(NAME) :  $(OBJECTS)
-	@$(CC) $(OBJECTS) -lmlx -framework OpenGL -framework AppKit -o3 -o $(NAME) #-fsanitize=address -g
+$(NAME) :  $(OBJECTS) $(minilib)
+	@$(CC) $(OBJECTS) $(minilib) -lmlx -framework OpenGL -framework AppKit -o $(NAME) #-fsanitize=address -g
 	@echo "$(C_GREEN)[CUB3D MANDATORY CREATED!]$(C_RES)"
+
+$(minilib) :
+	@make -s -C minilibx
 
 bonus : $(NAME_bonus)
 
-$(NAME_bonus) :  $(OBJECTS_bonus)
-	@$(CC) $(OBJECTS_bonus) -lmlx -framework OpenGL -framework AppKit -o3 -o $(NAME_bonus) #-fsanitize=address -g
+$(NAME_bonus) :  $(OBJECTS_bonus) $(minilib)
+	@$(CC) $(OBJECTS_bonus) $(minilib) -lmlx -framework OpenGL -framework AppKit -o $(NAME_bonus) #-fsanitize=address -g
 	@echo "$(C_GREEN)[CUB3D BONUS CREATED!]$(C_RES)"
 
 clean : 
 	@$(RM) $(OBJECTS)
 	@$(RM) $(OBJECTS_bonus)
+	@make -s clean -C minilibx
 	@echo "$(C_RED)[CUB3D OBJECTS DELETED!]$(C_RES)"
 
 fclean : clean
-	@$(RM) $(NAME)	@$(RM) $(NAME_bonus)
+	@$(RM) $(NAME)	@$(RM) $(NAME_bonus) $(minilib)
 	@echo "$(C_RED)[CUB3D && EXECUTABLES DELETED!]$(C_RES)"
 
 re : fclean all

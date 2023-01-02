@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 23:21:26 by mchliyah          #+#    #+#             */
-/*   Updated: 2023/01/01 18:55:23 by mchliyah         ###   ########.fr       */
+/*   Updated: 2023/01/02 19:28:49 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,7 @@ int	render(t_cub *cub)
 	events(cub);
 	mlx_put_image_to_window(cub->window.mlx,
 		cub->window.win, cub->window.img, 0, 0);
+	if (!cub->player.turn_key)
+		cub->player.move[2] = -1;
 	return (0);
 }
