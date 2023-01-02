@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:27:59 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/12/30 16:09:02 by mchliyah         ###   ########.fr       */
+/*   Updated: 2023/01/02 18:41:02 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@
 # include <stdbool.h>
 # include "parse.h"
 
-# define TILESIZE 64
+# define TILESIZE 32
 # define SCL 0.1
 
-# define X 1600
-# define Y 800
+# define X 1400
+# define Y 720
 
 # define WALL '1'
 # define EMPTY '0'
@@ -81,6 +81,8 @@ typedef struct s_player
 	double	speed_rot;
 	double	rot_angle;
 	int		move[3];
+	int 	mouse_x;
+	int 	mouse_y;
 	bool	facing_up;
 	bool	facing_right;
 }	t_player;
@@ -123,12 +125,23 @@ typedef struct s_ray
 	bool	hit_horz;
 }	t_ray;
 
+typedef struct s_textur
+{
+	void	*img;
+	void	*img_adrs;
+	int		bits_per_pixel;
+	int		line_length;
+	int		size_line;
+	int		endian;
+} t_textur;
+
+
 typedef struct s_wall
 {
-	int		color;
+	char	*textur;
 	double	distance;
 	double	correct_dist;
-	double	height;
+	double	hheight;
 	double	top;
 	double	bottom;
 }	t_wall;
@@ -139,6 +152,11 @@ typedef struct s_cub
 	t_map		map;
 	t_player	player;
 	t_ray		ray[X];
+	t_textur	no;
+	t_textur	ea;
+	t_textur	we;
+	t_textur	so;
+
 }t_cub;
 
 //init
@@ -174,4 +192,6 @@ void	player_update(t_cub *cub);
 // void	draw_line(double x1, double y1, t_ax pos_end, t_cub *cub);
 void	render_square(t_cub *cub, t_ax pos, unsigned int color);
 void	render_player(t_cub *cub);
+int     mouse_event(int x, int y, t_cub *cub);
+int		get_pixel_color(t_textur *textur, int x, int y);
 #endif

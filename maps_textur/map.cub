@@ -1,5 +1,5 @@
-NO /Users/hsaidi/Desktop/merge/toillet.xpm
-SO ./path_to_the_south_texture
+NO  /Users/hsaidi/Desktop/merge/maps_textur/1_.xpm
+SO maps_textur/2_.xpm
 WE ./path_to_the_west_texture
 EA ./path_to_the_east_texture
 

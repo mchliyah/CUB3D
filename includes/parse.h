@@ -6,11 +6,11 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 22:35:54 by hsaidi            #+#    #+#             */
-/*   Updated: 2023/01/01 14:31:37 by hsaidi           ###   ########.fr       */
+/*   Updated: 2023/01/02 16:08:14 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef PARSE_H
+#ifndef PARSE_H
 # define PARSE_H
 
 # include <stdio.h>
@@ -34,8 +34,8 @@ enum e_path
 typedef struct s_map
 {
 	int		valid_i;
-	int		map_width;
-	int		map_height;
+	int		width;
+	int		height;
 	char	**col;
 	int		player_count;
 	int		player_x;
@@ -45,10 +45,10 @@ typedef struct s_map
 	char	**parsing;
 	int		floor;
 	int		ceiling;
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
+	void	*no;
+	void	*so;
+	void	*we;
+	void	*ea;
 }	t_map;
 
 				//parsing//
@@ -59,7 +59,7 @@ int		ft_check_file(char **argv, char *filename);
 int		space(char pos);
 int		ft_wrong_characters(char *str, int i);
 void	ft_asssign_map(char **argv, t_map *map);
-void	ft_count_height(char **argv, t_map *map);
+void	ft_count_hheight(char **argv, t_map *map);
 void	ft_count_width(char **argv, t_map *map);
 int		player(char c);
 void	init_data(t_map *map);

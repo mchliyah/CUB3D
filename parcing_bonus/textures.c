@@ -1,32 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/09 16:27:39 by mchliyah          #+#    #+#             */
-/*   Updated: 2023/01/01 19:24:18 by hsaidi           ###   ########.fr       */
+/*   Created: 2023/01/01 14:37:11 by hsaidi            #+#    #+#             */
+/*   Updated: 2023/01/01 18:08:49 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  "includes/cub.h"
-
-int	main(int ac, char **av)
-{
-	t_cub	cub;
-
-	if (ac != 2 || !ft_check_file(av, av[1]))
-	{	
-		printf("wrong arg!");
-		exit(0);
-	}
-	get_data(av, &cub.map);
-	init_data(&cub.map);
-	if_map_valid(&cub.map);
-	if (!init_player(&cub) || !init_mlx(&cub))
-		exit(EXIT_FAILURE);
-	render(&cub);
-	keyhook_loop(&cub);
-	return (0);
-}
+#include "../includes/parse.h"

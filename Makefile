@@ -3,14 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+         #
+#    By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 20:42:29 by mchliyah          #+#    #+#              #
-#    Updated: 2023/01/01 18:09:38 by hsaidi           ###   ########.fr        #
+#    Updated: 2023/01/01 18:57:56 by mchliyah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3
+NAME_bonus = cub3_bonus
+
 CC = gcc
 FLAGS =  -Wall -Werror -Wextra -c 
 
@@ -41,8 +43,33 @@ FILES = main.c\
 		raycast/raycast.c\
 		raycast/get_intersect.c\
 		
+FILES_bonus = main.c\
+			get_next_line/get_next_line.c\
+			get_next_line/get_next_line_utils.c\
+			parcing_bonus/parce.c\
+			parcing_bonus/file_handling.c\
+			parcing_bonus/map_utils.c\
+			parcing_bonus/map_utils2.c\
+			parcing_bonus/reading_file.c\
+			parcing_bonus/colors.c\
+			parcing_bonus/top_file.c\
+			parcing_bonus/libft_2.c\
+			parcing_bonus/libft.c\
+			parcing_bonus/more_utils.c\
+			parcing_bonus/textures_path.c\
+			raycast_bonus/init.c\
+			raycast_bonus/player.c\
+			raycast_bonus/utils.c\
+			raycast_bonus/keyhook.c\
+			raycast_bonus/render.c\
+			raycast_bonus/colision.c\
+			raycast_bonus/events.c\
+			raycast_bonus/mlx.c\
+			raycast_bonus/raycast.c\
+			raycast_bonus/get_intersect.c\
 
 OBJECTS = $(FILES:.c=.o)
+OBJECTS_bonus = $(FILES_bonus:.c=.o)
 
 %.o: %.c
 	@$(CC) $(FLAGS) -c $^ -o $@
@@ -57,15 +84,22 @@ C_RES = \033[0m
 all : $(NAME)
 
 $(NAME) :  $(OBJECTS)
-	@$(CC) $(OBJECTS) -lmlx -framework OpenGL -framework AppKit -o $(NAME) -fsanitize=address -g
+	@$(CC) $(OBJECTS) -lmlx -framework OpenGL -framework AppKit -o3 -o $(NAME) #-fsanitize=address -g
 	@echo "$(C_GREEN)[CUB3D MANDATORY CREATED!]$(C_RES)"
+
+bonus : $(NAME_bonus)
+
+$(NAME_bonus) :  $(OBJECTS_bonus)
+	@$(CC) $(OBJECTS_bonus) -lmlx -framework OpenGL -framework AppKit -o3 -o $(NAME_bonus) #-fsanitize=address -g
+	@echo "$(C_GREEN)[CUB3D BONUS CREATED!]$(C_RES)"
 
 clean : 
 	@$(RM) $(OBJECTS)
+	@$(RM) $(OBJECTS_bonus)
 	@echo "$(C_RED)[CUB3D OBJECTS DELETED!]$(C_RES)"
 
 fclean : clean
-	@$(RM) $(NAME)
+	@$(RM) $(NAME)	@$(RM) $(NAME_bonus)
 	@echo "$(C_RED)[CUB3D && EXECUTABLES DELETED!]$(C_RES)"
 
 re : fclean all
