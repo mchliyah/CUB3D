@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 23:21:26 by mchliyah          #+#    #+#             */
-/*   Updated: 2023/01/03 11:03:12 by mchliyah         ###   ########.fr       */
+/*   Updated: 2023/01/03 18:51:43 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ int	render(t_cub *cub)
 {
 	t_wall	wall;
 
+	// mlx_mouse_hide();
 	mlx_destroy_image(cub->window.mlx, cub->window.img);
 	cub->window.img = mlx_new_image(cub->window.mlx, X, Y);
 	cub->window.img_adrs = mlx_get_data_addr(cub->window.img,

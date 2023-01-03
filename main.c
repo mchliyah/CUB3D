@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:27:39 by mchliyah          #+#    #+#             */
-/*   Updated: 2023/01/02 19:31:22 by mchliyah         ###   ########.fr       */
+/*   Updated: 2023/01/03 17:46:47 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	main(int ac, char **av)
 	if_map_valid(&cub.map);
 	if (!init_player(&cub) || !init_mlx(&cub))
 		exit(EXIT_FAILURE);
-	mlx_mouse_hide();
 	render(&cub);
 	keyhook_loop(&cub);
 	return (0);

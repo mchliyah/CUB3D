@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 13:11:10 by mchliyah          #+#    #+#             */
-/*   Updated: 2023/01/03 10:08:51 by mchliyah         ###   ########.fr       */
+/*   Updated: 2023/01/03 18:52:45 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ bool	init_player(t_cub *cub)
 	cub->player.mouse_x = 0;
 	cub->player.mouse_y = 0;
 	cub->player.fov = M_PI / 3;
-	cub->player.speed_mov = 2.2;
+	cub->player.speed_mov = 3.0;
 	cub->player.speed_rot = 1.2 * (M_PI / 180);
 	cub->player.rot_angle = M_PI_2;
 	player_update(cub);
