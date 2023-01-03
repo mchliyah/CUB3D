@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:27:59 by mchliyah          #+#    #+#             */
-/*   Updated: 2023/01/02 19:31:41 by mchliyah         ###   ########.fr       */
+/*   Updated: 2023/01/03 10:31:57 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdbool.h>
 # include "parse.h"
 
-# define TILESIZE 32
+# define TILESIZE 64
 # define SCL 0.1
 
 # define X 1400
@@ -134,17 +134,16 @@ typedef struct s_textur
 	int		line_length;
 	int		size_line;
 	int		endian;
-} t_textur;
-
+}	t_textur;
 
 typedef struct s_wall
 {
 	char	*textur;
 	double	distance;
 	double	correct_dist;
-	double	hheight;
-	double	top;
-	double	bottom;
+	double	height;
+	double	top_pixel;
+	double	bottom_pixel;
 }	t_wall;
 
 typedef struct s_cub
@@ -193,6 +192,6 @@ void	player_update(t_cub *cub);
 // void	draw_line(double x1, double y1, t_ax pos_end, t_cub *cub);
 void	render_square(t_cub *cub, t_ax pos, unsigned int color);
 void	render_player(t_cub *cub);
-int     mouse_event(int x, int y, t_cub *cub);
+int		mouse_event(int x, int y, t_cub *cub);
 int		get_pixel_color(t_textur *textur, int x, int y);
 #endif

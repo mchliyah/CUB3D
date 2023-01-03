@@ -1,10 +1,10 @@
-NO maps_textur/bricks.xpm
-SO maps_textur/rough-brick.xpm
-WE maps_textur/vintage.xpm
-EA maps_textur/wall-2.xpm
+NO maps_textur/Brick-wall-texture-Graphics-7143465-1-580x387.xpm
+SO maps_textur/images1.xpm
+WE maps_textur/wiliiii.xpm
+EA maps_textur/Red_brick_wall_texture.xpm
 
-C 100,30,0
-F 220,100,0
+C 20,100,100
+F 255,140,70
 
         1111111111111111111111111
         1000000000110000000000001

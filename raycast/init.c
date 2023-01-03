@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 13:11:10 by mchliyah          #+#    #+#             */
-/*   Updated: 2023/01/02 18:41:23 by hsaidi           ###   ########.fr       */
+/*   Updated: 2023/01/03 10:21:50 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,19 @@ bool	init_mlx(t_cub *cub)
 			&cub->window.bits_per_pixel, &cub->window.line_length,
 			&cub->window.endian);
 	cub->no.img = mlx_xpm_file_to_image(cub->window.mlx, cub->map.no, &i, &i);
-	cub->no.img_adrs =  mlx_get_data_addr(cub->no.img,
+	cub->no.img_adrs = mlx_get_data_addr(cub->no.img,
 			&cub->no.bits_per_pixel, &cub->no.line_length,
 			&cub->no.endian);
 	cub->ea.img = mlx_xpm_file_to_image(cub->window.mlx, cub->map.ea, &i, &i);
-	cub->ea.img_adrs =  mlx_get_data_addr(cub->ea.img ,
+	cub->ea.img_adrs = mlx_get_data_addr(cub->ea.img,
 			&cub->ea.bits_per_pixel, &cub->ea.line_length,
 			&cub->ea.endian);
 	cub->we.img = mlx_xpm_file_to_image(cub->window.mlx, cub->map.we, &i, &i);
-	cub->we.img_adrs  =  mlx_get_data_addr(cub->we.img,
+	cub->we.img_adrs = mlx_get_data_addr(cub->we.img,
 			&cub->we.bits_per_pixel, &cub->we.line_length,
 			&cub->we.endian);
 	cub->so.img = mlx_xpm_file_to_image(cub->window.mlx, cub->map.so, &i, &i);
-	cub->so.img_adrs =  mlx_get_data_addr(cub->so.img,
+	cub->so.img_adrs = mlx_get_data_addr(cub->so.img,
 			&cub->so.bits_per_pixel, &cub->so.line_length,
 			&cub->so.endian);
 	return (true);
@@ -84,7 +84,7 @@ bool	init_player(t_cub *cub)
 	cub->player.mouse_x = 0;
 	cub->player.mouse_y = 0;
 	cub->player.fov = M_PI / 3;
-	cub->player.speed_mov = 1.2;
+	cub->player.speed_mov = 2.5;
 	cub->player.speed_rot = 1.2 * (M_PI / 180);
 	cub->player.rot_angle = M_PI_2;
 	player_update(cub);
