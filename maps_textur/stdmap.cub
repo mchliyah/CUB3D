@@ -1,7 +1,7 @@
-NO /Users/mchliyah/Desktop/CUB3D/maps_textur/wall-2.xpm
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+NO maps_textur/bricks.xpm
+SO maps_textur/rough-brick.xpm
+WE maps_textur/vintage.xpm
+EA maps_textur/wall-2.xpm
 
 C 100,30,0
 F 220,100,0

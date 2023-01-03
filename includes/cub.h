@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:27:59 by mchliyah          #+#    #+#             */
-/*   Updated: 2023/01/02 19:27:19 by mchliyah         ###   ########.fr       */
+/*   Updated: 2023/01/02 19:31:41 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,17 @@ typedef struct s_ray
 	bool	hit_horz;
 }	t_ray;
 
+typedef struct s_textur
+{
+	void	*img;
+	void	*img_adrs;
+	int		bits_per_pixel;
+	int		line_length;
+	int		size_line;
+	int		endian;
+} t_textur;
+
+
 typedef struct s_wall
 {
 	char	*textur;
@@ -142,6 +153,11 @@ typedef struct s_cub
 	t_map		map;
 	t_player	player;
 	t_ray		ray[X];
+	t_textur	no;
+	t_textur	ea;
+	t_textur	we;
+	t_textur	so;
+
 }t_cub;
 
 //init
@@ -178,4 +194,5 @@ void	player_update(t_cub *cub);
 void	render_square(t_cub *cub, t_ax pos, unsigned int color);
 void	render_player(t_cub *cub);
 int     mouse_event(int x, int y, t_cub *cub);
+int		get_pixel_color(t_textur *textur, int x, int y);
 #endif

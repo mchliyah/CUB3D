@@ -1,0 +1,2 @@
+ray distance : distance betwen player and wall
+

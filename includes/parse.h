@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 22:35:54 by hsaidi            #+#    #+#             */
-/*   Updated: 2023/01/01 18:48:47 by mchliyah         ###   ########.fr       */
+/*   Updated: 2023/01/02 16:08:14 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ typedef struct s_map
 	char	**parsing;
 	int		floor;
 	int		ceiling;
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
+	void	*no;
+	void	*so;
+	void	*we;
+	void	*ea;
 }	t_map;
 
 				//parsing//
