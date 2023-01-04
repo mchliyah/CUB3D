@@ -6,7 +6,7 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 22:35:54 by hsaidi            #+#    #+#             */
-/*   Updated: 2023/01/04 15:20:01 by hsaidi           ###   ########.fr       */
+/*   Updated: 2023/01/04 18:04:02 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,10 @@ int		is_color(char *colors, t_map *map);
 int		is_param_first(char *str);
 int		player_protection(t_map *map, int i, int p);
 int		skip_alpha(char *str);
+int	reading(t_map *map);
 
 				//libft//
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
-int		reading(t_map *map, char **av);
 char	*ft_strdup(const char *s1);
 char	**ft_split(char const *s, char c);
 char	*ft_substr(char const *s, unsigned int start, size_t len);

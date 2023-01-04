@@ -6,7 +6,7 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 22:16:02 by hsaidi            #+#    #+#             */
-/*   Updated: 2023/01/04 14:39:00 by hsaidi           ###   ########.fr       */
+/*   Updated: 2023/01/04 18:11:38 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,9 @@ int	first_wall(t_map *map)
 
 	i = 0;
 	if (!map->valid_i)
-	{
-		printf("valid i in first wall %d\n", map->valid_i);
 		return (1);
-	}
-	if(!map->parsing[map->valid_i])
-	{
-		printf("valid i in first wall after %d\n", map->valid_i);
+	if (!map->parsing[map->valid_i])
 		return (1);
-	}
-	printf("first wall valid %d\n", map->valid_i);
 	while (map->valid_i && map->parsing[map->valid_i][i])
 	{
 		if (map->parsing[map->valid_i][i] != '1'
@@ -49,7 +42,6 @@ int	last_wall(t_map *map, int last_wal)
 
 	if (!map->valid_i || !map->parsing[map->valid_i])
 		return (1);
-	printf("last wall valid %d\n", last_wal);
 	i = last_wal;
 	while (map->parsing[i])
 		i++;
@@ -72,9 +64,9 @@ int	ft_wrong_characters(char *str, int i)
 {
 	if (str[i] != '0' && str[i] != '1' && str[i] != 'E'
 		&& str[i] != 'S' && str[i] != 'N' && str[i] != 'W'
-		&& str[i] != '\n' && !space(str[i]))
+		&& str[i] != '\n' && str[i] != ' ')
 	{
-		printf("error\ninvalid character\n");
+		printf("error\ninvalid character |%c|\n", str[i]);
 		exit(1);
 	}
 	return (0);

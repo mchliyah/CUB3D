@@ -6,7 +6,7 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 20:16:27 by hsaidi            #+#    #+#             */
-/*   Updated: 2023/01/04 13:39:16 by hsaidi           ###   ########.fr       */
+/*   Updated: 2023/01/04 18:21:02 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,34 +51,4 @@ int	file_one(t_map *map, int flag)
 		i++;
 	}
 	return (size - 1);
-}
-
-int	check_is_map(char **av)
-{
-	int	i;
-	int	p;
-	int	invalid;
-
-	invalid = 0;
-	i = 0;
-	while (av[i])
-	{
-		p = 0;
-		while (av[i][p])
-		{
-			if ((skip_alpha(av[i]) == 0))
-				invalid = 1;
-			else
-			{
-				invalid = 0;
-				break ;
-			}
-			p++;
-		}
-		if (invalid != 1)
-			break ;
-		invalid = 0;
-		i++;
-	}
-	return (i);
 }

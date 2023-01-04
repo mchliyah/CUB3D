@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reading_file.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 10:36:13 by hsaidi            #+#    #+#             */
-/*   Updated: 2023/01/01 18:35:12 by mchliyah         ###   ########.fr       */
+/*   Updated: 2023/01/04 17:13:12 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,11 @@ void	ft_asssign_map(char **argv, t_map *map)
 	int	fd;
 
 	fd = open(argv[1], O_RDONLY);
-	i = 0;
 	map->parsing = malloc(sizeof(char *) * (map->height + 1));
-	while (i <= map->height)
-	{
+	i = -1;
+	while (++i < map->height)
 		map->parsing[i] = get_next_line(fd);
-		i++;
-	}
-	map->parsing[i] = 0;
+	map->parsing[i] = NULL;
 }
 
 void	get_data(char **av, t_map *map)

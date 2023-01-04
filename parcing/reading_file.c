@@ -6,7 +6,7 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 10:36:13 by hsaidi            #+#    #+#             */
-/*   Updated: 2023/01/04 15:31:51 by hsaidi           ###   ########.fr       */
+/*   Updated: 2023/01/04 17:13:12 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,5 @@ void	get_data(char **av, t_map *map)
 	ft_count_width(av, map);
 	ft_count_hheight(av, map);
 	ft_asssign_map(av, map);
-	printf("map[1] = %s\n", map->parsing[1]);
 	return ;
 }

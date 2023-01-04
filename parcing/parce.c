@@ -6,7 +6,7 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 22:02:16 by hsaidi            #+#    #+#             */
-/*   Updated: 2023/01/04 14:47:11 by hsaidi           ###   ########.fr       */
+/*   Updated: 2023/01/04 18:04:23 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,28 +96,26 @@ int	ft_check_borders(t_map *map)
 void	if_map_valid(t_map *map)
 {
 	int	last_wal;
-	// map->valid_i = check_is_map(map->parsing);
-	if (reading(map, map->parsing))
+
+	if (reading(map))
 	{
-		printf("==wrong map!1\n");
+		printf("wrong map!\n");
 		exit(0);
 	}
 	if (first_wall(map))
 	{
-		printf("==wrong map!2\n");
+		printf("wrong map!\n");
 		exit(0);
 	}
 	last_wal = ft_check_borders(map);
- 	if (last_wall(map, last_wal))
+	if (last_wall(map, last_wal))
 	{
-		printf("==wrong map!4\n");
+		printf("wrong map!\n");
 		exit(0);
 	}
 	if ((map->player_count != 1 || map->char_count != 6))
 	{
-		
-		printf("==wrong map!5\n");
+		printf("wrong map!\n");
 		exit(0);
 	}
 }
-	
