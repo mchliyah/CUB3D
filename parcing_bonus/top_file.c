@@ -6,7 +6,7 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 04:12:10 by hsaidi            #+#    #+#             */
-/*   Updated: 2023/01/04 18:06:31 by hsaidi           ###   ########.fr       */
+/*   Updated: 2023/01/04 22:19:52 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	assignming(t_map *map, int i, int j, int flag)
 		map->parsing[i][ft_strlen(map->parsing[i]) - 1] = 0;
 		colors = ft_substr(map->parsing[i], j + 1, ft_strlen(map->parsing[i]));
 		color_checking(map, colors, flag);
+		free(colors);
 	}
 	if (flag == PATH_NO || flag == PATH_EA
 		|| flag == PATH_SO || flag == PATH_WE)

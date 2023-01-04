@@ -6,7 +6,7 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 21:54:14 by hsaidi            #+#    #+#             */
-/*   Updated: 2023/01/04 18:22:28 by hsaidi           ###   ########.fr       */
+/*   Updated: 2023/01/04 22:25:38 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,6 @@ int	is_color(char *colors, t_map *map)
 	return (t);
 }
 
-int	create_trgb(int t, int r, int g, int b)
-{
-	return (t << 24 | r << 16 | g << 8 | b);
-}
-
 void	colors_asssiging(int flag, t_map *map, int col[3])
 {
 	if (flag == PATH_F && map->floor == -1)
@@ -73,6 +68,15 @@ void	colors_asssiging(int flag, t_map *map, int col[3])
 	else
 	{
 		printf("color error\n");
+		exit(1);
+	}
+}
+
+void	more_then_3(int count)
+{
+	if (count != 3)
+	{
+		printf("error\n colors more or less than 3\n");
 		exit(1);
 	}
 }
@@ -98,10 +102,7 @@ void	color_checking(t_map *map, char *color_l, int flag)
 		count++;
 		i++;
 	}
-	if (count != 3)
-	{
-		printf("error\n colors more or less than 3\n");
-		exit(1);
-	}
+	more_then_3(count);
 	colors_asssiging(flag, map, col);
+	free_2d_array(map->col);
 }

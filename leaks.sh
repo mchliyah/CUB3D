@@ -1,6 +1,6 @@
 while [ 1 ]
 do
-	leaks cub3 | grep bytes
+	leaks cub3_bonus | grep bytes
 	sleep 2
 	clear
 done
