@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 01:55:47 by mchliyah          #+#    #+#             */
-/*   Updated: 2023/01/02 19:28:22 by mchliyah         ###   ########.fr       */
+/*   Updated: 2023/01/04 22:35:35 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ void	events(t_cub *cub)
 int	mouse_event(int x, int y, t_cub *cub)
 {
 	(void)y;
-
 	if (x > cub->player.mouse_x)
 	{
 		cub->player.move[2] = RIGHT_KEY;
