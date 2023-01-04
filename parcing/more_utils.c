@@ -6,7 +6,7 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 00:43:08 by hsaidi            #+#    #+#             */
-/*   Updated: 2022/12/31 12:10:27 by hsaidi           ###   ########.fr       */
+/*   Updated: 2023/01/04 15:05:20 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	init_data(t_map *map)
 	map->ea = NULL;
 	map->so = NULL;
 	map->we = NULL;
+	map->parsing = NULL;
+	map->valid_i = 0;
 	map->ceiling = -1;
 	map->floor = -1;
 	map->player_count = 0;
