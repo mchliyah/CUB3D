@@ -6,7 +6,7 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 22:35:54 by hsaidi            #+#    #+#             */
-/*   Updated: 2023/01/02 16:08:14 by hsaidi           ###   ########.fr       */
+/*   Updated: 2023/01/04 15:20:01 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ typedef struct s_map
 	int		player_count;
 	int		player_x;
 	int		char_count;
-	int		more_maps;
 	int		player_y;
 	char	**parsing;
 	int		floor;
@@ -68,7 +67,7 @@ int		map_c(char c, int flag);
 int		is_not_texter(char *str, int i);
 int		first_wall(t_map *map);
 void	texters(t_map *map ,char *av, int i, int flag);
-int		last_wall(t_map *map);
+int		last_wall(t_map *map, int last_wal);
 int		skip_space(char *sp, int i);
 int		check_top2(char *var, int j);
 int		file_one(t_map *map, int flag);
@@ -85,7 +84,6 @@ int		skip_alpha(char *str);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		reading(t_map *map, char **av);
 char	*ft_strdup(const char *s1);
-int		check_is_map(char **av);
 char	**ft_split(char const *s, char c);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		ft_isdigit(int k);

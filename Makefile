@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+         #
+#    By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 20:42:29 by mchliyah          #+#    #+#              #
-#    Updated: 2023/01/03 09:38:55 by mchliyah         ###   ########.fr        #
+#    Updated: 2023/01/04 15:54:05 by hsaidi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,7 +86,7 @@ C_RES = \033[0m
 all : $(NAME)
 
 $(NAME) :  $(OBJECTS) $(minilib)
-	@$(CC) $(OBJECTS) $(minilib) -lmlx -framework OpenGL -framework AppKit -o $(NAME) #-fsanitize=address -g
+	@$(CC) $(OBJECTS) $(minilib) -lmlx -framework OpenGL -framework AppKit -o $(NAME) -fsanitize=address -g
 	@echo "$(C_GREEN)[CUB3D MANDATORY CREATED!]$(C_RES)"
 
 $(minilib) :

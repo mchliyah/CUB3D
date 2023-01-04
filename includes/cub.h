@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:27:59 by mchliyah          #+#    #+#             */
-/*   Updated: 2023/01/03 10:31:57 by mchliyah         ###   ########.fr       */
+/*   Updated: 2023/01/03 18:41:41 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_ax
 {
 	double	x;
 	double	y;
+	int		steps;
 }				t_ax;
 
 typedef struct s_int_ax

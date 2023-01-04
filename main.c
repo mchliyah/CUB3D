@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:27:39 by mchliyah          #+#    #+#             */
-/*   Updated: 2023/01/02 19:31:22 by mchliyah         ###   ########.fr       */
+/*   Updated: 2023/01/04 12:36:12 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,11 @@ int	main(int ac, char **av)
 		printf("wrong arg!");
 		exit(0);
 	}
-	get_data(av, &cub.map);
 	init_data(&cub.map);
+	get_data(av, &cub.map);
 	if_map_valid(&cub.map);
 	if (!init_player(&cub) || !init_mlx(&cub))
 		exit(EXIT_FAILURE);
-	mlx_mouse_hide();
 	render(&cub);
 	keyhook_loop(&cub);
 	return (0);
