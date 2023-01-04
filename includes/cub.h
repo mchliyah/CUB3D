@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:27:59 by mchliyah          #+#    #+#             */
-/*   Updated: 2023/01/03 18:41:41 by mchliyah         ###   ########.fr       */
+/*   Updated: 2023/01/04 11:19:47 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,8 @@ typedef struct s_textur
 	int		line_length;
 	int		size_line;
 	int		endian;
+	int		width;
+	int		height;
 }	t_textur;
 
 typedef struct s_wall

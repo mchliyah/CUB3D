@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 13:11:10 by mchliyah          #+#    #+#             */
-/*   Updated: 2023/01/03 18:40:33 by mchliyah         ###   ########.fr       */
+/*   Updated: 2023/01/04 11:27:20 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,32 +27,37 @@ void	init_ray(t_ray *ray)
 		ray->is_facing_right = false;
 }
 
+bool	init_xpm(t_cub *cub, void *path, t_textur *textur)
+{
+	textur->img = mlx_xpm_file_to_image(cub->window.mlx, path,
+			&textur->width, &textur->height);
+	if (!textur->img)
+		return (false);
+	textur->img_adrs = mlx_get_data_addr(textur->img, &textur->bits_per_pixel,
+			&textur->line_length, &textur->endian);
+	return (true);
+}
+
 bool	init_mlx(t_cub *cub)
 {
-	int	i;
-
 	cub->window.mlx = mlx_init();
 	cub->window.win = mlx_new_window(cub->window.mlx, X, Y, "cub3D");
 	cub->window.img = mlx_new_image(cub->window.mlx, X, Y);
 	cub->window.img_adrs = mlx_get_data_addr(cub->window.img,
 			&cub->window.bits_per_pixel, &cub->window.line_length,
 			&cub->window.endian);
-	cub->no.img = mlx_xpm_file_to_image(cub->window.mlx, cub->map.no, &i, &i);
-	cub->no.img_adrs = mlx_get_data_addr(cub->no.img,
-			&cub->no.bits_per_pixel, &cub->no.line_length,
-			&cub->no.endian);
-	cub->ea.img = mlx_xpm_file_to_image(cub->window.mlx, cub->map.ea, &i, &i);
-	cub->ea.img_adrs = mlx_get_data_addr(cub->ea.img,
-			&cub->ea.bits_per_pixel, &cub->ea.line_length,
-			&cub->ea.endian);
-	cub->we.img = mlx_xpm_file_to_image(cub->window.mlx, cub->map.we, &i, &i);
-	cub->we.img_adrs = mlx_get_data_addr(cub->we.img,
-			&cub->we.bits_per_pixel, &cub->we.line_length,
-			&cub->we.endian);
-	cub->so.img = mlx_xpm_file_to_image(cub->window.mlx, cub->map.so, &i, &i);
-	cub->so.img_adrs = mlx_get_data_addr(cub->so.img,
-			&cub->so.bits_per_pixel, &cub->so.line_length,
-			&cub->so.endian);
+	if (!init_xpm(cub, cub->map.no, &cub->no))
+		return (false);
+	if (!init_xpm(cub, cub->map.so, &cub->so))
+		return (false);
+	if (!init_xpm(cub, cub->map.we, &cub->we))
+		return (false);
+	if (!init_xpm(cub, cub->map.ea, &cub->ea))
+		return (false);
+	printf("textur width `%d` height `%d`\n", cub->no.width, cub->no.height);
+	printf("textur width `%d` height `%d`\n", cub->so.width, cub->so.height);
+	printf("textur width `%d` height `%d`\n", cub->we.width, cub->we.height);
+	printf("textur width `%d` height `%d`\n", cub->ea.width, cub->ea.height);
 	return (true);
 }
 

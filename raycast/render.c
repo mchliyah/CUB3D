@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 23:21:26 by mchliyah          #+#    #+#             */
-/*   Updated: 2023/01/03 10:48:46 by mchliyah         ###   ########.fr       */
+/*   Updated: 2023/01/04 12:02:45 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	render_floor_ceiling(t_cub *cub, t_wall *wall, int i)
 	int	j;
 
 	j = -1;
-	while (++j <= wall->top_pixel)
+	while (++j < wall->top_pixel)
 		my_mlx_pixel_put(&cub->window, i, j, cub->map.ceiling);
 	j = wall->bottom_pixel - 1;
 	while (++j <= Y)
@@ -38,13 +38,13 @@ void	render_wall(t_cub *cub, int i, t_wall *wall, t_textur *textur)
 		wall->bottom_pixel = Y;
 	j = wall->top_pixel;
 	if (cub->ray[i].hit_horz)
-		x = (int)cub->ray[i].horz_hit_x % TILESIZE;
+		x = ((int)cub->ray[i].horz_hit_x % TILESIZE * textur->width) / TILESIZE;
 	else
-		x = (int)cub->ray[i].vert_hit_y % TILESIZE;
+		x = ((int)cub->ray[i].vert_hit_y % TILESIZE * textur->width) / TILESIZE;
 	while (j <= wall->bottom_pixel)
 	{
-		y = ((j - save_top_pixel) / (wall->height)) * TILESIZE;
-		my_mlx_pixel_put(&cub->window, i, j, get_pixel_color(textur, x, y));
+		y = ((j - save_top_pixel) / (wall->height)) * textur->height;
+		my_mlx_pixel_put(&cub->window, i, j, get_pixel_color(textur, x % textur->width, y % textur->height));
 		j++;
 	}
 	render_floor_ceiling(cub, wall, i);

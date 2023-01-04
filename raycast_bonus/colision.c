@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 01:56:32 by mchliyah          #+#    #+#             */
-/*   Updated: 2023/01/03 17:43:14 by mchliyah         ###   ########.fr       */
+/*   Updated: 2023/01/04 10:52:47 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,23 @@ t_ax	a_d_colision(t_cub *cub, int key)
 	return (pos);
 }
 
+bool	is_wall(t_cub *cub, int x[2], int y[2])
+{
+	if (cub->map.parsing[y[0]][x[0]] == WALL
+		|| cub->map.parsing[y[1]][x[0]] == WALL
+		|| cub->map.parsing[y[0]][x[1]] == WALL
+		|| cub->map.parsing[y[1]][x[1]] == WALL)
+		return (true);
+	return (false);
+}
+
 bool	colision(t_cub *cub, int key)
 {
-	t_ax		pos_start;
-	t_ax		pos;
-	// t_int_ax	check;
-	int x[2];
-	int y[2];
+	t_ax	pos_start;
+	t_ax	pos;
+	int		x[2];
+	int		y[2];
+
 	pos_start.x = cub->player.x;
 	pos_start.y = cub->player.y;
 	if (key == S_KEY || key == W_KEY
@@ -68,21 +78,13 @@ bool	colision(t_cub *cub, int key)
 		pos = s_w_colision(cub, key);
 	if (key == A_KEY || key == D_KEY)
 		pos = a_d_colision(cub, key);
-	x[0] = pos.x + 2;
-	x[1] = pos.x - 2;
-	y[0] = pos.y + 2;
-	y[1] = pos.y - 2;
+	x[0] = pos.x + 6;
+	x[1] = pos.x - 6;
+	y[0] = pos.y + 6;
+	y[1] = pos.y - 6;
 	x[0] = (int)(x[0] / TILESIZE);
 	y[0] = (int)(y[0] / TILESIZE);
 	x[1] = (int)(x[1] / TILESIZE);
 	y[1] = (int)(y[1] / TILESIZE);
-	if (cub->map.parsing[y[0]][x[0]] == WALL
-		|| cub->map.parsing[y[1]][x[1]] == WALL
-		||	cub->map.parsing[y[0]][x[1]] == WALL
-		|| cub->map.parsing[y[1]][x[0]] == WALL)
-		return (true);
-	// if (cub->map.parsing[((int)(pos_start.y / TILESIZE))][(check.x)] == WALL
-	// 	|| cub->map.parsing[(check.y)][(int)(pos_start.x / TILESIZE)] == WALL)
-	// 	return (true);
-	return (false);
+	return (is_wall(cub, x, y));
 }
