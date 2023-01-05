@@ -3,14 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 20:16:27 by hsaidi            #+#    #+#             */
-/*   Updated: 2023/01/04 13:39:16 by hsaidi           ###   ########.fr       */
+/*   Updated: 2023/01/05 12:43:38 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/parse.h"
+
+int	create_trgb(int t, int r, int g, int b)
+{
+	return (t << 24 | r << 16 | g << 8 | b);
+}
+
+void	free_2d_array(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
+}
 
 int	skip_alpha(char *str)
 {
@@ -51,34 +69,4 @@ int	file_one(t_map *map, int flag)
 		i++;
 	}
 	return (size - 1);
-}
-
-int	check_is_map(char **av)
-{
-	int	i;
-	int	p;
-	int	invalid;
-
-	invalid = 0;
-	i = 0;
-	while (av[i])
-	{
-		p = 0;
-		while (av[i][p])
-		{
-			if ((skip_alpha(av[i]) == 0))
-				invalid = 1;
-			else
-			{
-				invalid = 0;
-				break ;
-			}
-			p++;
-		}
-		if (invalid != 1)
-			break ;
-		invalid = 0;
-		i++;
-	}
-	return (i);
 }
