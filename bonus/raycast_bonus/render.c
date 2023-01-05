@@ -6,34 +6,47 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 23:21:26 by mchliyah          #+#    #+#             */
-/*   Updated: 2023/01/05 17:00:04 by mchliyah         ###   ########.fr       */
+/*   Updated: 2023/01/05 23:18:33 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include  "../../includes/cub.h"
 
+int	get_square_color(t_cub *cub, int i, int j)
+{
+	if (cub->map.parsing[j][i] == WALL && j >= cub->map.valid_i)
+		return (GRAY);
+	else if (cub->map.parsing[j][i] == EMPTY
+		|| cub->map.parsing[j][i] == cub->player.symbol)
+		return (WHITE);
+	else
+		return (BLACK);
+}
+
 void	render_mini_map(t_cub *cub)
 {
 	t_ax	pos;
+	t_ax	limit;
+	int		i;
+	int		j;
 
-	pos.x = 0;
-	pos.y = cub->map.valid_i;
-	while (pos.y < cub->map.height)
+	limit.y = cub->player.y / TILESIZE;
+	pos.y = 0;
+	j = limit.y - 7;
+	while (++j < limit.y + 6 && j < cub->map.height)
 	{
+		limit.x = cub->player.x / TILESIZE;
 		pos.x = 0;
-		while (pos.x < ft_strlen1(cub->map.parsing[(int)pos.y]))
+		i = limit.x - 7;
+		while (++i < limit.x + 6 && i < ft_strlen1(cub->map.parsing[j]))
 		{
-			if (cub->map.parsing[(int)pos.y][(int)pos.x] == WALL)
-				render_square(cub, pos, GRAY);
-			else if (cub->map.parsing[(int)pos.y][(int)pos.x] == EMPTY
-				|| cub->map.parsing[(int)pos.y][(int)pos.x]
-				== cub->player.symbol)
-				render_square(cub, pos, WHITE);
+			if (i >= 0 && j >= 0 && j >= cub->map.valid_i)
+				render_square(cub, pos, get_square_color(cub, i, j));
 			pos.x++;
 		}
 		pos.y++;
 	}
-	render_player(cub);
+	render_player(cub, 6 * TILESIZE, 6 * TILESIZE);
 }
 
 void	render_floor_ceiling(t_cub *cub, t_wall *wall, int i)

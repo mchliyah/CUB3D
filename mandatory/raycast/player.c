@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 04:43:26 by mchliyah          #+#    #+#             */
-/*   Updated: 2023/01/05 14:45:20 by mchliyah         ###   ########.fr       */
+/*   Updated: 2023/01/05 20:26:39 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,6 @@ void	get_player_pos(t_cub *cub)
 			}
 			j++;
 		}
-		i++;
-	}
-}
-
-void	render_player(t_cub *cub)
-{
-	int	i;
-	int	j;
-
-	i = cub->player.y * SCL - 2;
-	while (i < cub->player.y * SCL + 2)
-	{
-		j = cub->player.x * SCL - 2;
-		while (++j < cub->player.x * SCL + 2)
-			my_mlx_pixel_put(&cub->window, j, i, RED);
 		i++;
 	}
 }

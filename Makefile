@@ -6,7 +6,7 @@
 #    By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 20:42:29 by mchliyah          #+#    #+#              #
-#    Updated: 2023/01/05 15:48:20 by mchliyah         ###   ########.fr        #
+#    Updated: 2023/01/05 18:09:52 by mchliyah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,7 +81,7 @@ C_GREEN = \033[1;32m
 C_L_BLUE = \033[1;34m
 C_RES = \033[0m
 
-.PHONY : all clean fclean rebonus
+.PHONY : all clean fclean bonus rebonus
 
 all : $(NAME)
 
@@ -109,3 +109,5 @@ fclean : clean
 	@echo "$(C_RED)[CUB3D && EXECUTABLES DELETED!]$(C_RES)"
 
 re : fclean all
+
+rebonus : fclean bonus

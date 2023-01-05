@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 13:11:10 by mchliyah          #+#    #+#             */
-/*   Updated: 2023/01/05 14:47:03 by mchliyah         ###   ########.fr       */
+/*   Updated: 2023/01/05 20:15:16 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,3 +98,4 @@ bool	init_player(t_cub *cub)
 	player_update(cub);
 	return (true);
 }
+     

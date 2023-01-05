@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:27:59 by mchliyah          #+#    #+#             */
-/*   Updated: 2023/01/05 12:48:50 by mchliyah         ###   ########.fr       */
+/*   Updated: 2023/01/05 19:03:01 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include "parse.h"
 
 # define TILESIZE 64
-# define SCL 0.1
+# define SCL 0.2
 
 # define X 1400
 # define Y 720
@@ -194,7 +194,7 @@ void	player_update(t_cub *cub);
 
 // void	draw_line(double x1, double y1, t_ax pos_end, t_cub *cub);
 void	render_square(t_cub *cub, t_ax pos, unsigned int color);
-void	render_player(t_cub *cub);
+void	render_player(t_cub *cub, int x, int y);
 int		mouse_event(int x, int y, t_cub *cub);
 int		get_pixel_color(t_textur *textur, int x, int y);
 #endif

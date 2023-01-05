@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 04:43:26 by mchliyah          #+#    #+#             */
-/*   Updated: 2023/01/05 14:47:03 by mchliyah         ###   ########.fr       */
+/*   Updated: 2023/01/05 20:42:22 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	get_player_pos(t_cub *cub)
 	}
 }
 
-void	dda(t_cub *cub)
+void	dda(t_cub *cub, int x, int y)
 {
 	t_ax	end;
 	t_ax	strt;
@@ -46,12 +46,12 @@ void	dda(t_cub *cub)
 	t_ax	incr;
 	int		i;
 
-	strt.x = cub->player.x * SCL;
-	strt.y = cub->player.y * SCL;
-	end.x = (cub->player.x - (80 * cos(cub->player.rot_angle))) * SCL;
-	end.y = (cub->player.y - (80 * sin(cub->player.rot_angle))) * SCL;
-	d.x = cub->player.x * SCL - end.x;
-	d.y = cub->player.y * SCL - end.y;
+	strt.x = x * SCL;
+	strt.y = y * SCL;
+	end.x = (x - (80 * cos(cub->player.rot_angle))) * SCL;
+	end.y = (y - (80 * sin(cub->player.rot_angle))) * SCL;
+	d.x = x * SCL - end.x;
+	d.y = y * SCL - end.y;
 	if (fabs(d.x) > fabs(d.y))
 		incr.steps = fabs(d.x);
 	else
@@ -67,20 +67,20 @@ void	dda(t_cub *cub)
 	}
 }
 
-void	render_player(t_cub *cub)
+void	render_player(t_cub *cub, int x, int y)
 {
 	int	i;
 	int	j;
 
-	i = cub->player.y * SCL - 2;
-	while (i < cub->player.y * SCL + 2)
+	i = y * SCL - 2;
+	while (i < y * SCL + 2)
 	{
-		j = cub->player.x * SCL - 2;
-		while (++j < cub->player.x * SCL + 2)
+		j = x * SCL - 2;
+		while (++j < x * SCL + 2)
 			my_mlx_pixel_put(&cub->window, j, i, RED);
 		i++;
 	}
-	dda(cub);
+	dda(cub, x, y);
 }
 
 void	player_update(t_cub *cub)
