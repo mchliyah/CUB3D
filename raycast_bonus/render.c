@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 23:21:26 by mchliyah          #+#    #+#             */
-/*   Updated: 2023/01/05 12:45:17 by mchliyah         ###   ########.fr       */
+/*   Updated: 2023/01/05 14:33:46 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,13 @@ void	render_wall(t_cub *cub, int i, t_wall *wall, t_textur *textur)
 		wall->bottom_pixel = Y;
 	j = wall->top_pixel;
 	if (cub->ray[i].hit_horz)
-		x = (int)cub->ray[i].horz_hit_x % TILESIZE;
+		x = ((int)cub->ray[i].horz_hit_x % TILESIZE * textur->width) / TILESIZE;
 	else
-		x = (int)cub->ray[i].vert_hit_y % TILESIZE;
+		x = ((int)cub->ray[i].vert_hit_y % TILESIZE * textur->width) / TILESIZE;
 	while (j <= wall->bottom_pixel)
 	{
-		y = ((j - save_top_pixel) / (wall->height)) * TILESIZE;
-		my_mlx_pixel_put(&cub->window, i, j, get_pixel_color(textur, x, y));
+		y = ((j - save_top_pixel) / (wall->height)) * textur->height;
+		my_mlx_pixel_put(&cub->window, i, j, get_pixel_color(textur, x % textur->width, y % textur->height));
 		j++;
 	}
 	render_floor_ceiling(cub, wall, i);
@@ -89,13 +89,13 @@ void	thre_d_projection(t_cub *cub, t_wall *wall)
 			* cos(ray.angle - cub->player.rot_angle);
 		wall->height = ((TILESIZE / wall->correct_dist) * wall->distance);
 		if (ray.hit_vert && !ray.is_facing_right)
-			textur = &cub->no;
-		else if (ray.hit_vert && ray.is_facing_right)
-			textur = &cub->so;
-		else if (ray.hit_horz && !ray.is_facing_up)
-			textur = &cub->ea;
-		else if (ray.hit_horz && ray.is_facing_up)
 			textur = &cub->we;
+		else if (ray.hit_vert && ray.is_facing_right)
+			textur = &cub->ea;
+		else if (ray.hit_horz && !ray.is_facing_up)
+			textur = &cub->so;
+		else if (ray.hit_horz && ray.is_facing_up)
+			textur = &cub->no;
 		wall->top_pixel = Y / 2 - (wall->height / 2);
 		wall->bottom_pixel = wall->top_pixel + wall->height;
 		render_wall(cub, i, wall, textur);
@@ -107,7 +107,7 @@ int	render(t_cub *cub)
 {
 	t_wall	wall;
 
-	// mlx_mouse_hide();
+	mlx_mouse_hide();
 	mlx_destroy_image(cub->window.mlx, cub->window.img);
 	cub->window.img = mlx_new_image(cub->window.mlx, X, Y);
 	cub->window.img_adrs = mlx_get_data_addr(cub->window.img,

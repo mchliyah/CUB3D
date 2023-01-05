@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 23:21:26 by mchliyah          #+#    #+#             */
-/*   Updated: 2023/01/04 12:02:45 by mchliyah         ###   ########.fr       */
+/*   Updated: 2023/01/05 13:26:31 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,13 @@ void	thre_d_projection(t_cub *cub, t_wall *wall)
 			* cos(ray.angle - cub->player.rot_angle);
 		wall->height = ((TILESIZE / wall->correct_dist) * wall->distance);
 		if (ray.hit_vert && !ray.is_facing_right)
-			textur = &cub->no;
-		else if (ray.hit_vert && ray.is_facing_right)
-			textur = &cub->so;
-		else if (ray.hit_horz && !ray.is_facing_up)
-			textur = &cub->ea;
-		else if (ray.hit_horz && ray.is_facing_up)
 			textur = &cub->we;
+		else if (ray.hit_vert && ray.is_facing_right)
+			textur = &cub->ea;
+		else if (ray.hit_horz && !ray.is_facing_up)
+			textur = &cub->so;
+		else if (ray.hit_horz && ray.is_facing_up)
+			textur = &cub->no;
 		wall->top_pixel = Y / 2 - (wall->height / 2);
 		wall->bottom_pixel = wall->top_pixel + wall->height;
 		render_wall(cub, i, wall, textur);

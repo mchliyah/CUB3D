@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 10:36:13 by hsaidi            #+#    #+#             */
-/*   Updated: 2023/01/05 12:43:58 by mchliyah         ###   ########.fr       */
+/*   Updated: 2023/01/05 14:37:54 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,5 @@ void	get_data(char **av, t_map *map)
 	ft_count_width(av, map);
 	ft_count_hheight(av, map);
 	ft_asssign_map(av, map);
-	printf("map[1] = %s\n", map->parsing[1]);
 	return ;
 }

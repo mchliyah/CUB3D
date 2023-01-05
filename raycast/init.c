@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 13:11:10 by mchliyah          #+#    #+#             */
-/*   Updated: 2023/01/05 12:44:42 by mchliyah         ###   ########.fr       */
+/*   Updated: 2023/01/05 14:28:41 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,6 @@ bool	init_mlx(t_cub *cub)
 		return (false);
 	if (!init_xpm(cub, cub->map.ea, &cub->ea))
 		return (false);
-	printf("textur width `%d` height `%d`\n", cub->no.width, cub->no.height);
-	printf("textur width `%d` height `%d`\n", cub->so.width, cub->so.height);
-	printf("textur width `%d` height `%d`\n", cub->we.width, cub->we.height);
-	printf("textur width `%d` height `%d`\n", cub->ea.width, cub->ea.height);
 	return (true);
 }
 
@@ -91,7 +87,14 @@ bool	init_player(t_cub *cub)
 	cub->player.fov = M_PI / 3;
 	cub->player.speed_mov = 2.5;
 	cub->player.speed_rot = 1.2 * (M_PI / 180);
-	cub->player.rot_angle = M_PI_2;
+	if (cub->player.symbol == 'N')
+		cub->player.rot_angle = M_PI / 2;
+	else if (cub->player.symbol == 'S')
+		cub->player.rot_angle = 3 * M_PI / 2;
+	else if (cub->player.symbol == 'W')
+		cub->player.rot_angle = 0;
+	else
+		cub->player.rot_angle = M_PI;
 	player_update(cub);
 	return (true);
 }
