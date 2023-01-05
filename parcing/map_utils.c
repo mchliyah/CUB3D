@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 22:16:02 by hsaidi            #+#    #+#             */
-/*   Updated: 2023/01/01 18:32:51 by mchliyah         ###   ########.fr       */
+/*   Updated: 2023/01/04 14:39:00 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,17 @@ int	first_wall(t_map *map)
 	int	i;
 
 	i = 0;
-	if (!map->valid_i || !map->parsing[map->valid_i])
+	if (!map->valid_i)
+	{
+		printf("valid i in first wall %d\n", map->valid_i);
 		return (1);
+	}
+	if(!map->parsing[map->valid_i])
+	{
+		printf("valid i in first wall after %d\n", map->valid_i);
+		return (1);
+	}
+	printf("first wall valid %d\n", map->valid_i);
 	while (map->valid_i && map->parsing[map->valid_i][i])
 	{
 		if (map->parsing[map->valid_i][i] != '1'
@@ -33,14 +42,15 @@ int	first_wall(t_map *map)
 	return (0);
 }
 
-int	last_wall(t_map *map)
+int	last_wall(t_map *map, int last_wal)
 {
 	int	p;
 	int	i;
 
 	if (!map->valid_i || !map->parsing[map->valid_i])
 		return (1);
-	i = map->valid_i;
+	printf("last wall valid %d\n", last_wal);
+	i = last_wal;
 	while (map->parsing[i])
 		i++;
 	p = 0;
