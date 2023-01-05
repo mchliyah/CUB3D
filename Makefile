@@ -6,14 +6,14 @@
 #    By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 20:42:29 by mchliyah          #+#    #+#              #
-#    Updated: 2023/01/05 15:28:59 by mchliyah         ###   ########.fr        #
+#    Updated: 2023/01/05 15:48:20 by mchliyah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 minilib = minilibx/libmlx.a
 
-NAME = cub3
-NAME_bonus = cub3_bonus
+NAME = cub3D
+NAME_bonus = cub3D_bonus
 
 CC = gcc
 FLAGS =  -Wall -Werror -Wextra -c 
