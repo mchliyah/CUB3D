@@ -3,8 +3,8 @@ SO texturs/AnyConv.com__colorstone.xpm
 WE texturs/AnyConv.com__redbrick.xpm
 EA texturs/AnyConv.com__wood.xpm
 
-C 55,00,0
-F 233,50,0
+C 0,0,150
+F 0,200,0
 
        1111111111111111111111111
        1000000000110000000000001

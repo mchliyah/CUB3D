@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   colors.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/31 21:54:14 by hsaidi            #+#    #+#             */
-/*   Updated: 2023/01/05 14:47:51 by mchliyah         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "../../includes/parse.h"
 
@@ -93,7 +82,7 @@ void	color_checking(t_map *map, char *color_l, int flag)
 	lenght = is_color(color_l, map);
 	while (i < lenght)
 	{
-		col[i] = atoi(map->col[i]);
+		col[i] = ft_atoi(map->col[i]);
 		if (col[i] < 0 || col[i] > 255)
 		{
 			printf("error\n color out of range\n");

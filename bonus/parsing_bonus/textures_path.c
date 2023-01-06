@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   textures_path.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/30 10:00:52 by hsaidi            #+#    #+#             */
-/*   Updated: 2023/01/05 14:45:53 by mchliyah         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "../../includes/parse.h"
 
@@ -58,9 +47,8 @@ void	*check_texter(char *av)
 	return (av);
 }
 
-void	texters(t_map *map, char *av, int i, int flag)
+void	texters(t_map *map, char *av, int flag)
 {
-	(void)i;
 	while (space(*av))
 		av++;
 	if (ft_strchr(av, 32) || ft_strchr(av, '\t'))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 22:35:54 by hsaidi            #+#    #+#             */
-/*   Updated: 2023/01/05 12:49:18 by mchliyah         ###   ########.fr       */
+/*   Updated: 2023/01/06 03:19:38 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct s_map
 				//parsing//
 
 void	get_data(char **av, t_map *map);
-int		check_xpm(char **argv, char *filename);
+int		check_xpm(char *filename);
 int		ft_check_file(char **argv, char *filename);
 int		space(char pos);
 int		ft_wrong_characters(char *str, int i);
@@ -65,7 +65,7 @@ int		skip_alpha(char *str);
 int		map_c(char c, int flag);
 int		is_not_texter(char *str, int i);
 int		first_wall(t_map *map);
-void	texters(t_map *map, char *av, int i, int flag);
+void    texters(t_map *map, char *av, int flag);
 int		last_wall(t_map *map, int last_wal);
 int		skip_space(char *sp, int i);
 int		check_top2(char *var, int j);
@@ -83,9 +83,11 @@ void	free_2d_array(char **arr);
 
 				//libft//
 char	**ft_split(char const *s, char c);
+int		ft_atoi(const char *str);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		ft_isdigit(int k);
 int		ft_strcmp(char *s1, char *s2);
+int		ft_strlen2(char *str);
 
 //add by mchliyah
 void	if_map_valid(t_map *map);

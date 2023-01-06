@@ -6,7 +6,7 @@
 #    By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 20:42:29 by mchliyah          #+#    #+#              #
-#    Updated: 2023/01/05 18:09:52 by mchliyah         ###   ########.fr        #
+#    Updated: 2023/01/06 13:17:36 by mchliyah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,17 +21,18 @@ FLAGS =  -Wall -Werror -Wextra -c
 RM = rm -f
 
 FILES = mandatory/main.c\
- 		mandatory/parcing/parce.c\
-		mandatory/parcing/file_handling.c\
-		mandatory/parcing/map_utils.c\
-		mandatory/parcing/map_utils2.c\
-		mandatory/parcing/reading_file.c\
-		mandatory/parcing/colors.c\
-		mandatory/parcing/top_file.c\
-		mandatory/parcing/libft_2.c\
-		mandatory/parcing/libft.c\
-		mandatory/parcing/more_utils.c\
-		mandatory/parcing/textures_path.c\
+ 		mandatory/parsing/parse.c\
+		mandatory/parsing/file_handling.c\
+		mandatory/parsing/map_utils.c\
+		mandatory/parsing/map_utils2.c\
+		mandatory/parsing/reading_file.c\
+		mandatory/parsing/colors.c\
+		mandatory/parsing/top_file.c\
+		mandatory/parsing/libft_2.c\
+		mandatory/parsing/libft_3.c\
+		mandatory/parsing/libft.c\
+		mandatory/parsing/more_utils.c\
+		mandatory/parsing/textures_path.c\
 		get_next_line/get_next_line.c\
 		get_next_line/get_next_line_utils.c\
 		mandatory/raycast/init.c\
@@ -48,17 +49,18 @@ FILES = mandatory/main.c\
 FILES_bonus = bonus/main.c\
 			get_next_line/get_next_line.c\
 			get_next_line/get_next_line_utils.c\
-			bonus/parcing_bonus/parce.c\
-			bonus/parcing_bonus/file_handling.c\
-			bonus/parcing_bonus/map_utils.c\
-			bonus/parcing_bonus/map_utils2.c\
-			bonus/parcing_bonus/reading_file.c\
-			bonus/parcing_bonus/colors.c\
-			bonus/parcing_bonus/top_file.c\
-			bonus/parcing_bonus/libft_2.c\
-			bonus/parcing_bonus/libft.c\
-			bonus/parcing_bonus/more_utils.c\
-			bonus/parcing_bonus/textures_path.c\
+			bonus/parsing_bonus/parse.c\
+			bonus/parsing_bonus/file_handling.c\
+			bonus/parsing_bonus/map_utils.c\
+			bonus/parsing_bonus/map_utils2.c\
+			bonus/parsing_bonus/reading_file.c\
+			bonus/parsing_bonus/colors.c\
+			bonus/parsing_bonus/top_file.c\
+			bonus/parsing_bonus/libft_2.c\
+			mandatory/parsing/libft_3.c\
+			bonus/parsing_bonus/libft.c\
+			bonus/parsing_bonus/more_utils.c\
+			bonus/parsing_bonus/textures_path.c\
 			bonus/raycast_bonus/init.c\
 			bonus/raycast_bonus/player.c\
 			bonus/raycast_bonus/utils.c\

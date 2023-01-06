@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 22:16:02 by hsaidi            #+#    #+#             */
-/*   Updated: 2023/01/05 14:46:19 by mchliyah         ###   ########.fr       */
+/*   Updated: 2023/01/06 13:02:12 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	first_wall(t_map *map)
 			&& !space(map->parsing[map->valid_i][i])
 			&& map->parsing[map->valid_i][i] != '\n')
 		{
-			printf("error\ncheck first wall\n");
+			printf("error\nsomthing wrong\n");
 			exit(0);
 		}
 		i++;

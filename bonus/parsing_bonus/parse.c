@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 22:02:16 by hsaidi            #+#    #+#             */
-/*   Updated: 2023/01/05 14:49:32 by mchliyah         ###   ########.fr       */
+/*   Updated: 2023/01/06 13:15:02 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,20 @@ int	is_param_first(char *str)
 
 int	player_protection(t_map *map, int i, int p)
 {
-	if (!map->parsing[i])
-		return (1);
+	if (!map->parsing[i] || !map->parsing[i + 1])
+	{
+		printf("error\nsomting wrong\n");
+		exit(1);
+	}
 	map->player_count += 1;
 	if (map->player_count != 1 || ((map_c(map->parsing[i][p + 1], 1) != 1)
 		|| (map_c(map->parsing[i][p - 1], 1) != 1)
 		|| (map_c(map->parsing[i + 1][p], 1) != 1)
-		|| (map_c(map->parsing[i - 1][p], 1) != 1)))
+		|| (map_c(map->parsing[i - 1][p], 1) != 1))
+		|| p > ft_strlen2(map->parsing[i - 1])
+		|| p > ft_strlen2(map->parsing[i + 1]))
 	{
-		printf("error\nMap invalid!2\n");
+		printf("error\nMap invalid!\n");
 		exit(1);
 	}
 	return (0);
@@ -52,14 +57,19 @@ int	player_protection(t_map *map, int i, int p)
 
 int	zero_protaction(t_map *map, int i, int p)
 {
-	if (!map->parsing[i])
-		return (1);
+	if (!map->parsing[i] || !map->parsing[i + 1])
+	{
+		printf("error\nsomting wrong\n");
+		exit(1);
+	}
 	if ((map_c(map->parsing[i][p + 1], 2) != 1)
 		|| (map_c(map->parsing[i][p - 1], 2) != 1)
 		|| (map_c(map->parsing[i + 1][p], 2) != 1)
-		|| (map_c(map->parsing[i - 1][p], 2) != 1))
+		|| (map_c(map->parsing[i - 1][p], 2) != 1)
+		|| p > ft_strlen2(map->parsing[i - 1])
+		|| p > ft_strlen2(map->parsing[i + 1]))
 	{
-		printf("error\nMap invalid!1\n");
+		printf("error\nMap invalid!\n");
 		exit(1);
 	}
 	return (0);
