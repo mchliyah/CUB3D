@@ -6,7 +6,7 @@
 /*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 22:35:54 by hsaidi            #+#    #+#             */
-/*   Updated: 2023/01/06 03:19:38 by hsaidi           ###   ########.fr       */
+/*   Updated: 2023/01/06 13:29:04 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int		skip_alpha(char *str);
 int		map_c(char c, int flag);
 int		is_not_texter(char *str, int i);
 int		first_wall(t_map *map);
-void    texters(t_map *map, char *av, int flag);
+void	texters(t_map *map, char *av, int flag);
 int		last_wall(t_map *map, int last_wal);
 int		skip_space(char *sp, int i);
 int		check_top2(char *var, int j);

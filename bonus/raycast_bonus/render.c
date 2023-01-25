@@ -3,25 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 23:21:26 by mchliyah          #+#    #+#             */
-/*   Updated: 2023/01/05 23:18:33 by mchliyah         ###   ########.fr       */
+/*   Updated: 2023/01/06 13:27:39 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include  "../../includes/cub.h"
-
-int	get_square_color(t_cub *cub, int i, int j)
-{
-	if (cub->map.parsing[j][i] == WALL && j >= cub->map.valid_i)
-		return (GRAY);
-	else if (cub->map.parsing[j][i] == EMPTY
-		|| cub->map.parsing[j][i] == cub->player.symbol)
-		return (WHITE);
-	else
-		return (BLACK);
-}
 
 void	render_mini_map(t_cub *cub)
 {

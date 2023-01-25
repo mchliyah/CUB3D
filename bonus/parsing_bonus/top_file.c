@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   top_file.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/06 13:22:41 by hsaidi            #+#    #+#             */
+/*   Updated: 2023/01/06 13:25:19 by hsaidi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../includes/parse.h"
 
@@ -20,7 +31,7 @@ void	assignming(t_map *map, int i, int j, int flag)
 		map->char_count++;
 		map->parsing[i][ft_strlen(map->parsing[i]) - 1] = 0;
 		var = ft_substr(map->parsing[i], j + 2, ft_strlen(map->parsing[i]));
-		texters(map, var,flag);
+		texters(map, var, flag);
 		if (!check_xpm(var))
 		{
 			printf("error\n xpm\n");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 13:01:18 by mchliyah          #+#    #+#             */
-/*   Updated: 2023/01/06 13:01:21 by mchliyah         ###   ########.fr       */
+/*   Updated: 2023/01/06 13:28:48 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,15 @@ int	get_pixel_color(t_textur *textur, int x, int y)
 	dst = textur->img_adrs + (y * textur->line_length + x
 			* (textur->bits_per_pixel / 8));
 	return (*(unsigned int *)dst);
+}
+
+int	get_square_color(t_cub *cub, int i, int j)
+{
+	if (cub->map.parsing[j][i] == WALL && j >= cub->map.valid_i)
+		return (GRAY);
+	else if (cub->map.parsing[j][i] == EMPTY
+		|| cub->map.parsing[j][i] == cub->player.symbol)
+		return (WHITE);
+	else
+		return (BLACK);
 }

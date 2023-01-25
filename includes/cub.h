@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:27:59 by mchliyah          #+#    #+#             */
-/*   Updated: 2023/01/05 19:03:01 by mchliyah         ###   ########.fr       */
+/*   Updated: 2023/01/06 13:28:22 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,4 +197,5 @@ void	render_square(t_cub *cub, t_ax pos, unsigned int color);
 void	render_player(t_cub *cub, int x, int y);
 int		mouse_event(int x, int y, t_cub *cub);
 int		get_pixel_color(t_textur *textur, int x, int y);
+int		get_square_color(t_cub *cub, int i, int j);
 #endif

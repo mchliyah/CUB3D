@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hsaidi <hsaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 13:01:25 by mchliyah          #+#    #+#             */
-/*   Updated: 2023/01/06 13:01:30 by mchliyah         ###   ########.fr       */
+/*   Updated: 2023/01/06 13:26:25 by hsaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,3 @@ bool	init_player(t_cub *cub)
 	player_update(cub);
 	return (true);
 }
-     
